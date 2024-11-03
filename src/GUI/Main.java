@@ -7,28 +7,21 @@ package GUI;
 
 import java.awt.Dimension;
 import javax.swing.*;
-import javax.swing.border.MatteBorder;
-import com.formdev.flatlaf.FlatIntelliJLaf;
-import com.formdev.flatlaf.FlatLaf;
-import com.formdev.flatlaf.extras.FlatSVGIcon;
-import com.formdev.flatlaf.fonts.roboto.FlatRobotoFont;
 import java.awt.*;
-import javax.swing.JToggleButton;
+import javax.swing.border.MatteBorder;
+import com.formdev.flatlaf.extras.FlatSVGIcon;
 
-/**
- *
- * @author nghia
- */
+
 public class Main extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Main
-     */
+    
+    Color BackgroundColor = new Color(240, 247, 250);
     public Main() {
         this.setPreferredSize(new Dimension(1366, 677));
         
 //        addIconTaskbar();
         setTitle("Cửa Hàng Bán Đồ Công Nghệ");
+        
         
         initComponents();
     }
@@ -55,6 +48,8 @@ public class Main extends javax.swing.JFrame {
         btnBaoHanh = new javax.swing.JToggleButton();
         btnDangXuat = new javax.swing.JButton();
         Header = new javax.swing.JPanel();
+        contentPanel = new javax.swing.JPanel();
+        contentPanel2 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -331,7 +326,7 @@ public class Main extends javax.swing.JFrame {
                 .addComponent(btnDangXuat, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        getContentPane().add(taskBar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 68, -1, 570));
+        getContentPane().add(taskBar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 68, 220, 570));
 
         Header.setBackground(new java.awt.Color(170, 211, 249));
 
@@ -343,12 +338,50 @@ public class Main extends javax.swing.JFrame {
         );
         HeaderLayout.setVerticalGroup(
             HeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 60, Short.MAX_VALUE)
+            .addGap(0, 65, Short.MAX_VALUE)
         );
 
-        getContentPane().add(Header, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1370, 60));
+        getContentPane().add(Header, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1370, 65));
+
+        contentPanel.setBackground(new java.awt.Color(255, 255, 255));
+        contentPanel.setPreferredSize(new java.awt.Dimension(1150, 570));
+
+        contentPanel2.setBackground(new java.awt.Color(255, 255, 255));
+
+        javax.swing.GroupLayout contentPanel2Layout = new javax.swing.GroupLayout(contentPanel2);
+        contentPanel2.setLayout(contentPanel2Layout);
+        contentPanel2Layout.setHorizontalGroup(
+            contentPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1072, Short.MAX_VALUE)
+        );
+        contentPanel2Layout.setVerticalGroup(
+            contentPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 512, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout contentPanelLayout = new javax.swing.GroupLayout(contentPanel);
+        contentPanel.setLayout(contentPanelLayout);
+        contentPanelLayout.setHorizontalGroup(
+            contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(contentPanelLayout.createSequentialGroup()
+                .addGap(39, 39, 39)
+                .addComponent(contentPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(39, Short.MAX_VALUE))
+        );
+        contentPanelLayout.setVerticalGroup(
+            contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(contentPanelLayout.createSequentialGroup()
+                .addGap(34, 34, 34)
+                .addComponent(contentPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(34, Short.MAX_VALUE))
+        );
+
+        contentPanel.add(contentPanel2, java.awt.BorderLayout.CENTER);
+
+        getContentPane().add(contentPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 60, 1150, 580));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSanPhamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSanPhamActionPerformed
@@ -408,8 +441,16 @@ public class Main extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Main().setVisible(true);
+//                new Main().setVisible(true);
+                JFrame frame = new JFrame("Khách Hàng");
+                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 
+                KhachHang khachHangPanel = new KhachHang();
+                frame.add(khachHangPanel);
+
+                frame.pack();
+                frame.setSize(1072, 512);
+                frame.setVisible(true);
             }
         });
     }
@@ -431,6 +472,8 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JToggleButton btnTaiKhoan;
     private javax.swing.JToggleButton btnThongKe;
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JPanel contentPanel;
+    private javax.swing.JPanel contentPanel2;
     private javax.swing.JPanel taskBar;
     // End of variables declaration//GEN-END:variables
 }
