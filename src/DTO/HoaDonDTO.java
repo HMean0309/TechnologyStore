@@ -4,88 +4,107 @@ import java.time.LocalDateTime;
 
 public class HoaDonDTO {
     private String id;
-    private long orderAmount;
-    private long discountAmount;
+    private LocalDateTime ngayLap;
+    private Integer orderAmount;
+    private Integer discountAmount;
     private String status;
-    private String note;
+    private String ghiChu;
     private String km;
     private String pttt;
     private String khachHang;
     private String nhanVien;
-    private LocalDateTime ngayLap;
 
-    public HoaDonDTO() {};
-    public HoaDonDTO(String id, long orderAmount, long discountAmount, String status, String note, String km,
-            String pttt, String khachHang, String nhanVien, LocalDateTime ngayLap) {
+    public HoaDonDTO(String id, LocalDateTime ngayLap, Integer orderAmount, Integer discountAmount, String status, String ghiChu, String km, String pttt, String khachHang, String nhanVien) {
         this.id = id;
+        this.ngayLap = ngayLap;
         this.orderAmount = orderAmount;
         this.discountAmount = discountAmount;
         this.status = status;
-        this.note = note;
+        this.ghiChu = ghiChu;
         this.km = km;
         this.pttt = pttt;
         this.khachHang = khachHang;
         this.nhanVien = nhanVien;
-        this.ngayLap = ngayLap;
     }
+
     public String getId() {
         return id;
     }
+
     public void setId(String id) {
         this.id = id;
     }
-    public long getOrderAmount() {
-        return orderAmount;
-    }
-    public void setOrderAmount(long orderAmount) {
-        this.orderAmount = orderAmount;
-    }
-    public long getDiscountAmount() {
-        return discountAmount;
-    }
-    public void setDiscountAmount(long discountAmount) {
-        this.discountAmount = discountAmount;
-    }
-    public String getStatus() {
-        return status;
-    }
-    public void setStatus(String status) {
-        this.status = status;
-    }
-    public String getNote() {
-        return note;
-    }
-    public void setNote(String note) {
-        this.note = note;
-    }
-    public String getKm() {
-        return km;
-    }
-    public void setKm(String km) {
-        this.km = km;
-    }
-    public String getPttt() {
-        return pttt;
-    }
-    public void setPttt(String pttt) {
-        this.pttt = pttt;
-    }
-    public String getKhachHang() {
-        return khachHang;
-    }
-    public void setKhachHang(String khachHang) {
-        this.khachHang = khachHang;
-    }
-    public String getNhanVien() {
-        return nhanVien;
-    }
-    public void setNhanVien(String nhanVien) {
-        this.nhanVien = nhanVien;
-    }
+
     public LocalDateTime getNgayLap() {
         return ngayLap;
     }
+
     public void setNgayLap(LocalDateTime ngayLap) {
         this.ngayLap = ngayLap;
     }
+
+    public Integer getOrderAmount() {
+        return orderAmount;
+    }
+
+    public void setOrderAmount(Integer orderAmount) {
+        this.orderAmount = orderAmount;
+    }
+
+    public Integer getDiscountAmount() {
+        return discountAmount;
+    }
+
+    public void setDiscountAmount(Integer discountAmount) {
+        this.discountAmount = discountAmount;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getGhichu() {
+        return ghiChu;
+    }
+
+    public void setGhichu(String ghiChu) {
+        this.ghiChu = ghiChu;
+    }
+
+    public String getKhuyenMai() {
+        return km;
+    }
+
+    public void setKhuyenMai(String km) {
+        this.km = km;
+    }
+
+    public String getPhuongThucTT() {
+        return pttt;
+    }
+
+    public void setPhuongThucTT(String pttt) {
+        this.pttt = pttt;
+    }
+
+    public String getKhachHang() {
+        return khachHang;
+    }
+
+    public void setKhachHang(String khachHang) {
+        this.khachHang = khachHang;
+    }
+
+    public String getNhanVien() {
+        return nhanVien;
+    }
+
+    public void setNhanVien(String nhanVien) {
+        this.nhanVien = nhanVien;
+    }
+    
 }
