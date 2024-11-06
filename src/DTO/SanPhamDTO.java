@@ -1,5 +1,7 @@
 package DTO;
 
+import java.util.Objects;
+
 public class SanPhamDTO {
     private String id;
     private String name;
@@ -74,5 +76,25 @@ public class SanPhamDTO {
     public void setImg(String img) {
         this.img = img;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+
+        SanPhamDTO that = (SanPhamDTO) obj;
+        return Objects.equals(id, that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
+
+    @Override
+    public String toString() {
+        return "SanPhamDTO{id='" + id + "', name='" + name + "'}";
+    }
+
     
 }

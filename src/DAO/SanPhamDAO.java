@@ -25,17 +25,11 @@ public class SanPhamDAO extends ObjectDAO {
         return super.executeQuery(query, params);
     }
 
-    public int getCountSPOfPhanLoai(String idCate){
-        int count = -1;
+    public ResultSet getCountSPOfPhanLoai(String idCate){
         String query = "SELECT COUNT(*) FROM PRODUCT WHERE isDelete = 0 AND id_cate = ? ;";
         Object[] params = {idCate};
         ResultSet rs = super.executeQuery(query, params);
-        try {
-            rs.next();
-            count = rs.getInt(1);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return count;
+        
+        return rs;
     }
 }

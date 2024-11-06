@@ -1,10 +1,15 @@
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashSet;
+import java.util.LinkedHashSet;
 
+import BUS.SanPhamBUS;
 import DAO.SanPhamDAO;
+import DTO.SanPhamDTO;
 
 public class Test {
     public static void main(String[] args) {
+        //Test DAO
         SanPhamDAO sPhamDAO = new SanPhamDAO();
         String idCate = "CATE002";
         ResultSet rs = sPhamDAO.getSanPhamOfPhanLoai(idCate);
@@ -18,6 +23,12 @@ public class Test {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        System.out.println("TỔNG SP CỦA " + idCate + " :" + sPhamDAO.getCountSPOfPhanLoai(idCate));
+        
+        //Test BUS
+        SanPhamBUS sPhamBUS = new SanPhamBUS();
+        LinkedHashSet<SanPhamDTO> result = sPhamBUS.getSetSP();
+        result.forEach(System.out::println);
+        
+        System.out.println("TỔNG SP CỦA " + idCate + " :" + sPhamBUS.getCountSPOfPhanLoai(idCate));
     }
 }
