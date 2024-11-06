@@ -3,12 +3,12 @@ package DTO;
 public class ChiTietNhapKhoDTO {
     private String idPN;
     private String seri;
-    private int cost;
+    private Integer cost;
 
     public ChiTietNhapKhoDTO(String idPN, String seri, int cost) {
         this.idPN = idPN;
         this.seri = seri;
-        this.cost = cost;
+        this.cost = Integer.valueOf(cost);
     }
 
     public String getIdPN() {
@@ -28,10 +28,10 @@ public class ChiTietNhapKhoDTO {
     }
 
     public int getCost() {
-        return cost;
+        return cost.intValue();
     }
 
     public void setCost(int cost) {
-        this.cost = cost;
+        this.cost = Integer.valueOf(cost);
     }
 }

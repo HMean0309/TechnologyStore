@@ -43,19 +43,19 @@ public class HoaDonDTO {
         this.ngayLap = ngayLap;
     }
 
-    public Integer getOrderAmount() {
-        return orderAmount;
+    public int getOrderAmount() {
+        return orderAmount.intValue();
     }
 
-    public void setOrderAmount(Integer orderAmount) {
+    public void setOrderAmount(int orderAmount) {
         this.orderAmount = orderAmount;
     }
 
-    public Integer getDiscountAmount() {
-        return discountAmount;
+    public int getDiscountAmount() {
+        return discountAmount.intValue();
     }
 
-    public void setDiscountAmount(Integer discountAmount) {
+    public void setDiscountAmount(int discountAmount) {
         this.discountAmount = discountAmount;
     }
 

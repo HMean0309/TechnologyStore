@@ -4,10 +4,10 @@ public class ChiTietSanPhamDTO {
     private String seri;
     private String idSP;
     private String color;
-    private long price;
+    private Integer price;
     private boolean isDelete;
 
-    public ChiTietSanPhamDTO(String seri, String idSP, String color, long price, boolean isDelete) {
+    public ChiTietSanPhamDTO(String seri, String idSP, String color, int price, boolean isDelete) {
         this.seri = seri;
         this.idSP = idSP;
         this.color = color;
@@ -39,11 +39,11 @@ public class ChiTietSanPhamDTO {
         this.color = color;
     }
 
-    public long getPrice() {
-        return price;
+    public int getPrice() {
+        return price.intValue();
     }
 
-    public void setPrice(long price) {
+    public void setPrice(int price) {
         this.price = price;
     }
 

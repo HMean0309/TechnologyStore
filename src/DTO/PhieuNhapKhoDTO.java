@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 public class PhieuNhapKhoDTO {
     private String id;
     private LocalDateTime ngayNhap;
-    private int total;
+    private Integer total;
     private boolean isDelete;
     private String nhanVien;
     private String idNCC;
@@ -36,7 +36,7 @@ public class PhieuNhapKhoDTO {
     }
 
     public int getTotal() {
-        return total;
+        return total.intValue();
     }
 
     public void setTotal(int total) {

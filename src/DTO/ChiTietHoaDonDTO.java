@@ -3,12 +3,12 @@ package DTO;
 public class ChiTietHoaDonDTO {
     private String idHoaDon;
     private String seri;
-    private long donGia;
+    private Integer donGia;
 
     public ChiTietHoaDonDTO(String idHoaDon, String seri, int donGia) {
         this.idHoaDon = idHoaDon;
         this.seri = seri;
-        this.donGia = donGia;
+        this.donGia = Integer.valueOf(donGia);
     }
 
     public String getIdHoaDon() {
@@ -27,11 +27,11 @@ public class ChiTietHoaDonDTO {
         this.seri = seri;
     }
 
-    public long getDonGia() {
-        return donGia;
+    public int getDonGia() {
+        return donGia.intValue();
     }
 
     public void setDonGia(int donGia) {
-        this.donGia = donGia;
+        this.donGia = Integer.valueOf(donGia);
     }
 }

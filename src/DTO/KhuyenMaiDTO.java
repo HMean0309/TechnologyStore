@@ -7,7 +7,7 @@ public class KhuyenMaiDTO {
     private LocalDateTime startDateTime;
     private LocalDateTime endDateTime;
     private boolean donViKM;
-    private long value;
+    private Integer value;
     private boolean isDelete;
     private String des;
 
@@ -53,8 +53,8 @@ public class KhuyenMaiDTO {
         this.donViKM = donViKM;
     }
 
-    public long getValue() {
-        return value;
+    public int getValue() {
+        return value.intValue();
     }
 
     public void setValue(int value) {
