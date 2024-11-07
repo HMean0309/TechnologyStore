@@ -1,24 +1,24 @@
 package DTO;
 
-public class KhachHangDTO {
+public class NhaCungCapDTO {
     private String id;
     private String name;
-    private String phone;
-    private String address;
-    private String district;
-    private String ward;
-    private String city;
+    private String phone; 
     private boolean isDelete;
+    private String address;
+    private String ward;
+    private String district;
+    private String city;
 
-    public KhachHangDTO(String id, String name, String phone, String address, String district, String ward, String city, boolean isDelete) {
+    public NhaCungCapDTO(String id, String name, String phone, boolean isDelete, String address, String ward, String district, String city) {
         this.id = id;
         this.name = name;
         this.phone = phone;
-        this.address = address;
-        this.district = district;
-        this.ward = ward;
-        this.city = city;
         this.isDelete = isDelete;
+        this.address = address;
+        this.ward = ward;
+        this.district = district;
+        this.city = city;
     }
 
     public String getId() {
@@ -45,20 +45,20 @@ public class KhachHangDTO {
         this.phone = phone;
     }
 
+    public boolean isDelete() {
+        return isDelete;
+    }
+
+    public void setDelete(boolean isDelete) {
+        this.isDelete = isDelete;
+    }
+
     public String getAddress() {
         return address;
     }
 
     public void setAddress(String address) {
         this.address = address;
-    }
-
-    public String getDistrict() {
-        return district;
-    }
-
-    public void setDistrict(String district) {
-        this.district = district;
     }
 
     public String getWard() {
@@ -69,19 +69,19 @@ public class KhachHangDTO {
         this.ward = ward;
     }
 
+    public String getDistrict() {
+        return district;
+    }
+
+    public void setDistrict(String district) {
+        this.district = district;
+    }
+
     public String getCity() {
         return city;
     }
 
     public void setCity(String city) {
         this.city = city;
-    }
-
-    public boolean isDelete() {
-        return isDelete;
-    }
-
-    public void setDelete(boolean isDelete) {
-        this.isDelete = isDelete;
     }
 }

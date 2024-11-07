@@ -34,8 +34,5 @@ public class MySQLConnection {
             }
         }
     }
-//    public static void main(String []args){
-//        Connection connection = getConnection();
-//        closeConnection(connection);
-//    }
+
 }

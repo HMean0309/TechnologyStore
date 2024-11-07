@@ -24,7 +24,7 @@ CREATE TABLE `CT_PRO` (
 
 CREATE TABLE `HOA_DON` (
   `id` char(16) PRIMARY KEY NOT NULL,
-  `ngaylap` date NOT NULL COMMENT 'Ngày Lập Hóa Đơn',
+  `ngaylap` datetime NOT NULL COMMENT 'Ngày Lập Hóa Đơn',
   `order_amount` int(8) COMMENT 'Tổng tiền theo chi tiết hóa đơn',
   `discount_amount` int(8) COMMENT 'Tổng chiết khấu + giảm giá',
   `status` ENUM ('CH_THANHTOAN', 'CH_GIAO', 'CH_HUY', 'CH_BAOHANH') NOT NULL COMMENT 'Trạng thái của đơn',
@@ -50,8 +50,8 @@ CREATE TABLE `PTTT` (
 
 CREATE TABLE `KHUYEN_MAI` (
   `id` char(14) PRIMARY KEY NOT NULL,
-  `startDate` date NOT NULL COMMENT 'Ngày bắt đầu',
-  `endDate` date NOT NULL COMMENT 'Ngày kết thúc',
+  `startDatetime` datetime NOT NULL COMMENT 'Ngày bắt đầu',
+  `endDatetime` datetime NOT NULL COMMENT 'Ngày kết thúc',
   `donviKM` bool DEFAULT 0,
   `value` int(10) NOT NULL COMMENT 'Giá trị áp dụng theo đơn vị',
   `isDelete` bool DEFAULT 0 ,
@@ -115,7 +115,7 @@ CREATE TABLE `CT_QUYEN` (
 
 CREATE TABLE `PHIEU_NHAP_KHO` (
   `id` char(8) PRIMARY KEY NOT NULL,
-  `ngaynhap` date NOT NULL COMMENT 'Ngày nhập hàng',
+  `ngaynhap` datetime NOT NULL COMMENT 'Ngày nhập hàng',
   `total` int(8) NOT NULL COMMENT 'Tổng tiền nhập hàng',
   `isDelete` bool DEFAULT 0,
   `nhanvien` char(10) COMMENT 'Nhân viên phụ trách',
@@ -142,11 +142,11 @@ CREATE TABLE `NCC` (
 
 CREATE TABLE `PHIEU_BAO_HANH` (
   `id` char(8) PRIMARY KEY NOT NULL,
-  `ngaylap` date NOT NULL COMMENT 'Ngày lập phiếu',
+  `ngaylap` datetime NOT NULL COMMENT 'Ngày lập phiếu',
   `isDelete` bool DEFAULT 0,
   `nhanvien` char(10) COMMENT 'Nhân viên phụ trách',
   `id_hoa_don` char(16) COMMENT 'Mã Hóa Đơn',
-  `ngaytrahang` date NOT NULL COMMENT 'Ngày trả hàng dự kiến'
+  `ngaytrahang` datetime NOT NULL COMMENT 'Ngày trả hàng dự kiến'
 );
 
 CREATE TABLE `CT_BAOHANH` (
