@@ -14,6 +14,7 @@ import com.formdev.flatlaf.extras.FlatSVGIcon;
 
 public class Main extends javax.swing.JFrame {
 
+    KhachHang khachHang;
     
     Color BackgroundColor = new Color(240, 247, 250);
     public Main() {
@@ -406,6 +407,7 @@ public class Main extends javax.swing.JFrame {
 
     private void btnKhachHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKhachHangActionPerformed
         // TODO add your handling code here:
+        
     }//GEN-LAST:event_btnKhachHangActionPerformed
 
     private void btnNhaCungCapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNhaCungCapActionPerformed
