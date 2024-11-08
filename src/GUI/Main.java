@@ -13,10 +13,7 @@ import com.formdev.flatlaf.extras.FlatSVGIcon;
 
 
 public class Main extends javax.swing.JFrame {
-
-    KhachHang khachHang;
     
-    Color BackgroundColor = new Color(240, 247, 250);
     public Main() {
         this.setPreferredSize(new Dimension(1366, 677));
         
