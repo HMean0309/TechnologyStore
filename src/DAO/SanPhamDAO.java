@@ -2,6 +2,8 @@ package DAO;
 
 import java.sql.Statement;
 
+import DTO.SanPhamDTO;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -35,20 +37,20 @@ public class SanPhamDAO extends ObjectDAO {
     public void updateSPById(SanPhamDTO product){
         String query = "UPDATE PRODUCT SET name = ?, id_cate = ?, baohanh = ?, des = ?, img = ? WHERE id = ? ;";
         Object[] params = {product.getName(), product.getIdCate(), product.getBaoHanh(), product.getDes(), product.getImg(), product.getId() };
-        return super.executeNonQuery(query, params);
+        super.executeNonQuery(query, params);
     }
 
     // Xoa san pham bang id
     public void removeSPById(int id){
         String query = "UPDATE PRODUCT SET isDelete = 1 WHERE id = ? ;";
         Object[] params = {id};
-        return super.executeNonQuery(query, params);
+        super.executeNonQuery(query, params);
     }
 
     // Them du lieu vao san pham
     public void addSPWithData(SanPhamDTO product){
-        String query = "INSERT INTO PRODUCT (id,name,isDelete,id_cate,baohanh,des,img)"+"VALUES(?,?,?,?,?,?,?) ;";
-        Object[] params = {product.getId(),product.getName(),product.isDelete(),product.setIdCate(),product.setBaoHanh(),product.setDes(),product.setImg()};
-        return super.executeNonQuery(query,params);
+        String query = "INSERT INTO PRODUCT (id,name,id_cate,baohanh,des,img)"+"VALUES(?,?,?,?,?,?) ;";
+        Object[] params = {product.getId(),product.getName(),product.getIdCate(),product.getBaoHanh(),product.getDes(),product.getImg()};
+        super.executeNonQuery(query,params);
     }
 }
