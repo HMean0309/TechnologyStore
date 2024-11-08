@@ -4,16 +4,15 @@
  */
 package DAO;
 
-import DTO.ChiTietNhapKhoDTO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import DTO.PhieuNhapKhoDTO;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
-import javax.swing.JOptionPane;
 
 public class PhieuNhapDAO extends ObjectDAO {
     public PhieuNhapDAO(){
@@ -37,43 +36,63 @@ public class PhieuNhapDAO extends ObjectDAO {
         executeNonQuery(query, params);
     }
     
-    public void editPhieuNhap(String id, LocalDateTime ngayNhap, int total, String id_nhanvien, String idNCC) {
-        String query = "UPDATE PHIEU_NHAP_KHO (id, ngaynhap, total, id_nhanvien, id_ncc) VALUES (?, ?, ?, ?, ?)";
-        Object[] params = {id, ngayNhap, total, id_nhanvien, idNCC};
-        executeNonQuery(query, params);
-    }
-    
-    public void deletePhieuNhap(String idPhieuNhap, List<ChiTietNhapKhoDTO> listPn) {
-        if (!canDeletePhieuNhap(listPn)) {
-            return;
-        }
+    public List<PhieuNhapKhoDTO> searchPhieuNhap(String id_pn, String tenNcc, String tenNhanVien,LocalDateTime fromDate, LocalDateTime toDate,Integer fromTotal, Integer toTotal) {
+        List<PhieuNhapKhoDTO> result = new ArrayList<>();
+        StringBuilder query = new StringBuilder("SELECT pn.id_pn, ncc.id_ncc, nv.id_nhanvien, pn.ngay_nhap, pn.total " +
+                                                "FROM phieu_nhap pn " +
+                                                "JOIN ncc ON pn.id_ncc = ncc.id " +
+                                                "JOIN nhan_vien nv ON pn.id_nhanvien = nv.id " +
+                                                "WHERE 1=1");
+        List<Object> params = new ArrayList<>();
 
-        String query = "DELETE FROM PHIEU_NHAP_KHO WHERE id = ?";
-        Object[] params = {idPhieuNhap};
-        executeNonQuery(query, params);
-        JOptionPane.showMessageDialog(null, "Phiếu nhập đã được xóa thành công.");
-    }
+        checkGanGiong(query, params, "pn.id_pn LIKE ?", id_pn);
+        checkGanGiong(query, params, "ncc.ten_ncc LIKE ?", tenNcc);
+        checkGanGiong(query, params, "nv.ten_nhanvien LIKE ?", tenNhanVien);
+        checkNgay(query, params, "pn.ngay_nhap >= ?", fromDate);
+        checkNgay(query, params, "pn.ngay_nhap <= ?", toDate);
+        checkGiongNhau(query, params, "pn.total >= ?", fromTotal);
+        checkGiongNhau(query, params, "pn.total <= ?", toTotal);
 
-
-    
-    public boolean canDeletePhieuNhap(List<ChiTietNhapKhoDTO> listPn) {
         try {
-            for (ChiTietNhapKhoDTO chiTiet : listPn) {
-                String seriSanPham = chiTiet.getSeri();
-
-                String query = "SELECT COUNT(*) FROM ChiTietHoaDon WHERE seriSanPham = ?";
-                Object[] params = {seriSanPham};
-
-                try (ResultSet rs = executeQuery(query, params)) {
-                    if (rs.next() && rs.getInt(1) > 0) {
-                        JOptionPane.showMessageDialog(null, "Phiếu này có sản phẩm đã bán, không thể hủy!");
-                        return false;
-                    }
-                }
+            ResultSet rs = executeQuery(query.toString(), params.toArray());
+            while (rs.next()) {
+                PhieuNhapKhoDTO phieuNhap = new PhieuNhapKhoDTO();
+                phieuNhap.setId(rs.getString("id_pn"));
+                phieuNhap.setIdNCC(rs.getString("id_ncc"));
+                phieuNhap.setidNhanVien(rs.getString("id_nhanvien"));
+                phieuNhap.setNgayNhap(rs.getTimestamp("ngay_nhap").toLocalDateTime());
+                phieuNhap.setTotal(rs.getInt("total"));
+                result.add(phieuNhap);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return true;
+
+        return result;
     }
+    
+    // Hàm thêm điều kiện cho các trường hợp kiểm tra bằng
+    private void checkGiongNhau(StringBuilder query, List<Object> params, String condition, Object value) {
+        if (value != null) {
+            query.append(" AND ").append(condition);
+            params.add(value);
+        }
+    }
+
+    // Hàm thêm điều kiện cho các trường hợp kiểm tra giống nhau
+    private void checkGanGiong(StringBuilder query, List<Object> params, String condition, String value) {
+        if (value != null && !value.trim().isEmpty()) {
+            query.append(" AND ").append(condition);
+            params.add("%" + value + "%");
+        }
+    }
+
+    // Hàm thêm điều kiện cho các trường hợp kiểm tra ngày
+    private void checkNgay(StringBuilder query, List<Object> params, String condition, LocalDateTime date) {
+        if (date != null) {
+            query.append(" AND ").append(condition);
+            params.add(Timestamp.valueOf(date));
+        }
+    }
+
 }

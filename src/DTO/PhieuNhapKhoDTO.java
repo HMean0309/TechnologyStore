@@ -18,6 +18,10 @@ public class PhieuNhapKhoDTO {
         this.idNCC = idNCC;
     }
 
+    public PhieuNhapKhoDTO() {
+        
+    }
+
     public String getId() {
         return id;
     }
