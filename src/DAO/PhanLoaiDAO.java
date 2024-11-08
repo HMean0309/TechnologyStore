@@ -1,7 +1,7 @@
 package DAO;
 
 import java.sql.Statement;
-
+import DTO.PhanLoaiDTO;
 import config.MySQLConnection;
 
 import java.sql.Connection;
@@ -45,19 +45,19 @@ public class PhanLoaiDAO extends ObjectDAO {
     public void addPLWithData(PhanLoaiDTO category){
         String query = "INSERT INTO CATEGORY (id,name,isDelete)"+"VALUES(?,?,?)";
         Object[] params = {category.getId(),category.getName(),category.isDelete()};
-        return super.executeNonQuery(query,params);
+        super.executeNonQuery(query,params);
     }
       // Xoa Phan Loai bang id
     public void removePLById(int id){
         String query = "UPDATE CATEGORY SET isDelete = 1 WHERE id = ? ;";
         Object[] params = {id};
-        return super.executeNonQuery(query, params);
+        super.executeNonQuery(query, params);
     }
   
       // Thay doi Phan Loai dua tren id
     public void updatePLById(PhanLoaiDTO category){
         String query = "UPDATE CATEGORY SET name = ? WHERE id = ? ;";
         Object[] params = {category.getName(), category.getId()};
-        return super.executeNonQuery(query, params);
+        super.executeNonQuery(query, params);
     }
 }
