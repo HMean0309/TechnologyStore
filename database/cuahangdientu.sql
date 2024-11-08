@@ -1,4 +1,4 @@
-CREATE TABLE `PRODUCT` (
+CREATE TABLE `SAN_PHAM` (
   `id` char(12) PRIMARY KEY NOT NULL,
   `name` nvarchar(50) UNIQUE NOT NULL COMMENT 'Tên sản phẩm',
   `isDelete` bool DEFAULT 0,
@@ -8,15 +8,21 @@ CREATE TABLE `PRODUCT` (
   `img` varchar(200) COMMENT 'Link ảnh'
 );
 
-CREATE TABLE `CATEGORY` (
+CREATE TABLE `OPTION_SAN_PHAM` (
+  `id_sp` char(12) PRIMARY KEY NOT NULL,
+  `color` nvarchar(30) NOT NULL COMMENT 'Màu',
+  `isDelete` bool DEFAULT 0
+);
+
+CREATE TABLE `PHAN_LOAI` (
   `id` char(7) PRIMARY KEY NOT NULL,
   `name` nvarchar(50) UNIQUE NOT NULL,
   `isDelete` bool DEFAULT 0
 );
 
-CREATE TABLE `CT_PRO` (
+CREATE TABLE `CT_SAN_PHAM` (
   `seri` char(14) PRIMARY KEY,
-  `id_pr` char(12) NOT NULL,
+  `id_sp` char(12) NOT NULL,
   `color` nvarchar(30) NOT NULL COMMENT 'Màu',
   `price` int(10) NOT NULL COMMENT 'Giá bán của sp',
   `isDelete` bool DEFAULT 0
@@ -31,15 +37,15 @@ CREATE TABLE `HOA_DON` (
   `ghichu` nvarchar(100) COMMENT 'Ghi chú cho đơn',
   `km` char(14) COMMENT 'Khuyến Mãi',
   `pttt` char(6) NOT NULL COMMENT 'Phương thức thanh toán',
-  `khachhang` char(14) NOT NULL COMMENT 'Địa chỉ giao hàng',
-  `nhanvien` char(10) NOT NULL COMMENT 'Nhân viên bán hàng'
+  `id_khachhang` char(14) NOT NULL COMMENT 'Địa chỉ giao hàng',
+  `id_nhanvien` char(10) NOT NULL COMMENT 'Nhân viên bán hàng'
 );
 
 CREATE TABLE `CT_HOA_DON` (
-  `id_hoa_don` char(16) COMMENT 'Mã Hóa Đơn',
+  `id_hoadon` char(16) COMMENT 'Mã Hóa Đơn',
   `seri` char(14) COMMENT 'Số seri của sản phẩm được chọn',
   `don_gia` int(10) NOT NULL COMMENT 'Đơn giá sản phẩm',
-  PRIMARY KEY (`id_hoa_don`, `seri`)
+  PRIMARY KEY (`id_hoadon`, `seri`)
 );
 
 CREATE TABLE `PTTT` (
@@ -60,7 +66,7 @@ CREATE TABLE `KHUYEN_MAI` (
 
 CREATE TABLE `CT_KM` (
   `id_km` char(14) PRIMARY KEY NOT NULL COMMENT 'Mã Khuyến Mãi',
-  `id_pr` char(12) COMMENT 'Món Khuyến Mãi'
+  `id_sp` char(12) COMMENT 'Món Khuyến Mãi'
 );
 
 CREATE TABLE `KHACH_HANG` (
@@ -78,14 +84,14 @@ CREATE TABLE `TAI_KHOAN` (
   `username` varchar(30) PRIMARY KEY,
   `password` varchar(20),
   `type` bool DEFAULT 0,
-  `id_nv` varchar(14) COMMENT 'Mã Thông Tin Tài Khoản',
+  `id_nhanvien` varchar(14) COMMENT 'Mã Thông Tin Tài Khoản',
   `id_quyen` char(6) COMMENT 'Mã Quyền',
   `isDelete` bool DEFAULT 0 
 );
 
 CREATE TABLE `NHAN_VIEN` (
   `id` char(10) PRIMARY KEY NOT NULL,
-  `name` nvarchar(50),
+  `name` nvarchar(50) NOT NULL,
   `phone` varchar(12) NOT NULL COMMENT 'Số điện thoại',
   `isDelete` bool DEFAULT 0 
 );
@@ -118,7 +124,7 @@ CREATE TABLE `PHIEU_NHAP_KHO` (
   `ngaynhap` datetime NOT NULL COMMENT 'Ngày nhập hàng',
   `total` int(8) NOT NULL COMMENT 'Tổng tiền nhập hàng',
   `isDelete` bool DEFAULT 0,
-  `nhanvien` char(10) COMMENT 'Nhân viên phụ trách',
+  `id_nhanvien` char(10) COMMENT 'Nhân viên phụ trách',
   `id_ncc` char(7) COMMENT 'Nhà cung cấp'
 );
 
@@ -144,8 +150,8 @@ CREATE TABLE `PHIEU_BAO_HANH` (
   `id` char(8) PRIMARY KEY NOT NULL,
   `ngaylap` datetime NOT NULL COMMENT 'Ngày lập phiếu',
   `isDelete` bool DEFAULT 0,
-  `nhanvien` char(10) COMMENT 'Nhân viên phụ trách',
-  `id_hoa_don` char(16) COMMENT 'Mã Hóa Đơn',
+  `id_nhanvien` char(10) COMMENT 'Nhân viên phụ trách',
+  `id_hoadon` char(16) COMMENT 'Mã Hóa Đơn',
   `ngaytrahang` datetime NOT NULL COMMENT 'Ngày trả hàng dự kiến'
 );
 
@@ -155,27 +161,29 @@ CREATE TABLE `CT_BAOHANH` (
   PRIMARY KEY (`id_bh`, `seri`)
 );
 
-ALTER TABLE `PRODUCT` ADD FOREIGN KEY (`id_cate`) REFERENCES `CATEGORY` (`id`);
+ALTER TABLE `SAN_PHAM` ADD FOREIGN KEY (`id_cate`) REFERENCES `PHAN_LOAI` (`id`);
 
-ALTER TABLE `CT_PRO` ADD FOREIGN KEY (`id_pr`) REFERENCES `PRODUCT` (`id`);
+ALTER TABLE `CT_SAN_PHAM` ADD FOREIGN KEY (`id_sp`) REFERENCES `SAN_PHAM` (`id`);
+
+ALTER TABLE `OPTION_SAN_PHAM` ADD FOREIGN KEY (`id_sp`) REFERENCES `SAN_PHAM` (`id`);
 
 ALTER TABLE `HOA_DON` ADD FOREIGN KEY (`km`) REFERENCES `KHUYEN_MAI` (`id`);
 
 ALTER TABLE `HOA_DON` ADD FOREIGN KEY (`pttt`) REFERENCES `PTTT` (`id`);
 
-ALTER TABLE `HOA_DON` ADD FOREIGN KEY (`khachhang`) REFERENCES `KHACH_HANG` (`id`);
+ALTER TABLE `HOA_DON` ADD FOREIGN KEY (`id_khachhang`) REFERENCES `KHACH_HANG` (`id`);
 
-ALTER TABLE `HOA_DON` ADD FOREIGN KEY (`nhanvien`) REFERENCES `NHAN_VIEN` (`id`);
+ALTER TABLE `HOA_DON` ADD FOREIGN KEY (`id_nhanvien`) REFERENCES `NHAN_VIEN` (`id`);
 
-ALTER TABLE `CT_HOA_DON` ADD FOREIGN KEY (`id_hoa_don`) REFERENCES `HOA_DON` (`id`);
+ALTER TABLE `CT_HOA_DON` ADD FOREIGN KEY (`id_hoadon`) REFERENCES `HOA_DON` (`id`);
 
-ALTER TABLE `CT_HOA_DON` ADD FOREIGN KEY (`seri`) REFERENCES `CT_PRO` (`seri`);
+ALTER TABLE `CT_HOA_DON` ADD FOREIGN KEY (`seri`) REFERENCES `CT_SAN_PHAM` (`seri`);
 
 ALTER TABLE `CT_KM` ADD FOREIGN KEY (`id_km`) REFERENCES `KHUYEN_MAI` (`id`);
 
-ALTER TABLE `CT_KM` ADD FOREIGN KEY (`id_pr`) REFERENCES `PRODUCT` (`id`);
+ALTER TABLE `CT_KM` ADD FOREIGN KEY (`id_sp`) REFERENCES `SAN_PHAM` (`id`);
 
-ALTER TABLE `TAI_KHOAN` ADD FOREIGN KEY (`id_nv`) REFERENCES `NHAN_VIEN` (`id`);
+ALTER TABLE `TAI_KHOAN` ADD FOREIGN KEY (`id_nhanvien`) REFERENCES `NHAN_VIEN` (`id`);
 
 ALTER TABLE `TAI_KHOAN` ADD FOREIGN KEY (`id_quyen`) REFERENCES `QUYEN` (`id`);
 
@@ -183,18 +191,18 @@ ALTER TABLE `CT_QUYEN` ADD FOREIGN KEY (`id_quyen`) REFERENCES `QUYEN` (`id`);
 
 ALTER TABLE `CT_QUYEN` ADD FOREIGN KEY (`id_chucnang`) REFERENCES `CHUC_NANG` (`id`);
 
-ALTER TABLE `PHIEU_NHAP_KHO` ADD FOREIGN KEY (`nhanvien`) REFERENCES `NHAN_VIEN` (`id`);
+ALTER TABLE `PHIEU_NHAP_KHO` ADD FOREIGN KEY (`id_nhanvien`) REFERENCES `NHAN_VIEN` (`id`);
 
 ALTER TABLE `PHIEU_NHAP_KHO` ADD FOREIGN KEY (`id_ncc`) REFERENCES `NCC` (`id`);
 
 ALTER TABLE `CT_NHAP_KHO` ADD FOREIGN KEY (`id_pn`) REFERENCES `PHIEU_NHAP_KHO` (`id`);
 
-ALTER TABLE `CT_NHAP_KHO` ADD FOREIGN KEY (`seri`) REFERENCES `CT_PRO` (`seri`);
+ALTER TABLE `CT_NHAP_KHO` ADD FOREIGN KEY (`seri`) REFERENCES `CT_SAN_PHAM` (`seri`);
 
-ALTER TABLE `PHIEU_BAO_HANH` ADD FOREIGN KEY (`nhanvien`) REFERENCES `NHAN_VIEN` (`id`);
+ALTER TABLE `PHIEU_BAO_HANH` ADD FOREIGN KEY (`id_nhanvien`) REFERENCES `NHAN_VIEN` (`id`);
 
-ALTER TABLE `PHIEU_BAO_HANH` ADD FOREIGN KEY (`id_hoa_don`) REFERENCES `HOA_DON` (`id`);
+ALTER TABLE `PHIEU_BAO_HANH` ADD FOREIGN KEY (`id_hoadon`) REFERENCES `HOA_DON` (`id`);
 
 ALTER TABLE `CT_BAOHANH` ADD FOREIGN KEY (`id_bh`) REFERENCES `PHIEU_BAO_HANH` (`id`);
 
-ALTER TABLE `CT_BAOHANH` ADD FOREIGN KEY (`seri`) REFERENCES `CT_PRO` (`seri`);
+ALTER TABLE `CT_BAOHANH` ADD FOREIGN KEY (`seri`) REFERENCES `CT_SAN_PHAM` (`seri`);
