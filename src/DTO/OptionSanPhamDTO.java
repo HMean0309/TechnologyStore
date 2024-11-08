@@ -28,4 +28,14 @@ public class OptionSanPhamDTO{
     {
        this.idSP = idSp; 
     }
+
+    public String getColor()
+    {
+        return color;
+    }
+
+    public String setColor(String color)
+    {
+        this.color = color;
+    }
 }
