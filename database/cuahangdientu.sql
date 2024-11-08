@@ -1,13 +1,17 @@
 CREATE TABLE `SAN_PHAM` (
-  `id` char(12) NOT NULL,
-  `color` nvarchar(30) NOT NULL COMMENT 'Màu',
+  `id` char(12) PRIMARY KEY NOT NULL,
   `name` nvarchar(50) UNIQUE NOT NULL COMMENT 'Tên sản phẩm',
   `isDelete` bool DEFAULT 0,
   `id_cate` char(7) COMMENT 'Loại sản phẩm',
   `baohanh` int(4) COMMENT 'Bảo hàng theo tháng',
   `des` nvarchar(200) COMMENT 'Mô tả',
   `img` varchar(200) COMMENT 'Link ảnh'
-  PRIMARY KEY('id','color')
+);
+
+CREATE TABLE `OPTION_SAN_PHAM` (
+  `id_sp` char(12) PRIMARY KEY NOT NULL,
+  `color` nvarchar(30) NOT NULL COMMENT 'Màu',
+  `isDelete` bool DEFAULT 0
 );
 
 CREATE TABLE `PHAN_LOAI` (
@@ -18,7 +22,7 @@ CREATE TABLE `PHAN_LOAI` (
 
 CREATE TABLE `CT_SAN_PHAM` (
   `seri` char(14) PRIMARY KEY,
-  `id_pr` char(12) NOT NULL,
+  `id_sp` char(12) NOT NULL,
   `color` nvarchar(30) NOT NULL COMMENT 'Màu',
   `price` int(10) NOT NULL COMMENT 'Giá bán của sp',
   `isDelete` bool DEFAULT 0
@@ -41,7 +45,7 @@ CREATE TABLE `CT_HOA_DON` (
   `id_hoadon` char(16) COMMENT 'Mã Hóa Đơn',
   `seri` char(14) COMMENT 'Số seri của sản phẩm được chọn',
   `don_gia` int(10) NOT NULL COMMENT 'Đơn giá sản phẩm',
-  PRIMARY KEY (`id_hoa_don`, `seri`)
+  PRIMARY KEY (`id_hoadon`, `seri`)
 );
 
 CREATE TABLE `PTTT` (
@@ -159,9 +163,9 @@ CREATE TABLE `CT_BAOHANH` (
 
 ALTER TABLE `SAN_PHAM` ADD FOREIGN KEY (`id_cate`) REFERENCES `PHAN_LOAI` (`id`);
 
-ALTER TABLE `CT_SAN_PHAM` ADD FOREIGN KEY (`id_pr`) REFERENCES `SAN_PHAM` (`id`);
+ALTER TABLE `CT_SAN_PHAM` ADD FOREIGN KEY (`id_sp`) REFERENCES `SAN_PHAM` (`id`);
 
-ALTER TABLE `CT_SAN_PHAM` ADD FOREIGN KEY (`color`) REFERENCES `SAN_PHAM` (`color`);
+ALTER TABLE `OPTION_SAN_PHAM` ADD FOREIGN KEY (`id_sp`) REFERENCES `SAN_PHAM` (`id`);
 
 ALTER TABLE `HOA_DON` ADD FOREIGN KEY (`km`) REFERENCES `KHUYEN_MAI` (`id`);
 
@@ -177,9 +181,9 @@ ALTER TABLE `CT_HOA_DON` ADD FOREIGN KEY (`seri`) REFERENCES `CT_SAN_PHAM` (`ser
 
 ALTER TABLE `CT_KM` ADD FOREIGN KEY (`id_km`) REFERENCES `KHUYEN_MAI` (`id`);
 
-ALTER TABLE `CT_KM` ADD FOREIGN KEY (`id_pr`) REFERENCES `SAN_PHAM` (`id`);
+ALTER TABLE `CT_KM` ADD FOREIGN KEY (`id_sp`) REFERENCES `SAN_PHAM` (`id`);
 
-ALTER TABLE `TAI_KHOAN` ADD FOREIGN KEY (`id_nv`) REFERENCES `NHAN_VIEN` (`id`);
+ALTER TABLE `TAI_KHOAN` ADD FOREIGN KEY (`id_nhanvien`) REFERENCES `NHAN_VIEN` (`id`);
 
 ALTER TABLE `TAI_KHOAN` ADD FOREIGN KEY (`id_quyen`) REFERENCES `QUYEN` (`id`);
 
