@@ -7,15 +7,15 @@ public class PhieuNhapKhoDTO {
     private LocalDateTime ngayNhap;
     private Integer total;
     private boolean isDelete;
-    private String nhanVien;
+    private String idNhanVien;
     private String idNCC;
 
-    public PhieuNhapKhoDTO(String id, LocalDateTime ngayNhap, int total, boolean isDelete, String nhanVien, String idNCC) {
+    public PhieuNhapKhoDTO(String id, LocalDateTime ngayNhap, int total, boolean isDelete, String idNhanVien, String idNCC) {
         this.id = id;
         this.ngayNhap = ngayNhap;
         this.total = total;
         this.isDelete = isDelete;
-        this.nhanVien = nhanVien;
+        this.idNhanVien = idNhanVien;
         this.idNCC = idNCC;
     }
 
@@ -51,12 +51,12 @@ public class PhieuNhapKhoDTO {
         this.isDelete = isDelete;
     }
 
-    public String getNhanVien() {
-        return nhanVien;
+    public String getIdNhanVien() {
+        return idNhanVien;
     }
 
-    public void setNhanVien(String nhanVien) {
-        this.nhanVien = nhanVien;
+    public void setIdNhanVien(String idNhanVien) {
+        this.idNhanVien = idNhanVien;
     }
 
     public String getIdNCC() {
