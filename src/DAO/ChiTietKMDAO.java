@@ -15,18 +15,18 @@ public class ChiTietKMDAO extends ObjectDAO{
     }
 
     public ResultSet getAllCTKM(){
-        String query = "SELECT * FROM CT_KM";
+        String query = "SELECT * FROM CT_KM ;";
         return super.executeQuery(query);
     }
-
-    public ResultSet getIdSPInCTKMByIdKM(String idkm){
-        String query = "SELECT id_sp FROM CT_KM WHERE id_km = ? ;";
+    
+    public ResultSet getCTKMByIdKM(String idkm){
+        String query = "SELECT * FROM CT_KM WHERE id_km = ? ;";
         Object[] params = {idkm};
-        return super.executeQuery(query);
+        return super.executeQuery(query, params);
     }
 
     public ResultSet getCountAllCTKM(){
-        String query = "SELECT COUNT(*) FROM CT_KM";
+        String query = "SELECT COUNT(*) FROM CT_KM ;";
         return super.executeQuery(query);
     }
 

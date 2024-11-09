@@ -16,44 +16,20 @@ public class KhuyenMaiDAO extends ObjectDAO {
 
     public ResultSet getAllKhuyenMai()
     {
-        String query = "SELECT * FROM KHUYEN_MAI WHERE isDelete = 0";
+        String query = "SELECT * FROM KHUYEN_MAI WHERE isDelete = 0 ;";
         return super.executeQuery(query);
     }
 
-    public ResultSet getStartDateInKMById(String id){
-        String query = "SELECT startDatetime FROM KHUYEN_MAI WHERE id = ? ;";
-        Object[] params = {id};
-        return super.executeQuery(query, params);
-    }
-
-    public ResultSet getEndDateInKMById(String id){
-        String query = "SELECT endDatetime FROM KHUYEN_MAI WHERE id = ? ;";
-        Object[] params = {id};
-        return super.executeQuery(query, params);
-    }
-
-    public ResultSet getDonViKMinKMById(String id){
-        String query = "SELECT donviKM FROM KHUYEN_MAI WHERE id = ? ;";
-        Object[] params = {id};
-        return super.executeQuery(query, params);
-    }
-
-    public ResultSet getValueInKMById(String id){
-        String query = "SELECT value FROM KHUYEN_MAI WHERE id = ? ;";
-        Object[] params = {id};
-        return super.executeQuery(query, params);        
-    }
-
-    public ResultSet getDesInKMById(String id){
-        String query = "SELECT des FROM KHUYEN_MAI WHERE id = ? ;";
-        Object[] params = {id};
-        return super.executeQuery(query, params);
-    }
-
-    public ResultSet getCountIdInKMByDate(KhuyenMaiDTO km){
-        String query = "SELECT COUNT(id) FROM KHUYEN_MAI WHERE startDateTime = ? AND endDatetime = ? ;";
+    public ResultSet getCountKMByDate(KhuyenMaiDTO km){
+        String query = "SELECT COUNT(*) FROM KHUYEN_MAI WHERE startDateTime = ? AND endDatetime = ? ;";
         Object[] params = {km.getStartLocalDateTimetime(),km.getEndLocalDateTimetime()};
         return super.executeQuery(query, params);
+    }
+    
+    public ResultSet getAllCountKM()
+    {
+        String query = "SELECT COUNT(*) FROM KHUYEN_MAI ;";
+        return super.executeQuery(query);
     }
 
     public void addKMWithData(KhuyenMaiDTO km){
@@ -69,7 +45,7 @@ public class KhuyenMaiDAO extends ObjectDAO {
     }
 
     public void removeKMById(String id){
-        String query = "UPDATE KHUYEN_MAi SET isDelete = 1 WHERE id = ?";
+        String query = "UPDATE KHUYEN_MAi SET isDelete = 1 WHERE id = ? ;";
         Object[] params = {id};
         super.executeNonQuery(query, params);
     }

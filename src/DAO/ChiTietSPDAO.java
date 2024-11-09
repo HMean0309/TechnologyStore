@@ -18,6 +18,17 @@ public class ChiTietSPDAO extends ObjectDAO{
         String query = "SELECT * FROM CT_SAN_PHAM WHERE isDelete = 0 ;";
         return super.executeQuery(query);
     }
+    
+    public ResultSet getAllCountCTSP() {
+        String query = "SELECT COUNT(*) FROM CT_SAN_PHAM WHERE isDelete = 0 ;";
+        return super.executeQuery(query);       
+    }
+    
+     public ResultSet getCountCTSPById(String id_sp) {
+        String query = "SELECT COUNT(*) FROM CT_SAN_PHAM WHERE isDelete = 0 AND id_sp = ? ;";
+        Object[] params = { id_sp };
+        return super.executeQuery(query, params);       
+    }
 
     public ResultSet getCTSPByIdSP(String id) {
         String query = "SELECT * FROM CT_SAN_PHAM WHERE isDelete = 0 AND id_sp = ? ;";
@@ -62,13 +73,6 @@ public class ChiTietSPDAO extends ObjectDAO{
         return rs;
     }
 
-    public ResultSet getCountCTSPByIdSP(String idSP) {
-        String query = "SELECT COUNT(*) FROM CT_SAN_PHAM WHERE isDelete = 0 AND id_sp = ? ;";
-        Object[] params = { idSP };
-        ResultSet rs = super.executeQuery(query, params);
-        return rs;
-    }
-
     // Them du lieu vao Phan Loai
     public void addCTSPWithData(ChiTietSanPhamDTO ctsp) {
         String query = "INSERT INTO CT_SAN_PHAM (seri,id_sp,color,price)" + "VALUES(?,?,?,?)";
@@ -83,15 +87,10 @@ public class ChiTietSPDAO extends ObjectDAO{
     }
 
     // Thay doi Phan Loai dua tren id
-    public void updateCTSPBySeri(ChiTietSanPhamDTO CT_SAN_PHAM) {
+    public void updateCTSPBySeri(ChiTietSanPhamDTO ctsp) {
         String query = "UPDATE CT_SAN_PHAM SET id_sp = ?, color = ?, price = ? WHERE seri = ? AND isDelete = 0 ;";
         Object[] params = { ctsp.getidSP(), ctsp.getColor(), ctsp.getPrice(), ctsp.getSeri()};
         super.executeNonQuery(query, params);
     }
-
-    public void updateCTSPByIdSP(ChiTietSanPhamDTO CT_SAN_PHAM) {
-        String query = "UPDATE CT_SAN_PHAM SET seri = ?, color = ?, price = ? WHERE id_sp = ? AND isDelete = 0 ;";
-        Object[] params = { ctsp.getSeri(), ctsp.getColor(), ctsp.getPrice(), ctsp.getidSP()};
-        super.executeNonQuery(query, params);
-    }    
+  
 }

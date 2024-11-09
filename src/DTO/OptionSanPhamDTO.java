@@ -3,9 +3,9 @@ package DTO;
 public class OptionSanPhamDTO{
     public String idSP;
     public String color;
-    public String isDelete;
+    public Boolean isDelete;
 
-    public OptionSanPhamDTO(String idSp, String color, String isDelete)
+    public OptionSanPhamDTO(String idSp, String color, Boolean isDelete)
     {
         this.idSP = idSp;
         this.color = color;
@@ -24,7 +24,7 @@ public class OptionSanPhamDTO{
         return idSP;
     }
 
-    public String setIdSP(String idSp)
+    public void setIdSP(String idSp)
     {
        this.idSP = idSp; 
     }
@@ -34,7 +34,7 @@ public class OptionSanPhamDTO{
         return color;
     }
 
-    public String setColor(String color)
+    public void setColor(String color)
     {
         this.color = color;
     }

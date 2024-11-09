@@ -33,6 +33,19 @@ public class SanPhamDAO extends ObjectDAO {
         return rs;
     }
 
+    public ResultSet getSanPhamById(String id)
+    {
+        String query = "SELECT * FROM PRODUCT WHERE isDelete = 0 AND id = ? ;";
+        Object[] params = {id};
+        return super.executeQuery(query, params);
+    }
+    
+    public ResultSet getSPByIdCate(String idCate)
+    {
+        String query = "SELECT * FROM PHAN_LOAI WHERE isDelete = 0 AND id_cate = ? ;";
+        Object[] params = {idCate};
+        return super.executeQuery(query, params);
+    }
     // Thay doi san pham dua tren id
     public void updateSPById(SanPhamDTO product){
         String query = "UPDATE PRODUCT SET name = ?, id_cate = ?, baohanh = ?, des = ?, img = ? WHERE id = ? ;";
@@ -41,7 +54,7 @@ public class SanPhamDAO extends ObjectDAO {
     }
 
     // Xoa san pham bang id
-    public void removeSPById(int id){
+    public void removeSPById(String id){
         String query = "UPDATE PRODUCT SET isDelete = 1 WHERE id = ? ;";
         Object[] params = {id};
         super.executeNonQuery(query, params);
