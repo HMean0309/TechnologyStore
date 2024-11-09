@@ -13,18 +13,18 @@ public class SanPhamDAO extends ObjectDAO {
     }
 
     public ResultSet getAllSanPham(){
-        String query = "SELECT * FROM PRODUCT WHERE isDelete = 0 ;";
+        String query = "SELECT * FROM SAN_PHAM WHERE isDelete = 0 ;";
         return super.executeQuery(query);
     }
 
     public ResultSet getSanPhamOfPhanLoai(String idCate){
-        String query = "SELECT * FROM PRODUCT WHERE isDelete = 0 AND id_cate = ? ;";
+        String query = "SELECT * FROM SAN_PHAM WHERE isDelete = 0 AND id_cate = ? ;";
         Object[] params = {idCate};
         return super.executeQuery(query, params);
     }
 
     public ResultSet getCountSPOfPhanLoai(String idCate){
-        String query = "SELECT COUNT(*) FROM PRODUCT WHERE isDelete = 0 AND id_cate = ? ;";
+        String query = "SELECT COUNT(*) FROM SAN_PHAM WHERE isDelete = 0 AND id_cate = ? ;";
         Object[] params = {idCate};
         ResultSet rs = super.executeQuery(query, params);
         
@@ -33,7 +33,7 @@ public class SanPhamDAO extends ObjectDAO {
 
     // Thay doi san pham dua tren id
     public void updateSPById(SanPhamDTO product){
-        String query = "UPDATE PRODUCT SET name = ?, id_cate = ?, baohanh = ?, des = ?, img = ? WHERE id = ? ;";
+        String query = "UPDATE SAN_PHAM SET name = ?, id_cate = ?, baohanh = ?, des = ?, img = ? WHERE id = ? ;";
         Object[] params = {product.getName(), product.getIdCate(), product.getBaoHanh(), product.getDes(), product.getImg(), product.getId() };
         super.executeNonQuery(query, params);
     }
