@@ -1,17 +1,17 @@
 package DAO;
 
 import java.sql.ResultSet;
+import DTO.ChiTietNhapKhoDTO;
 
 public class ChiTietPhieuNhapDAO extends ObjectDAO {
     public ChiTietPhieuNhapDAO(){
         super();
     }
     
-    public void insertChiTietPhieuNhap(String id_pn, String seri, int cost) {
+    public void insertChiTietPhieuNhap(ChiTietNhapKhoDTO ctpn) {
         String query = "INSERT INTO ct_pro (id_pn, seri, cost) VALUES (?, ?, ?)";
-        Object[] params = {id_pn, seri, cost};
-        executeNonQuery(query, params);
-//      return true; 
+        Object[] params = {ctpn.getIdPN(), ctpn.getSeri(), ctpn.getCost()};
+        super.executeNonQuery(query, params);
     }
     
     public ResultSet getDetailedChiTietPhieuNhap(String id_pn) {

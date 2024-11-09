@@ -30,10 +30,10 @@ public class PhieuNhapDAO extends ObjectDAO {
         return super.executeQuery(query, params);
     }
     
-    public void addPhieuNhap(String id, LocalDateTime ngayNhap, int total, String id_nhanvien, String idNCC) {
+    public void addPhieuNhap(PhieuNhapKhoDTO phieunhap) {
         String query = "INSERT INTO PHIEU_NHAP_KHO (id, ngaynhap, total, id_nhanvien, id_ncc) VALUES (?, ?, ?, ?, ?)";
-        Object[] params = {id, ngayNhap, total, id_nhanvien, idNCC};
-        executeNonQuery(query, params);
+        Object[] params = {phieunhap.getId(), phieunhap.getNgayNhap(), phieunhap.getTotal(), phieunhap.getidNhanVien(), phieunhap.getIdNCC()};
+        super.executeNonQuery(query, params);
     }
     
     public List<PhieuNhapKhoDTO> searchPhieuNhap(String id_pn, String tenNcc, String tenNhanVien,LocalDateTime fromDate, LocalDateTime toDate,Integer fromTotal, Integer toTotal) {

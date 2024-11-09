@@ -39,7 +39,7 @@ public class SanPhamDAO extends ObjectDAO {
     }
 
     // Xoa san pham bang id
-    public void removeSPById(int id){
+    public void removeSPById(String id){
         String query = "UPDATE PRODUCT SET isDelete = 1 WHERE id = ? ;";
         Object[] params = {id};
         super.executeNonQuery(query, params);
