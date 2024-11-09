@@ -1,12 +1,11 @@
 package DTO;
 
-public class OptionSanPhamDTO{
+public class OptionSanPhamDTO {
     public String idSP;
     public String color;
-    public String isDelete;
+    public boolean isDelete;
 
-    public OptionSanPhamDTO(String idSp, String color, String isDelete)
-    {
+    public OptionSanPhamDTO(String idSp, String color, boolean isDelete) {
         this.idSP = idSp;
         this.color = color;
         this.isDelete = isDelete;
@@ -20,22 +19,19 @@ public class OptionSanPhamDTO{
         this.isDelete = isDelete;
     }
 
-    public String getIdSP(){
+    public String getIdSP() {
         return idSP;
     }
 
-    public String setIdSP(String idSp)
-    {
-       this.idSP = idSp; 
+    public void setIdSP(String idSp) {
+        this.idSP = idSp;
     }
 
-    public String getColor()
-    {
+    public String getColor() {
         return color;
     }
 
-    public String setColor(String color)
-    {
+    public void setColor(String color) {
         this.color = color;
     }
 }
