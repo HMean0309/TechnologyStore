@@ -18,24 +18,24 @@ public class PhanLoaiDAO extends ObjectDAO {
     }
 
     public ResultSet getAllPhanLoai() {
-        String query = "SELECT * FROM CATEGORY WHERE isDelete = 0 ;";
+        String query = "SELECT * FROM PHAN_LOAI WHERE isDelete = 0 ;";
         return super.executeQuery(query);
     }
 
-    public ResultSet getPhanLoaiById(int id) {
-        String query = "SELECT * FROM CATEGORY WHERE isDelete = 0 AND id = ? ;";
+    public ResultSet getPhanLoaiById(String id) {
+        String query = "SELECT * FROM PHAN_LOAI WHERE isDelete = 0 AND id = ? ;";
         Object[] params = { id };
         return super.executeQuery(query, params);
     }
 
     public ResultSet getPhanLoaiByName(String name) {
-        String query = "SELECT * FROM CATEGORY WHERE isDelete = 0 AND name = ? ;";
+        String query = "SELECT * FROM PHAN_LOAI WHERE isDelete = 0 AND name = ? ;";
         Object[] params = { name };
         return super.executeQuery(query, params);
     }
 
     public ResultSet getCountPLByName(String name) {
-        String query = "SELECT COUNT(*) FROM CATEGORY WHERE isDelete = 0 AND name = ? ;";
+        String query = "SELECT COUNT(*) FROM PHAN_LOAI WHERE isDelete = 0 AND name = ? ;";
         Object[] params = { name };
         ResultSet rs = super.executeQuery(query, params);
         return rs;
@@ -43,21 +43,21 @@ public class PhanLoaiDAO extends ObjectDAO {
 
     // Them du lieu vao Phan Loai
     public void addPLWithData(PhanLoaiDTO category) {
-        String query = "INSERT INTO CATEGORY (id,name)" + "VALUES(?,?)";
+        String query = "INSERT INTO PHAN_LOAI (id,name)" + "VALUES(?,?)";
         Object[] params = { category.getId(), category.getName() };
         super.executeNonQuery(query, params);
     }
 
     // Xoa Phan Loai bang id
     public void removePLById(String id) {
-        String query = "UPDATE CATEGORY SET isDelete = 1 WHERE id = ? ;";
+        String query = "UPDATE PHAN_LOAI SET isDelete = 1 WHERE id = ? ;";
         Object[] params = { id };
         super.executeNonQuery(query, params);
     }
 
     // Thay doi Phan Loai dua tren id
     public void updatePLById(PhanLoaiDTO category) {
-        String query = "UPDATE CATEGORY SET name = ? WHERE id = ? ;";
+        String query = "UPDATE PHAN_LOAI SET name = ? WHERE id = ? ;";
         Object[] params = { category.getName(), category.getId() };
         super.executeNonQuery(query, params);
     }
