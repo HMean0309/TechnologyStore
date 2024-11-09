@@ -46,10 +46,10 @@ public class PhieuNhapDAO extends ObjectDAO {
         List<Object> params = new ArrayList<>();
 
         checkGanGiong(query, params, "pn.id_pn LIKE ?", id_pn);
-        checkGanGiong(query, params, "ncc.ten_ncc LIKE ?", tenNcc);
-        checkGanGiong(query, params, "nv.ten_nhanvien LIKE ?", tenNhanVien);
-        checkNgay(query, params, "pn.ngay_nhap >= ?", fromDate);
-        checkNgay(query, params, "pn.ngay_nhap <= ?", toDate);
+        checkGanGiong(query, params, "ncc.name LIKE ?", tenNcc);
+        checkGanGiong(query, params, "nv.name LIKE ?", tenNhanVien);
+        checkNgay(query, params, "pn.ngaynhap >= ?", fromDate);
+        checkNgay(query, params, "pn.ngaynhap <= ?", toDate);
         checkGiongNhau(query, params, "pn.total >= ?", fromTotal);
         checkGiongNhau(query, params, "pn.total <= ?", toTotal);
 
@@ -57,10 +57,10 @@ public class PhieuNhapDAO extends ObjectDAO {
             ResultSet rs = executeQuery(query.toString(), params.toArray());
             while (rs.next()) {
                 PhieuNhapKhoDTO phieuNhap = new PhieuNhapKhoDTO();
-                phieuNhap.setId(rs.getString("id_pn"));
+                phieuNhap.setId(rs.getString("id"));
                 phieuNhap.setIdNCC(rs.getString("id_ncc"));
                 phieuNhap.setidNhanVien(rs.getString("id_nhanvien"));
-                phieuNhap.setNgayNhap(rs.getTimestamp("ngay_nhap").toLocalDateTime());
+                phieuNhap.setNgayNhap(rs.getTimestamp("ngaynhap").toLocalDateTime());
                 phieuNhap.setTotal(rs.getInt("total"));
                 result.add(phieuNhap);
             }
