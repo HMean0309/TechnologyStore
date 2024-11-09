@@ -5,6 +5,10 @@ public class ChiTietNhapKhoDTO {
     private String seri;
     private Integer cost;
 
+    public ChiTietNhapKhoDTO() {
+        
+    }
+    
     public ChiTietNhapKhoDTO(String idPN, String seri, int cost) {
         this.idPN = idPN;
         this.seri = seri;
