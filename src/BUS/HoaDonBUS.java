@@ -3,6 +3,7 @@ package BUS;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedHashSet;
+import java.util.function.Function;
 
 import DAO.HoaDonDAO;
 import DTO.HoaDonDTO;
@@ -60,5 +61,48 @@ public class HoaDonBUS {
 
     public void setDaoHD(HoaDonDAO daoHD) {
         this.daoHD = daoHD;
+    }
+
+    public LinkedHashSet<HoaDonDTO> getAllHoaDon(){
+        setSetHD(toSet(daoHD.getAllHoaDon()));
+        return getSetHD();
+    }
+
+    public LinkedHashSet<HoaDonDTO> getAllHoaDonWithStatus(String status) {
+        setSetHD(toSet(daoHD.getAllHoaDonWithStatus(status)));
+        return getSetHD();
+    }
+
+    public int getCountHoaDonWithStatus(String status) {
+        ResultSet rs = daoHD.getCountHoaDonWithStatus(status);
+        int count = -1;
+        try {
+            rs.next();
+            count = rs.getInt(1);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return count;
+    }
+
+    public void updateStatusHoaDon(String id, String status) {
+        boolean updateSuccess = setHD.stream()
+                .filter(hoaDon -> hoaDon.getId().equals(id))
+                .findFirst()
+                .map(hoaDon -> {
+                    hoaDon.setStatus(status);
+                    return true;
+                })
+                .orElse(false);
+
+        if (updateSuccess) {
+            daoHD.updateStatusHoaDon(id, status);
+        }
+    }
+
+    public void addHoaDon(HoaDonDTO hoadon) {
+        if (setHD.add(hoadon)) {
+            daoHD.addHoaDon(hoadon);
+        }
     }
 }
