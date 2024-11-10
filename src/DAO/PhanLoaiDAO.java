@@ -45,7 +45,7 @@ public class PhanLoaiDAO extends ObjectDAO {
     public void addPLWithData(PhanLoaiDTO category) {
         String query = "INSERT INTO PHAN_LOAI (id,name)" + "VALUES(?,?)";
         Object[] params = { category.getId(), category.getName() };
-        return super.executeQuery(query);
+        super.executeNonQuery(query, params);
     }
     
     public ResultSet getCountPhanLoai()
@@ -54,18 +54,6 @@ public class PhanLoaiDAO extends ObjectDAO {
         return super.executeQuery(query);
     }
     
-    public ResultSet getPhanLoaiById(String id)
-    {
-        String query = "SELECT * FROM PHAN_LOAI WHERE isDelete = 0 AND id = ? ;";
-        Object[] params = {id};
-        return super.executeQuery(query, params);
-    }
-    // Them du lieu vao Phan Loai
-    public void addPLWithData(PhanLoaiDTO PHAN_lOAI) {
-        String query = "INSERT INTO PHAN_lOAI (id,name)" + "VALUES(?,?)";
-        Object[] params = { PHAN_lOAI.getId(), PHAN_lOAI.getName() };
-        super.executeNonQuery(query, params);
-    }
 
     // Xoa Phan Loai bang id
     public void removePLById(String id) {
