@@ -33,9 +33,8 @@ public class QuyenDAO extends ObjectDAO {
 
     public ResultSet getCountQuyen(String id){
         super.connectDB();
-        String query = "SELECT COUNT(*) FROM QUYEN WHERE isDelete = 0 AND id = ?;";
-        Object[] params = {id};
-        ResultSet rs = super.executeQuery(query, params);
+        String query = "SELECT COUNT(*) FROM QUYEN WHERE isDelete = 0;";
+        ResultSet rs = super.executeQuery(query);
         super.closeDB();
         return rs;
     }

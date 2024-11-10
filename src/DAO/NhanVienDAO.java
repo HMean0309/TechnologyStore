@@ -34,9 +34,8 @@ public class NhanVienDAO extends ObjectDAO {
      
      public ResultSet getCountNhanVien(String id){
         super.connectDB();
-        String query = "SELECT COUNT(*) FROM NHAN_VIEN WHERE isDelete = 0 AND id = ?;";
-        Object[] params = {id};
-        ResultSet rs = super.executeQuery(query, params);
+        String query = "SELECT COUNT(*) FROM NHAN_VIEN WHERE isDelete = 0;";
+        ResultSet rs = super.executeQuery(query);
         super.closeDB();
         return rs;
     }

@@ -24,7 +24,7 @@ public class TaiKhoanDAO extends ObjectDAO {
 
     public ResultSet getTaiKhoan(String idNV){
         super.connectDB();
-        String query = "SELECT * FROM TAI_KHOAN WHERE isDelete = 0 AND id_nv = ?;";
+        String query = "SELECT * FROM TAI_KHOAN WHERE isDelete = 0 AND id_nhanvien = ?;";
         Object[] params = {idNV};
         ResultSet rs = super.executeQuery(query, params);
         super.closeDB();
@@ -33,9 +33,8 @@ public class TaiKhoanDAO extends ObjectDAO {
 
     public ResultSet getCountTaiKhoan(String idNV){
         super.connectDB();
-        String query = "SELECT COUNT(*) FROM TAI_KHOAN WHERE isDelete = 0 AND id_nv = ?;";
-        Object[] params = {idNV};
-        ResultSet rs = super.executeQuery(query, params);
+        String query = "SELECT COUNT(*) FROM TAI_KHOAN WHERE isDelete = 0;";
+        ResultSet rs = super.executeQuery(query);
         super.closeDB();
         return rs;
     }
@@ -43,7 +42,7 @@ public class TaiKhoanDAO extends ObjectDAO {
     // Thay doi Tai kHoan dua tren id nhan vien
     public void updateTKByIdNV(TaiKhoanDTO taikhoan){
         super.connectDB();
-        String query = "UPDATE TAI_KHOAN SET password = ?, type = ?, id_quyen = ? WHERE id_nv = ?;";
+        String query = "UPDATE TAI_KHOAN SET password = ?, type = ?, id_quyen = ? WHERE id_nhanvien = ?;";
         Object[] params = {
             taikhoan.getPassword(),
             taikhoan.isType(),
@@ -57,7 +56,7 @@ public class TaiKhoanDAO extends ObjectDAO {
     // Xoa Tai Khoan bang id nhan vien
     public void removeTKByIdNV(String idNV){
         super.connectDB();
-        String query = "UPDATE TAI_KHOAN SET isDelete = 1 WHERE id_nv = ?;";
+        String query = "UPDATE TAI_KHOAN SET isDelete = 1 WHERE id_nhanvien = ?;";
         Object[] params = {idNV};
         super.executeNonQuery(query, params);
         super.closeDB();
@@ -66,7 +65,7 @@ public class TaiKhoanDAO extends ObjectDAO {
     // Them du lieu vao Tai Khoan
     public void addTKWithData(TaiKhoanDTO taikhoan){
         super.connectDB();
-        String query = "INSERT INTO TAI_KHOAN (username, password, type, id_nv, id_quyen) VALUES (?, ?, ?, ?, ?);";
+        String query = "INSERT INTO TAI_KHOAN (username, password, type, id_nhanvien, id_quyen) VALUES (?, ?, ?, ?, ?);";
         Object[] params = {
             taikhoan.getUsername(),
             taikhoan.getPassword(),

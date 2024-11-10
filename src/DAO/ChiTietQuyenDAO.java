@@ -43,38 +43,23 @@ public class ChiTietQuyenDAO extends ObjectDAO {
     // Thay doi Chi Tiet Quyen dua tren id
     public void updateChiTietQuyenById(ChiTietQuyenDTO ctQuyen){
         super.connectDB();
-        String query = "UPDATE CHI_TIET_QUYEN SET show_function = ?, insert_function = ?, edit_function = ?, delete_function = ? WHERE id_quyen = ? AND id_chuc_nang = ?;";
+        String query = "UPDATE CHI_TIET_QUYEN WHERE id_quyen = ? AND id_chuc_nang = ?;";
         Object[] params = {
             ctQuyen.getIdQuyen(),
-            ctQuyen.getIdChucNang(),
-            ctQuyen.isShow(),
-            ctQuyen.isInsert(),
-            ctQuyen.isEdit()
+            ctQuyen.getIdChucNang()
         };
         super.executeNonQuery(query, params);
         super.closeDB();
     }
 
-    // Xoa Chi Tiet Quyen bang id
-    public void removeChiTietQuyenById(String idQuyen){
-       super.connectDB();
-        String query = "DELETE FROM CHI_TIET_QUYEN WHERE id_quyen = ?;";
-        Object[] params = {idQuyen};
-        super.executeNonQuery(query, params);
-        super.closeDB();
-    }
 
     // Them du lieu vao chi tiet quyen
     public void addChiTietQuyenWithData(ChiTietQuyenDTO ctQuyen){
         super.connectDB();
-        String query = "INSERT INTO CHI_TIET_QUYEN (id_quyen, id_chuc_nang, show_function, insert_function, edit_function, delete_function) VALUES (?, ?, ?, ?, ?, ?);";
+        String query = "INSERT INTO CHI_TIET_QUYEN (id_quyen, id_chuc_nang) VALUES (?, ?);";
         Object[] params = {
             ctQuyen.getIdQuyen(),
-            ctQuyen.getIdChucNang(),
-            ctQuyen.isShow(),
-            ctQuyen.isInsert(),
-            ctQuyen.isEdit(),
-            ctQuyen.isDelete()
+            ctQuyen.getIdChucNang()
         };
         super.executeNonQuery(query, params);
         super.closeDB();
