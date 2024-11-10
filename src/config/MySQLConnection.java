@@ -30,7 +30,7 @@ public class MySQLConnection {
             try {
                 connection.close();
             } catch (SQLException e) {
-                
+                e.printStackTrace();
             }
         }
     }
