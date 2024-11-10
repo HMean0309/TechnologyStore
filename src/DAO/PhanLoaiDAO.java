@@ -3,12 +3,12 @@ package DAO;
 import java.sql.Statement;
 
 import DTO.PhanLoaiDTO;
-import config.MySQLConnection;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
 
 import config.MySQLConnection;
 
@@ -45,12 +45,32 @@ public class PhanLoaiDAO extends ObjectDAO {
     public void addPLWithData(PhanLoaiDTO category) {
         String query = "INSERT INTO PHAN_LOAI (id,name)" + "VALUES(?,?)";
         Object[] params = { category.getId(), category.getName() };
+        return super.executeQuery(query);
+    }
+    
+    public ResultSet getCountPhanLoai()
+    {
+        String query = "SELECT COUNT(*) FROM PHAN_lOAI WHERE isDelete = 0 ;";
+        return super.executeQuery(query);
+    }
+    
+    public ResultSet getPhanLoaiById(String id)
+    {
+        String query = "SELECT * FROM PHAN_LOAI WHERE isDelete = 0 AND id = ? ;";
+        Object[] params = {id};
+        return super.executeQuery(query, params);
+    }
+    // Them du lieu vao Phan Loai
+    public void addPLWithData(PhanLoaiDTO PHAN_lOAI) {
+        String query = "INSERT INTO PHAN_lOAI (id,name)" + "VALUES(?,?)";
+        Object[] params = { PHAN_lOAI.getId(), PHAN_lOAI.getName() };
         super.executeNonQuery(query, params);
     }
 
     // Xoa Phan Loai bang id
     public void removePLById(String id) {
         String query = "UPDATE PHAN_LOAI SET isDelete = 1 WHERE id = ? ;";
+
         Object[] params = { id };
         super.executeNonQuery(query, params);
     }
@@ -62,3 +82,4 @@ public class PhanLoaiDAO extends ObjectDAO {
         super.executeNonQuery(query, params);
     }
 }
+

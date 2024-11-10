@@ -70,4 +70,59 @@ public class SanPhamBUS {
         }
         return count;
     }
+    
+    public LinkedHashSet<SanPhamDTO> getSanPhamById(String id)
+    {
+        ResultSet rs = daoSP.getSanPhamById(id);
+        try {
+            while (rs.next()) {
+                SanPhamDTO that = new SanPhamDTO(
+                    rs.getString("id"),
+                    rs.getString("name"),
+                    false,
+                    rs.getString("id_cate"),
+                    rs.getInt("baohanh"),
+                    rs.getString("des"),
+                    rs.getString("img"));
+                setSP.add(that);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return setSP;
+    }
+    
+    public LinkedHashSet<SanPhamDTO> getSPByIdCate(String idCate)
+    {
+        ResultSet rs = daoSP.getSanPhamById(idCate);
+        try {
+            while (rs.next()) {
+                SanPhamDTO that = new SanPhamDTO(
+                    rs.getString("id"),
+                    rs.getString("name"),
+                    false,
+                    rs.getString("id_cate"),
+                    rs.getInt("baohanh"),
+                    rs.getString("des"),
+                    rs.getString("img"));
+                setSP.add(that);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return setSP;
+    }
+    
+    public void removeSPById(String id){
+        daoSP.removeSPById(id);
+    }
+    
+    public void updateSPById(SanPhamDTO product)
+    {
+        daoSP.updateSPById(product);
+    }
+    
+    public  void addSPWithData(SanPhamDTO product){
+        daoSP.addSPWithData(product);
+    }
 }

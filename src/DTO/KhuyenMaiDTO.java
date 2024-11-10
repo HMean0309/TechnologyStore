@@ -6,12 +6,12 @@ public class KhuyenMaiDTO {
     private String id;
     private LocalDateTime startDateTime;
     private LocalDateTime endDateTime;
-    private boolean donViKM;
-    private Integer value;
+    private int donViKM;
+    private int value;
     private boolean isDelete;
     private String des;
 
-    public KhuyenMaiDTO(String id, LocalDateTime startDateTime, LocalDateTime endDateTime, boolean donViKM, int value, boolean isDelete, String des) {
+    public KhuyenMaiDTO(String id, LocalDateTime startDateTime, LocalDateTime endDateTime, int donViKM, int value, boolean isDelete, String des) {
         this.id = id;
         this.startDateTime = startDateTime;
         this.endDateTime = endDateTime;
@@ -45,16 +45,16 @@ public class KhuyenMaiDTO {
         this.endDateTime = endDateTime;
     }
 
-    public boolean isDonviKM() {
+    public int isDonviKM() {
         return donViKM;
     }
 
-    public void setDonviKM(boolean donViKM) {
+    public void setDonviKM(int donViKM) {
         this.donViKM = donViKM;
     }
 
     public int getValue() {
-        return value.intValue();
+        return value;
     }
 
     public void setValue(int value) {
