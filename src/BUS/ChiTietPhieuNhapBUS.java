@@ -32,7 +32,11 @@ public class ChiTietPhieuNhapBUS {
         }
         return setCTPN;
     }
-
+    
+    public void addChiTietPhieuNhap(ChiTietNhapKhoDTO ctpn){
+        daoCTPN.addChiTietPhieuNhap(ctpn);
+    }
+    
     public ChiTietPhieuNhapBUS(LinkedHashSet<ChiTietNhapKhoDTO> setCTPN, ChiTietPhieuNhapDAO daoCTPN) {
         this.setCTPN = setCTPN;
         this.daoCTPN = daoCTPN;
