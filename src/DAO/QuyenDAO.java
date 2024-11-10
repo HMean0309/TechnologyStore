@@ -15,42 +15,60 @@ public class QuyenDAO extends ObjectDAO {
     }
     
     public ResultSet getAllQuyen(){
-        String query = "SELECT * FROM PRODUCT WHERE isDelete = 0 ;";
-        return super.executeQuery(query);
+        super.connectDB();
+        String query = "SELECT * FROM QUYEN WHERE isDelete = 0;";
+        ResultSet rs = super.executeQuery(query);
+        super.closeDB();
+        return rs;
     }
 
     public ResultSet getQuyen(String id){
-        String query = "SELECT * FROM PRODUCT WHERE isDelete = 0 AND id_cate = ? ;";
+        super.connectDB();
+        String query = "SELECT * FROM QUYEN WHERE isDelete = 0 AND id = ?;";
         Object[] params = {id};
-        return super.executeQuery(query, params);
+        ResultSet rs = super.executeQuery(query, params);
+        super.closeDB();
+        return rs;
     }
 
     public ResultSet getCountQuyen(String id){
-        String query = "SELECT COUNT(*) FROM PRODUCT WHERE isDelete = 0 AND id_cate = ? ;";
+        super.connectDB();
+        String query = "SELECT COUNT(*) FROM QUYEN WHERE isDelete = 0 AND id = ?;";
         Object[] params = {id};
         ResultSet rs = super.executeQuery(query, params);
-        
+        super.closeDB();
         return rs;
     }
 
     // Thay doi quyen dua tren id
     public void updateQuyenById(QuyenDTO quyen){
-        String query = "UPDATE PRODUCT SET name = ?, id_cate = ?, baohanh = ?, des = ?, img = ? WHERE id = ? ;";
-        Object[] params = {quyen.getId(), quyen.getName(), quyen.getDes()};
+        super.connectDB();
+        String query = "UPDATE QUYEN SET name = ?, des = ? WHERE id = ?;";
+        Object[] params = {
+            quyen.getId(),
+            quyen.getName(),
+            quyen.getDes()
+            
+        };
         super.executeNonQuery(query, params);
+        super.closeDB();
     }
 
     // Xoa quyen bang id
     public void removeQuyenById(String id){
-        String query = "UPDATE PRODUCT SET isDelete = 1 WHERE id = ? ;";
+        super.connectDB();
+        String query = "UPDATE QUYEN SET isDelete = 1 WHERE id = ?;";
         Object[] params = {id};
         super.executeNonQuery(query, params);
+        super.closeDB();
     }
 
     // Them du lieu vao quyen
     public void addQuyenWithData(QuyenDTO quyen){
-        String query = "INSERT INTO PRODUCT (id,name,id_cate,baohanh,des,img)"+"VALUES(?,?,?,?,?,?) ;";
+        super.connectDB();
+        String query = "INSERT INTO QUYEN (id, name, des) VALUES (?, ?, ?);";
         Object[] params = {quyen.getId(), quyen.getName(), quyen.getDes()};
-        super.executeNonQuery(query,params);
+        super.executeNonQuery(query, params);
+        super.closeDB();
     }
 }

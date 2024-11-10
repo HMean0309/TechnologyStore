@@ -15,42 +15,68 @@ public class ChiTietQuyenDAO extends ObjectDAO {
     }
 
     public ResultSet getAllChiTietQuyen(){
-        String query = "SELECT * FROM PRODUCT WHERE isDelete = 0 ;";
-        return super.executeQuery(query);
+        super.connectDB();
+        String query = "SELECT * FROM CHI_TIET_QUYEN;";
+        ResultSet rs = super.executeQuery(query);
+        super.closeDB();
+        return rs;
     }
 
     public ResultSet getChiTietQuyen(String idQuyen){
-        String query = "SELECT * FROM PRODUCT WHERE isDelete = 0 AND id_cate = ? ;";
+        super.connectDB();
+        String query = "SELECT * FROM CHI_TIET_QUYEN WHERE id_quyen = ?;";
         Object[] params = {idQuyen};
-        return super.executeQuery(query, params);
+        ResultSet rs = super.executeQuery(query, params);
+        super.closeDB();
+        return rs;
     }
 
     public ResultSet getCountChiTietQuyen(String idQuyen){
-        String query = "SELECT COUNT(*) FROM PRODUCT WHERE isDelete = 0 AND id_cate = ? ;";
+        super.connectDB();
+        String query = "SELECT COUNT(*) FROM CHI_TIET_QUYEN WHERE id_quyen = ?;";
         Object[] params = {idQuyen};
         ResultSet rs = super.executeQuery(query, params);
-        
+        super.closeDB();
         return rs;
     }
 
     // Thay doi Chi Tiet Quyen dua tren id
     public void updateChiTietQuyenById(ChiTietQuyenDTO ctQuyen){
-        String query = "UPDATE PRODUCT SET name = ?, id_cate = ?, baohanh = ?, des = ?, img = ? WHERE id = ? ;";
-        Object[] params = {ctQuyen.getIdQuyen(), ctQuyen.getIdChucNang(), ctQuyen.isShow(), ctQuyen.isInsert(), ctQuyen.isEdit()};
+        super.connectDB();
+        String query = "UPDATE CHI_TIET_QUYEN SET show_function = ?, insert_function = ?, edit_function = ?, delete_function = ? WHERE id_quyen = ? AND id_chuc_nang = ?;";
+        Object[] params = {
+            ctQuyen.getIdQuyen(),
+            ctQuyen.getIdChucNang(),
+            ctQuyen.isShow(),
+            ctQuyen.isInsert(),
+            ctQuyen.isEdit()
+        };
         super.executeNonQuery(query, params);
+        super.closeDB();
     }
 
     // Xoa Chi Tiet Quyen bang id
     public void removeChiTietQuyenById(String idQuyen){
-        String query = "UPDATE PRODUCT SET isDelete = 1 WHERE id = ? ;";
+       super.connectDB();
+        String query = "DELETE FROM CHI_TIET_QUYEN WHERE id_quyen = ?;";
         Object[] params = {idQuyen};
         super.executeNonQuery(query, params);
+        super.closeDB();
     }
 
     // Them du lieu vao chi tiet quyen
     public void addChiTietQuyenWithData(ChiTietQuyenDTO ctQuyen){
-        String query = "INSERT INTO PRODUCT (id,name,id_cate,baohanh,des,img)"+"VALUES(?,?,?,?,?,?) ;";
-        Object[] params = {ctQuyen.getIdQuyen(), ctQuyen.getIdChucNang(), ctQuyen.isShow(), ctQuyen.isInsert(), ctQuyen.isEdit()};
-        super.executeNonQuery(query,params);
+        super.connectDB();
+        String query = "INSERT INTO CHI_TIET_QUYEN (id_quyen, id_chuc_nang, show_function, insert_function, edit_function, delete_function) VALUES (?, ?, ?, ?, ?, ?);";
+        Object[] params = {
+            ctQuyen.getIdQuyen(),
+            ctQuyen.getIdChucNang(),
+            ctQuyen.isShow(),
+            ctQuyen.isInsert(),
+            ctQuyen.isEdit(),
+            ctQuyen.isDelete()
+        };
+        super.executeNonQuery(query, params);
+        super.closeDB();
     }
 }

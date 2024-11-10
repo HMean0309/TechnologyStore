@@ -15,43 +15,67 @@ public class TaiKhoanDAO extends ObjectDAO {
     }
     
     public ResultSet getAllTaiKhoan(){
-        String query = "SELECT * FROM PRODUCT WHERE isDelete = 0 ;";
-        return super.executeQuery(query);
+        super.connectDB();
+        String query = "SELECT * FROM TAI_KHOAN WHERE isDelete = 0;";
+        ResultSet rs = super.executeQuery(query);
+        super.closeDB();
+        return rs;
     }
 
     public ResultSet getTaiKhoan(String idNV){
-        String query = "SELECT * FROM PRODUCT WHERE isDelete = 0 AND id_cate = ? ;";
+        super.connectDB();
+        String query = "SELECT * FROM TAI_KHOAN WHERE isDelete = 0 AND id_nv = ?;";
         Object[] params = {idNV};
-        return super.executeQuery(query, params);
+        ResultSet rs = super.executeQuery(query, params);
+        super.closeDB();
+        return rs;
     }
 
     public ResultSet getCountTaiKhoan(String idNV){
-        String query = "SELECT COUNT(*) FROM PRODUCT WHERE isDelete = 0 AND id_cate = ? ;";
+        super.connectDB();
+        String query = "SELECT COUNT(*) FROM TAI_KHOAN WHERE isDelete = 0 AND id_nv = ?;";
         Object[] params = {idNV};
         ResultSet rs = super.executeQuery(query, params);
-        
+        super.closeDB();
         return rs;
     }
 
     // Thay doi Tai kHoan dua tren id nhan vien
     public void updateTKByIdNV(TaiKhoanDTO taikhoan){
-        String query = "UPDATE PRODUCT SET name = ?, id_cate = ?, baohanh = ?, des = ?, img = ? WHERE id = ? ;";
-        Object[] params = {taikhoan.getUsername(), taikhoan.getPassword(), taikhoan.isType(), taikhoan.getIdNV(), taikhoan.getIdQuyen()};
+        super.connectDB();
+        String query = "UPDATE TAI_KHOAN SET password = ?, type = ?, id_quyen = ? WHERE id_nv = ?;";
+        Object[] params = {
+            taikhoan.getPassword(),
+            taikhoan.isType(),
+            taikhoan.getIdQuyen(),
+            taikhoan.getIdNV()
+        };
         super.executeNonQuery(query, params);
+        super.closeDB();
     }
 
     // Xoa Tai Khoan bang id nhan vien
     public void removeTKByIdNV(String idNV){
-        String query = "UPDATE PRODUCT SET isDelete = 1 WHERE id = ? ;";
+        super.connectDB();
+        String query = "UPDATE TAI_KHOAN SET isDelete = 1 WHERE id_nv = ?;";
         Object[] params = {idNV};
         super.executeNonQuery(query, params);
+        super.closeDB();
     }
 
     // Them du lieu vao Tai Khoan
     public void addTKWithData(TaiKhoanDTO taikhoan){
-        String query = "INSERT INTO PRODUCT (id,name,id_cate,baohanh,des,img)"+"VALUES(?,?,?,?,?,?) ;";
-        Object[] params = {taikhoan.getUsername(), taikhoan.getPassword(), taikhoan.isType(), taikhoan.getIdNV(), taikhoan.getIdQuyen()};
-        super.executeNonQuery(query,params);
+        super.connectDB();
+        String query = "INSERT INTO TAI_KHOAN (username, password, type, id_nv, id_quyen) VALUES (?, ?, ?, ?, ?);";
+        Object[] params = {
+            taikhoan.getUsername(),
+            taikhoan.getPassword(),
+            taikhoan.isType(),
+            taikhoan.getIdNV(),
+            taikhoan.getIdQuyen()
+        };
+        super.executeNonQuery(query, params);
+        super.closeDB();
     }
     
 }
