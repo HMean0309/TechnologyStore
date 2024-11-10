@@ -35,6 +35,7 @@ public class ChiTietPhieuNhapBUS {
     
     public void addChiTietPhieuNhap(ChiTietNhapKhoDTO ctpn){
         daoCTPN.addChiTietPhieuNhap(ctpn);
+        setCTPN.add(ctpn);
     }
     
     public ChiTietPhieuNhapBUS(LinkedHashSet<ChiTietNhapKhoDTO> setCTPN, ChiTietPhieuNhapDAO daoCTPN) {

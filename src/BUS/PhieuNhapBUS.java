@@ -38,6 +38,7 @@ public class PhieuNhapBUS {
     
     public void addPhieuNhap(PhieuNhapKhoDTO phieuNhap) {
         daoPN.addPhieuNhap(phieuNhap);
+        setPN.add(phieuNhap);
     }
     
     public LinkedHashSet<PhieuNhapKhoDTO> getSetPN() {
