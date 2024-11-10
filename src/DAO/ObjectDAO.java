@@ -15,7 +15,7 @@ public class ObjectDAO {
     protected PreparedStatement pstmt;
     protected ResultSet rs;
     public ObjectDAO(){
-        conn = MySQLConnection.getConnection();
+        
     }
     
     public ResultSet executeQuery(String query) {
@@ -110,14 +110,15 @@ public class ObjectDAO {
         }
         return null;
     }
-    public void close() {
-        try {
-            if (rs != null) rs.close();
-            if (stmt != null) stmt.close();
-            if (pstmt != null) pstmt.close();
-            if (conn != null) conn.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+    
+    public void connectDB() {
+        conn = MySQLConnection.getConnection();
+    }
+    
+    public void closeDB() {
+        MySQLConnection.closeConnection(conn);
+        stmt = null;
+        pstmt = null;
+        rs = null;
     }
 }
