@@ -111,4 +111,15 @@ public class ObjectDAO {
         }
         return null;
     }
+    
+       public void connectDB() {
+        conn = MySQLConnection.getConnection();
+    }
+
+    public void closeDB() {
+        MySQLConnection.closeConnection(conn);
+        stmt = null;
+        pstmt = null;
+        rs = null;
+    }
 }
