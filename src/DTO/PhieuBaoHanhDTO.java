@@ -6,15 +6,15 @@ public class PhieuBaoHanhDTO {
     private String id;
     private LocalDateTime ngayLap;
     private boolean isDelete;
-    private String nhanVien;
+    private String idNhanVien;
     private String idHoaDon;
     private LocalDateTime ngayTraHang;
 
-    public PhieuBaoHanhDTO(String id, LocalDateTime ngayLap, boolean isDelete, String nhanVien, String idHoaDon, LocalDateTime ngayTraHang) {
+    public PhieuBaoHanhDTO(String id, LocalDateTime ngayLap, boolean isDelete, String idNhanVien, String idHoaDon, LocalDateTime ngayTraHang) {
         this.id = id;
         this.ngayLap = ngayLap;
         this.isDelete = isDelete;
-        this.nhanVien = nhanVien;
+        this.idNhanVien = idNhanVien;
         this.idHoaDon = idHoaDon;
         this.ngayTraHang = ngayTraHang;
     }
@@ -43,12 +43,12 @@ public class PhieuBaoHanhDTO {
         this.isDelete = isDelete;
     }
 
-    public String getNhanVien() {
-        return nhanVien;
+    public String getIdNhanVien() {
+        return idNhanVien;
     }
 
-    public void setNhanVien(String nhanVien) {
-        this.nhanVien = nhanVien;
+    public void setIdNhanVien(String idNhanVien) {
+        this.idNhanVien = idNhanVien;
     }
 
     public String getIdHoaDon() {

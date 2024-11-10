@@ -15,9 +15,7 @@ public class ObjectDAO {
     protected Statement stmt;
     protected PreparedStatement pstmt;
     protected ResultSet rs;
-    public ObjectDAO(){
-        conn = MySQLConnection.getConnection();
-    }
+    public ObjectDAO(){}
     
     public ResultSet executeQuery(String query) {
         try {
@@ -111,4 +109,16 @@ public class ObjectDAO {
         }
         return null;
     }
+
+    public void connectDB() {
+        conn = MySQLConnection.getConnection();
+    }
+
+    public void closeDB() {
+        MySQLConnection.closeConnection(conn);
+        stmt = null;
+        pstmt = null;
+        rs = null;
+    }
+
 }

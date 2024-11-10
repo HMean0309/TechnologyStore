@@ -8,6 +8,7 @@ public class KhachHangDTO {
     private String district;
     private String ward;
     private String city;
+    private Boolean isDelete;
 
     public KhachHangDTO(String id, String name, String phone, String address, String district, String ward, String city, boolean isDelete) {
         this.id = id;
@@ -17,6 +18,7 @@ public class KhachHangDTO {
         this.district = district;
         this.ward = ward;
         this.city = city;
+        this.isDelete = isDelete;
     }
 
     public String getId() {
@@ -73,5 +75,13 @@ public class KhachHangDTO {
 
     public void setCity(String city) {
         this.city = city;
+    }
+
+    public boolean isDelete() {
+        return isDelete;
+    }
+
+    public void setDelete(boolean isDelete) {
+        this.isDelete = isDelete;
     }
 }
