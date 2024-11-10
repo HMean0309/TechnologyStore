@@ -12,34 +12,48 @@ public class ChiTietHoaDonDAO extends ObjectDAO {
     }
 
     public ResultSet getAllCTHoaDon(){
+        super.connectDB();
         String query = "SELECT * FROM CT_HOA_DON WHERE id_hoadon = ?";
         Object[] params = { idHoaDon };
-        return super.executeQuery(query, params);
+        ResultSet rs = super.executeQuery(query, params);
+        super.closeDB();
+        return rs;
     }
 
     public ResultSet getCountCTHoaDon(){
+        super.connectDB();
         String query = "SELECT COUNT(*) FROM CT_HOA_DON WHERE id_hoadon = ?";
         Object[] params = { idHoaDon };
-        return super.executeQuery(query, params);
+        ResultSet rs = super.executeQuery(query, params);
+        super.closeDB();
+        return rs;
     }
 
     public ResultSet getAllCTHoaDonOfSanPham(String idSanPham){
+        super.connectDB();
         String query = "SELECT * FROM CT_HOA_DON cthd LEFT JOIN CT_SAN_PHAM ctsp ON cthd.seri = ctsp.seri WHERE id_hoadon = ? and id_sp = ?";
         Object[] params = { idHoaDon, idSanPham };
-        return super.executeQuery(query, params);
+        ResultSet rs = super.executeQuery(query, params);
+        super.closeDB();
+        return rs;
     }
 
     public ResultSet getCountCTHoaDonOfSanPham(String idSanPham){
+        super.connectDB();
         String query = "SELECT COUNT(*) FROM CT_HOA_DON cthd LEFT JOIN CT_SAN_PHAM ctsp ON cthd.seri = ctsp.seri WHERE id_hoadon = ? and id_sp = ?";
         Object[] params = { idHoaDon, idSanPham };
-        return super.executeQuery(query, params);
+        ResultSet rs = super.executeQuery(query, params);
+        super.closeDB();
+        return rs;
     }
 
     public void addCTHoaDon(ChiTietHoaDonDTO ctHoaDon){
+        super.connectDB();
         String query = "INSERT INTO CT_HOA_DON (id_hoadon,seri,don_gia) "
                 + "VALUES(?,?,?)";
         Object[] params = { ctHoaDon.getIdHoaDon(), ctHoaDon.getSeri(), ctHoaDon.getDonGia() };
         super.executeNonQuery(query, params);
+        super.closeDB();
     }
 
 
