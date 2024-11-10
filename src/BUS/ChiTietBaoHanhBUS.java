@@ -38,6 +38,7 @@ public class ChiTietBaoHanhBUS {
         daoCTBH = new ChiTietBaoHanhDAO(idBaoHanh);
 
         setCTBH = toSet(daoCTBH.getAllCTBaoHanh());
+        daoCTBH.closeDB();
     }
 
     public static LinkedHashSet<ChiTietBaoHanhDTO> toSet(ResultSet rs) {
@@ -57,6 +58,7 @@ public class ChiTietBaoHanhBUS {
 
     public LinkedHashSet<ChiTietBaoHanhDTO> getAllCTBaoHanh() {
         setSetCTBH(toSet(daoCTBH.getAllCTBaoHanh()));
+        daoCTBH.closeDB();
         return getSetCTBH();
     }
 
@@ -69,12 +71,14 @@ public class ChiTietBaoHanhBUS {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        daoCTBH.closeDB();
         return count;
     }
 
     public void addCTBaoHanh(ChiTietBaoHanhDTO ctBaoHanh) {
         if (setCTBH.add(ctBaoHanh)) {
             daoCTBH.addCTBaoHanh(ctBaoHanh);
+            daoCTBH.closeDB();
         }
     }
 

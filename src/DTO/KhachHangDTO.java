@@ -84,4 +84,9 @@ public class KhachHangDTO {
     public void setDelete(boolean isDelete) {
         this.isDelete = isDelete;
     }
+
+    @Override
+    public String toString() {
+        return "KhachHangDTO{id='" + id + "', name='" + name + "'}";
+    }
 }

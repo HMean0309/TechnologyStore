@@ -16,7 +16,7 @@ public class ChiTietBaoHanhDAO extends ObjectDAO {
         String query = "SELECT * FROM CT_BAO_HANH WHERE id_bh = ?";
         Object[] params = { idBaoHanh };
         ResultSet rs = super.executeQuery(query, params);
-        super.closeDB();
+        
         return rs;
     }
 
@@ -25,7 +25,7 @@ public class ChiTietBaoHanhDAO extends ObjectDAO {
         String query = "SELECT COUNT(*) FROM CT_BAO_HANH WHERE id_bh = ?";
         Object[] params = { idBaoHanh };
         ResultSet rs = super.executeQuery(query, params);
-        super.closeDB();
+        
         return rs;
     }
 
@@ -35,6 +35,6 @@ public class ChiTietBaoHanhDAO extends ObjectDAO {
                 + "VALUES(?,?)";
         Object[] params = {ctBaoHanh.getIdBH(), ctBaoHanh.getSeri()};
         super.executeNonQuery(query, params);
-        super.closeDB();
+        
     }
 }

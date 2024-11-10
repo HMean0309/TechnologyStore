@@ -32,6 +32,7 @@ public class KhachHangBUS {
         daoKH = new KhachHangDAO();
 
         setKH = toSet(daoKH.getAllKhachHang());
+        daoKH.closeDB();
     }
 
     public static LinkedHashSet<KhachHangDTO> toSet(ResultSet rs) {
@@ -57,6 +58,7 @@ public class KhachHangBUS {
 
     public LinkedHashSet<KhachHangDTO> getAllKhachHang() {
         setSetKH(toSet(daoKH.getAllKhachHang()));
+        daoKH.closeDB();
         return getSetKH();
     }
 
@@ -69,6 +71,7 @@ public class KhachHangBUS {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        daoKH.closeDB();
         return count;
     }
 
@@ -88,13 +91,15 @@ public class KhachHangBUS {
                 .orElse(false);
 
         if (updateSuccess) {
-            daoKH.addKhachHang(kh);
+            daoKH.updateKhachHang(kh);
+            daoKH.closeDB();
         }
     }
 
     public void addKhachHang(KhachHangDTO kh) {
         if (setKH.add(kh)) {
             daoKH.addKhachHang(kh);
+            daoKH.closeDB();
         }
     }
 }

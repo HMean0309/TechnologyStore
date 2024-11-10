@@ -16,6 +16,7 @@ public class HoaDonBUS {
         setHD = new LinkedHashSet<>();
 
         setHD = HoaDonBUS.toSet(daoHD.getAllHoaDon());
+        daoHD.closeDB();
     }
 
     public static LinkedHashSet<HoaDonDTO> toSet(ResultSet rs) {
@@ -64,11 +65,13 @@ public class HoaDonBUS {
 
     public LinkedHashSet<HoaDonDTO> getAllHoaDon(){
         setSetHD(toSet(daoHD.getAllHoaDon()));
+        daoHD.closeDB();
         return getSetHD();
     }
 
     public LinkedHashSet<HoaDonDTO> getAllHoaDonWithStatus(String status) {
         setSetHD(toSet(daoHD.getAllHoaDonWithStatus(status)));
+        daoHD.closeDB();
         return getSetHD();
     }
 
@@ -81,6 +84,7 @@ public class HoaDonBUS {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        daoHD.closeDB();
         return count;
     }
 
@@ -96,12 +100,14 @@ public class HoaDonBUS {
 
         if (updateSuccess) {
             daoHD.updateStatusHoaDon(id, status);
+            daoHD.closeDB();
         }
     }
 
     public void addHoaDon(HoaDonDTO hoadon) {
         if (setHD.add(hoadon)) {
             daoHD.addHoaDon(hoadon);
+            daoHD.closeDB();
         }
     }
 }

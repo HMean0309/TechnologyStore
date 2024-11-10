@@ -12,9 +12,7 @@ public class HoaDonDAO extends ObjectDAO {
     public ResultSet getAllHoaDon() {
         super.connectDB();
         String query = "SELECT * FROM HOA_DON";
-        ResultSet rs = super.executeQuery(query);
-        super.closeDB();
-        return rs;
+        return super.executeQuery(query);
     }
 
     public ResultSet getAllHoaDonWithStatus(String status) {
@@ -22,7 +20,6 @@ public class HoaDonDAO extends ObjectDAO {
         String query = "SELECT * FROM HOA_DON WHERE status = ? ";
         Object[] params = { status };
         ResultSet rs = super.executeQuery(query, params);
-        super.closeDB();
         return rs;
     }
 
@@ -31,7 +28,6 @@ public class HoaDonDAO extends ObjectDAO {
         String query = "SELECT COUNT(*) FROM HOA_DON WHERE status = ?";
         Object[] params = { status };
         ResultSet rs = super.executeQuery(query, params);
-        super.closeDB();
         return rs;
     }
 
@@ -40,7 +36,7 @@ public class HoaDonDAO extends ObjectDAO {
         String query = "UPDATE HOA_DON SET status = ? WHERE id = ?";
         Object[] params = { status, id };
         super.executeNonQuery(query, params);
-        super.closeDB();
+
     }
 
     public void addHoaDon(HoaDonDTO hoadon) {
@@ -51,6 +47,6 @@ public class HoaDonDAO extends ObjectDAO {
                 hoadon.getStatus(), hoadon.getKhuyenMai(), hoadon.getPhuongThucTT(), hoadon.getKhachHang(),
                 hoadon.getNhanVien(), hoadon.getGhichu() };
         super.executeNonQuery(query, params);
-        super.closeDB();
+
     }
 }

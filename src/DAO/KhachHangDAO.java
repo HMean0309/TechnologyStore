@@ -13,7 +13,6 @@ public class KhachHangDAO extends ObjectDAO {
         super.connectDB();
         String query = "SELECT * FROM KHACH_HANG WHERE isDelete = 0";
         ResultSet rs = super.executeQuery(query);
-        super.closeDB();
         return rs;
     }
 
@@ -21,7 +20,6 @@ public class KhachHangDAO extends ObjectDAO {
         super.connectDB();
         String query = "SELECT COUNT(*) FROM KHACH_HANG WHERE isDelete = 0";
         ResultSet rs = super.executeQuery(query);
-        super.closeDB();
         return rs;
     }
 
@@ -31,7 +29,6 @@ public class KhachHangDAO extends ObjectDAO {
         Object[] params = { kh.getName(), kh.getPhone(), kh.getAddress(),
                 kh.getDistrict(), kh.getWard(), kh.getCity(), kh.getId() };
         super.executeNonQuery(query, params);
-        super.closeDB();
     }
 
     public void addKhachHang(KhachHangDTO kh) {
@@ -41,7 +38,6 @@ public class KhachHangDAO extends ObjectDAO {
         Object[] params = { kh.getId(), kh.getName(), kh.getPhone(), kh.getAddress(),
                 kh.getDistrict(), kh.getWard(), kh.getCity() };
         super.executeNonQuery(query, params);
-        super.closeDB();
     }
 
 }

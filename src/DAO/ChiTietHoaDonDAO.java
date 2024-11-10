@@ -15,36 +15,28 @@ public class ChiTietHoaDonDAO extends ObjectDAO {
         super.connectDB();
         String query = "SELECT * FROM CT_HOA_DON WHERE id_hoadon = ?";
         Object[] params = { idHoaDon };
-        ResultSet rs = super.executeQuery(query, params);
-        super.closeDB();
-        return rs;
+        return super.executeQuery(query, params);
     }
 
     public ResultSet getCountCTHoaDon(){
         super.connectDB();
         String query = "SELECT COUNT(*) FROM CT_HOA_DON WHERE id_hoadon = ?";
         Object[] params = { idHoaDon };
-        ResultSet rs = super.executeQuery(query, params);
-        super.closeDB();
-        return rs;
+        return super.executeQuery(query, params);
     }
 
     public ResultSet getAllCTHoaDonOfSanPham(String idSanPham){
         super.connectDB();
         String query = "SELECT * FROM CT_HOA_DON cthd LEFT JOIN CT_SAN_PHAM ctsp ON cthd.seri = ctsp.seri WHERE id_hoadon = ? and id_sp = ?";
         Object[] params = { idHoaDon, idSanPham };
-        ResultSet rs = super.executeQuery(query, params);
-        super.closeDB();
-        return rs;
+        return super.executeQuery(query, params);
     }
 
     public ResultSet getCountCTHoaDonOfSanPham(String idSanPham){
         super.connectDB();
         String query = "SELECT COUNT(*) FROM CT_HOA_DON cthd LEFT JOIN CT_SAN_PHAM ctsp ON cthd.seri = ctsp.seri WHERE id_hoadon = ? and id_sp = ?";
         Object[] params = { idHoaDon, idSanPham };
-        ResultSet rs = super.executeQuery(query, params);
-        super.closeDB();
-        return rs;
+        return super.executeQuery(query, params);
     }
 
     public void addCTHoaDon(ChiTietHoaDonDTO ctHoaDon){
@@ -53,7 +45,7 @@ public class ChiTietHoaDonDAO extends ObjectDAO {
                 + "VALUES(?,?,?)";
         Object[] params = { ctHoaDon.getIdHoaDon(), ctHoaDon.getSeri(), ctHoaDon.getDonGia() };
         super.executeNonQuery(query, params);
-        super.closeDB();
+        
     }
 
 

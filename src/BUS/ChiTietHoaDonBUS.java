@@ -38,6 +38,7 @@ public class ChiTietHoaDonBUS {
         daoCTHD = new ChiTietHoaDonDAO(idHoaDon);
 
         setCTHD = toSet(daoCTHD.getAllCTHoaDon());
+        daoCTHD.closeDB();
     }
 
     public static LinkedHashSet<ChiTietHoaDonDTO> toSet(ResultSet rs) {
@@ -59,11 +60,13 @@ public class ChiTietHoaDonBUS {
 
     public LinkedHashSet<ChiTietHoaDonDTO> getAllCTHoaDon(){
         setSetCTHD(toSet(daoCTHD.getAllCTHoaDon()));
+        daoCTHD.closeDB();
         return getSetCTHD();
     }
 
     public LinkedHashSet<ChiTietHoaDonDTO> getAllCTHoaDonOfSanPham(String idSanPham){
         setSetCTHD(toSet(daoCTHD.getAllCTHoaDonOfSanPham(idSanPham)));
+        daoCTHD.closeDB();
         return getSetCTHD();
     }
 
@@ -76,6 +79,7 @@ public class ChiTietHoaDonBUS {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        daoCTHD.closeDB();
         return count;
     }
 
@@ -88,12 +92,14 @@ public class ChiTietHoaDonBUS {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        daoCTHD.closeDB();
         return count;
     }
 
     public void addCTHoaDon(ChiTietHoaDonDTO ctHoaDon) {
         if (setCTHD.add(ctHoaDon)) {
             daoCTHD.addCTHoaDon(ctHoaDon);
+            daoCTHD.closeDB();
         }
     }
 
