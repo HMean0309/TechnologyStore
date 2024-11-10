@@ -15,8 +15,11 @@ public class SanPhamDAO extends ObjectDAO {
     }
 
     public ResultSet getAllSanPham(){
+        super.connectDB();
         String query = "SELECT * FROM SAN_PHAM WHERE isDelete = 0 ;";
-        return super.executeQuery(query);
+        ResultSet rs = super.executeQuery(query);
+        super.closeDB();
+        return rs;
     }
 
     public ResultSet getSanPhamOfPhanLoai(String idCate){
