@@ -13,8 +13,8 @@ public class ThongKeDAO extends ObjectDAO {
     // Thống kê theo ngày trong tháng/năm
     public LinkedHashSet<ThongKeDTO> thongKeTheoNgay(int thang, int nam) {
         super.connectDB();
-        String query = "SELECT DAY(hd.ngaylap) AS ngay, SUM(hd.order_amount - hd.discount_amount) AS doanhThu, " +
-                       "(SUM(hd.order_amount - hd.discount_amount) - SUM(ctnk.cost)) AS loiNhuan, SUM(ctnk.cost) AS chiPhi " +
+        String query = "SELECT DAY(hd.ngaylap) AS ngay, MONTH(hd.ngaylap) AS thang, YEAR(hd.ngaylap) AS nam, SUM(hd.order_amount - hd.discount_amount) AS doanhThu, " +
+                       "SUM(ctnk.cost) AS chiPhi " +
                        "FROM HOA_DON hd " +
                        "JOIN CT_HOA_DON cthd ON hd.id = cthd.id_hoadon " +
                        "JOIN CT_SAN_PHAM ctsp ON cthd.seri = ctsp.seri " +
@@ -25,13 +25,11 @@ public class ThongKeDAO extends ObjectDAO {
         
         try (ResultSet rs = executeQuery(query, new Object[]{thang, nam})) {
             while (rs.next()) {
-                ThongKeDTO thongKe = new ThongKeDTO(
-                    "Ngày " + rs.getInt("ngay"),
+                results.add(new ThongKeDTO(
+                    "Ngày " + rs.getInt("ngay") + "/" + rs.getInt("thang") + "/" + rs.getInt("nam"),
                     rs.getInt("doanhThu"),
                     rs.getInt("chiPhi")
-                );
-                thongKe.setCount(rs.getInt("loiNhuan"));
-                results.add(thongKe);
+                ));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -43,8 +41,8 @@ public class ThongKeDAO extends ObjectDAO {
     // Thống kê theo tháng trong năm
     public LinkedHashSet<ThongKeDTO> thongKeTheoThang(int nam) {
         super.connectDB();
-        String query = "SELECT MONTH(hd.ngaylap) AS thang, SUM(hd.order_amount - hd.discount_amount) AS doanhThu, " +
-                       "(SUM(hd.order_amount - hd.discount_amount) - SUM(ctnk.cost)) AS loiNhuan, SUM(ctnk.cost) AS chiPhi " +
+        String query = "SELECT MONTH(hd.ngaylap) AS thang, YEAR(hd.ngaylap) AS nam, SUM(hd.order_amount - hd.discount_amount) AS doanhThu, " +
+                       "SUM(ctnk.cost) AS chiPhi " +
                        "FROM HOA_DON hd " +
                        "JOIN CT_HOA_DON cthd ON hd.id = cthd.id_hoadon " +
                        "JOIN CT_SAN_PHAM ctsp ON cthd.seri = ctsp.seri " +
@@ -55,13 +53,11 @@ public class ThongKeDAO extends ObjectDAO {
         
         try (ResultSet rs = executeQuery(query, new Object[]{nam})) {
             while (rs.next()) {
-                ThongKeDTO thongKe = new ThongKeDTO(
-                    "Tháng " + rs.getInt("thang"),
+                results.add(new ThongKeDTO(
+                    "Tháng " + rs.getInt("thang") + "/" + rs.getInt("nam"),
                     rs.getInt("doanhThu"),
                     rs.getInt("chiPhi")
-                );
-                thongKe.setCount(rs.getInt("loiNhuan"));
-                results.add(thongKe);
+                ));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -74,7 +70,7 @@ public class ThongKeDAO extends ObjectDAO {
     public LinkedHashSet<ThongKeDTO> thongKeTheoNam() {
         super.connectDB();
         String query = "SELECT YEAR(hd.ngaylap) AS nam, SUM(hd.order_amount - hd.discount_amount) AS doanhThu, " +
-                       "(SUM(hd.order_amount - hd.discount_amount) - SUM(ctnk.cost)) AS loiNhuan, SUM(ctnk.cost) AS chiPhi " +
+                       "SUM(ctnk.cost) AS chiPhi " +
                        "FROM HOA_DON hd " +
                        "JOIN CT_HOA_DON cthd ON hd.id = cthd.id_hoadon " +
                        "JOIN CT_SAN_PHAM ctsp ON cthd.seri = ctsp.seri " +
@@ -84,13 +80,11 @@ public class ThongKeDAO extends ObjectDAO {
         
         try (ResultSet rs = executeQuery(query)) {
             while (rs.next()) {
-                ThongKeDTO thongKe = new ThongKeDTO(
+                results.add(new ThongKeDTO(
                     "Năm " + rs.getInt("nam"),
                     rs.getInt("doanhThu"),
                     rs.getInt("chiPhi")
-                );
-                thongKe.setCount(rs.getInt("loiNhuan"));
-                results.add(thongKe);
+                ));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -109,7 +103,8 @@ public class ThongKeDAO extends ObjectDAO {
                        "JOIN SAN_PHAM sp ON ctsp.id_sp = sp.id " +
                        "WHERE MONTH(hd.ngaylap) = ? AND YEAR(hd.ngaylap) = ? " +
                        "GROUP BY sp.name " +
-                       "ORDER BY soLuongBan DESC";
+                       "ORDER BY soLuongBan DESC" +
+                       "LIMIT 10";
         LinkedHashSet<ThongKeDTO> results = new LinkedHashSet<>();
         
         try (ResultSet rs = executeQuery(query, new Object[]{thang, nam})) {
