@@ -62,6 +62,7 @@ public class SanPhamDAO extends ObjectDAO {
         Object[] params = {product.getName(), product.getIdCate(), product.getBaoHanh(), product.getDes(), product.getImg(), product.getId() };
         super.closeDB();
         super.executeNonQuery(query, params);
+        super.closeDB();
     }
 
     // Xoa san pham bang id
@@ -71,6 +72,7 @@ public class SanPhamDAO extends ObjectDAO {
         Object[] params = {id};
         super.closeDB();
         super.executeNonQuery(query, params);
+        super.closeDB();
     }
 
     // Them du lieu vao san pham
@@ -80,5 +82,6 @@ public class SanPhamDAO extends ObjectDAO {
         Object[] params = {product.getId(),product.getName(),product.getIdCate(),product.getBaoHanh(),product.getDes(),product.getImg()};
         super.closeDB();
         super.executeNonQuery(query,params);
+        super.closeDB();
     }
 }
