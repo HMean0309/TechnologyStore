@@ -76,12 +76,4 @@ public class KhachHangDTO {
     public void setCity(String city) {
         this.city = city;
     }
-
-    public boolean isDelete() {
-        return isDelete;
-    }
-
-    public void setDelete(boolean isDelete) {
-        this.isDelete = isDelete;
-    }
 }
