@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package GUI;
 
 
@@ -441,11 +437,14 @@ public class Main extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
 //                new Main().setVisible(true);
-                JFrame frame = new JFrame("Khách Hàng");
+                JFrame frame = new JFrame("");
                 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 
                 KhachHang khachHangPanel = new KhachHang();
                 frame.add(khachHangPanel);
+                
+//                NhaCungCap nccPanel = new NhaCungCap();
+//                frame.add(nccPanel);
 
                 frame.pack();
                 frame.setSize(1072, 512);
