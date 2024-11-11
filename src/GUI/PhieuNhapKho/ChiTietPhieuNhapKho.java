@@ -2,18 +2,18 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package GUI.PhieuNhap;
+package GUI.PhieuNhapKho;
 
 /**
  *
  * @author nghia
  */
-public class PhieuNhap extends javax.swing.JPanel {
+public class ChiTietPhieuNhapKho extends javax.swing.JPanel {
 
     /**
-     * Creates new form PhieuNhap
+     * Creates new form ChiTietPhieuNhap
      */
-    public PhieuNhap() {
+    public ChiTietPhieuNhapKho() {
         initComponents();
     }
 

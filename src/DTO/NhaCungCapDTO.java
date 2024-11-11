@@ -4,17 +4,15 @@ public class NhaCungCapDTO {
     private String id;
     private String name;
     private String phone; 
-    private boolean isDelete;
     private String address;
     private String ward;
     private String district;
     private String city;
 
-    public NhaCungCapDTO(String id, String name, String phone, boolean isDelete, String address, String ward, String district, String city) {
+    public NhaCungCapDTO(String id, String name, String phone, String address, String ward, String district, String city) {
         this.id = id;
         this.name = name;
         this.phone = phone;
-        this.isDelete = isDelete;
         this.address = address;
         this.ward = ward;
         this.district = district;
@@ -43,14 +41,6 @@ public class NhaCungCapDTO {
 
     public void setPhone(String phone) {
         this.phone = phone;
-    }
-
-    public boolean isDelete() {
-        return isDelete;
-    }
-
-    public void setDelete(boolean isDelete) {
-        this.isDelete = isDelete;
     }
 
     public String getAddress() {

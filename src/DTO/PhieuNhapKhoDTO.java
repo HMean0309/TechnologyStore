@@ -6,17 +6,19 @@ public class PhieuNhapKhoDTO {
     private String id;
     private LocalDateTime ngayNhap;
     private Integer total;
-    private boolean isDelete;
-    private String idNhanVien;
+    private String id_nhanvien;
     private String idNCC;
 
-    public PhieuNhapKhoDTO(String id, LocalDateTime ngayNhap, int total, boolean isDelete, String idNhanVien, String idNCC) {
+    public PhieuNhapKhoDTO(String id, LocalDateTime ngayNhap, int total, String id_nhanvien, String idNCC) {
         this.id = id;
         this.ngayNhap = ngayNhap;
         this.total = total;
-        this.isDelete = isDelete;
-        this.idNhanVien = idNhanVien;
+        this.id_nhanvien = id_nhanvien;
         this.idNCC = idNCC;
+    }
+
+    public PhieuNhapKhoDTO() {
+        
     }
 
     public String getId() {
@@ -43,20 +45,11 @@ public class PhieuNhapKhoDTO {
         this.total = total;
     }
 
-    public boolean isDelete() {
-        return isDelete;
+    public String getidNhanVien() {
+        return id_nhanvien;
     }
-
-    public void setDelete(boolean isDelete) {
-        this.isDelete = isDelete;
-    }
-
     public String getIdNhanVien() {
-        return idNhanVien;
-    }
-
-    public void setIdNhanVien(String idNhanVien) {
-        this.idNhanVien = idNhanVien;
+        return id_nhanvien;
     }
 
     public String getIdNCC() {
@@ -65,5 +58,12 @@ public class PhieuNhapKhoDTO {
 
     public void setIdNCC(String idNCC) {
         this.idNCC = idNCC;
+    }
+    public void setidNhanVien(String id_nhanvien) {
+        this.id_nhanvien = id_nhanvien;
+    }
+    public void setIdNhanVien(String idNhanVien) {
+        this.id_nhanvien = id_nhanvien;
+
     }
 }
