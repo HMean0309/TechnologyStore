@@ -1,12 +1,12 @@
 package GUI;
 
 
-import com.formdev.flatlaf.FlatLightLaf;
 import java.awt.Dimension;
 import javax.swing.*;
 import java.awt.*;
 import javax.swing.border.MatteBorder;
 import com.formdev.flatlaf.extras.FlatSVGIcon;
+import com.formdev.flatlaf.themes.FlatMacLightLaf;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -435,7 +435,7 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_btnBaoHanhActionPerformed
 
     public static void main(String args[]) throws UnsupportedLookAndFeelException {
-        UIManager.setLookAndFeel(new FlatLightLaf());
+        UIManager.setLookAndFeel(new FlatMacLightLaf());
         EventQueue.invokeLater(new Runnable() {
             public void run() {
 //                new Main().setVisible(true);

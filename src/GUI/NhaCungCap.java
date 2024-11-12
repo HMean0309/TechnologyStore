@@ -62,6 +62,7 @@ public class NhaCungCap extends javax.swing.JPanel {
         btnThemNCC = new javax.swing.JButton();
         btnXoaNCC = new javax.swing.JButton();
         btnSuaNCC = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         topPanel.setBackground(new java.awt.Color(255, 255, 255));
         topPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(56, 56, 56), 2));
@@ -256,12 +257,15 @@ public class NhaCungCap extends javax.swing.JPanel {
         centerPanel.setBackground(new java.awt.Color(255, 255, 255));
         centerPanel.setForeground(new java.awt.Color(255, 255, 255));
         centerPanel.setPreferredSize(new java.awt.Dimension(100, 90));
+        centerPanel.add(btnThemNCC);
+        centerPanel.add(btnSuaNCC);
+        centerPanel.add(btnXoaNCC);
 
         iconSearch.setIcon(new FlatSVGIcon("GUI/icon/search.svg")
         );
         iconSearch.setText(" ");
 
-        txtTimKiem.setBorder(new FlatLineBorder(new Insets(3, 3, 3, 3), new Color(0, 0, 0), 1, 15));
+        txtTimKiem.setBorder(new FlatLineBorder(new Insets(6, 6, 6, 6), new Color(237, 237, 237), 3, 15));
         txtTimKiem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtTimKiemActionPerformed(evt);
@@ -292,6 +296,10 @@ public class NhaCungCap extends javax.swing.JPanel {
         btnSuaNCC.setFocusPainted(false);
         btnSuaNCC.setPreferredSize(new java.awt.Dimension(100, 27));
 
+        jButton1.setBackground(new java.awt.Color(172, 249, 175));
+        jButton1.setText("jButton1");
+        jButton1.setBorder(null);
+
         javax.swing.GroupLayout centerPanelLayout = new javax.swing.GroupLayout(centerPanel);
         centerPanel.setLayout(centerPanelLayout);
         centerPanelLayout.setHorizontalGroup(
@@ -302,6 +310,8 @@ public class NhaCungCap extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(24, 24, 24)
                 .addComponent(btnThemNCC, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnXoaNCC, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -316,7 +326,8 @@ public class NhaCungCap extends javax.swing.JPanel {
                 .addGroup(centerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnThemNCC, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnXoaNCC, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnSuaNCC, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnSuaNCC, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(29, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, centerPanelLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -373,6 +384,7 @@ public class NhaCungCap extends javax.swing.JPanel {
     private javax.swing.JLabel headLable;
     private javax.swing.JLabel iconSearch;
     private javax.swing.JPanel inforPanel;
+    private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel maKHLabel;
     private javax.swing.JTextField maKHTextField;
