@@ -30,6 +30,7 @@ public class NhaCungCap extends javax.swing.JPanel {
         phuongTextField.putClientProperty("JTextField.placeholderText", "Phường");
         quanTextField.putClientProperty("JTextField.placeholderText", "Quận");
         thanhPhoTextField.putClientProperty("JTextField.placeholderText", "Thành phố");
+        btnThemNCC.putClientProperty("JButton.buttonType", "roundRect");
         this.setPreferredSize(new Dimension(1072, 512));
         
     }

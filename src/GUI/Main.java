@@ -434,17 +434,12 @@ public class Main extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnBaoHanhActionPerformed
 
-    public static void main(String args[]) {
+    public static void main(String args[]) throws UnsupportedLookAndFeelException {
       
-        /* Create and display the form */
+        UIManager.setLookAndFeel(new FlatLightLaf());
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
 //                new Main().setVisible(true);
-                try {
-                    UIManager.setLookAndFeel(new FlatLightLaf());
-                } catch (UnsupportedLookAndFeelException ex) {
-                    Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
-                }
                 JFrame frame = new JFrame("");
                 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 
