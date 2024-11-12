@@ -18,7 +18,7 @@ public class Main extends javax.swing.JFrame {
         setTitle("Cửa Hàng Bán Đồ Công Nghệ");
         initComponents();
         panelChinh.removeAll();
-        panelChinh.add(new NhaCungCap());
+        panelChinh.add(new KhachHang());
         panelChinh.revalidate();
         panelChinh.repaint();
         
@@ -227,7 +227,7 @@ public class Main extends javax.swing.JFrame {
         btnTaiKhoan.setText("TÀI KHOẢN");
         btnTaiKhoan.setBorder(new MatteBorder(0, 0, 2, 0, new Color(255,255,255)));
         btnTaiKhoan.setFocusPainted(false);
-        btnTaiKhoan.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnTaiKhoan.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
         btnTaiKhoan.setIconTextGap(7);
         btnTaiKhoan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
