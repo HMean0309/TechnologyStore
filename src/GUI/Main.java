@@ -1,11 +1,14 @@
 package GUI;
 
 
+import com.formdev.flatlaf.FlatLightLaf;
 import java.awt.Dimension;
 import javax.swing.*;
 import java.awt.*;
 import javax.swing.border.MatteBorder;
 import com.formdev.flatlaf.extras.FlatSVGIcon;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 public class Main extends javax.swing.JFrame {
@@ -437,15 +440,20 @@ public class Main extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
 //                new Main().setVisible(true);
+                try {
+                    UIManager.setLookAndFeel(new FlatLightLaf());
+                } catch (UnsupportedLookAndFeelException ex) {
+                    Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 JFrame frame = new JFrame("");
                 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 
-                KhachHang khachHangPanel = new KhachHang();
-                frame.add(khachHangPanel);
+//                KhachHang khachHangPanel = new KhachHang();
+//                frame.add(khachHangPanel);
                 
-//                NhaCungCap nccPanel = new NhaCungCap();
-//                frame.add(nccPanel);
-
+                NhaCungCap nccPanel = new NhaCungCap();
+                frame.add(nccPanel);
+                
                 frame.pack();
                 frame.setSize(1072, 512);
                 frame.setVisible(true);

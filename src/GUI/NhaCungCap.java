@@ -18,19 +18,20 @@ import java.awt.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableCellRenderer;
 
-public class KhachHang extends javax.swing.JPanel {
+public class NhaCungCap extends javax.swing.JPanel {
 
     
-    private final String[] columnTitles = {"Mã KH", "Tên KH", "SĐT", "Địa chỉ"};
+    private final String[] columnTitles = {"Mã NCC", "Tên NCC", "SĐT", "Địa chỉ"};
     private final int[] columnWidths = {200, 302, 200, 370};
-    public KhachHang() {
+    public NhaCungCap() {
         initComponents();
-        txtTimKiem.putClientProperty("JTextField.placeholderText", "Mã KH, Tên KH,...");
+        txtTimKiem.putClientProperty("JTextField.placeholderText", "Mã NCC, Tên NCC,...");
         soNhaTextField.putClientProperty("JTextField.placeholderText", "Số nhà, tên đường");
         phuongTextField.putClientProperty("JTextField.placeholderText", "Phường");
         quanTextField.putClientProperty("JTextField.placeholderText", "Quận");
         thanhPhoTextField.putClientProperty("JTextField.placeholderText", "Thành phố");
         this.setPreferredSize(new Dimension(1072, 512));
+        
     }
 
 
@@ -69,7 +70,7 @@ public class KhachHang extends javax.swing.JPanel {
         headLable.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         headLable.setForeground(new java.awt.Color(0, 0, 0));
         headLable.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        headLable.setText("THÔNG TIN KHÁCH HÀNG");
+        headLable.setText("THÔNG TIN NHÀ CUNG CẤP");
         headLable.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         headLable.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         topPanel.add(headLable, java.awt.BorderLayout.PAGE_START);
@@ -78,11 +79,11 @@ public class KhachHang extends javax.swing.JPanel {
 
         tenKHLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         tenKHLabel.setForeground(new java.awt.Color(0, 0, 0));
-        tenKHLabel.setText("Tên KH");
+        tenKHLabel.setText("Tên NCC");
 
         maKHLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         maKHLabel.setForeground(new java.awt.Color(0, 0, 0));
-        maKHLabel.setText("Mã KH");
+        maKHLabel.setText("Mã NCC");
 
         sdtLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         sdtLabel.setForeground(new java.awt.Color(0, 0, 0));
@@ -147,7 +148,7 @@ public class KhachHang extends javax.swing.JPanel {
                     .addComponent(sdtTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tenKHTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(maKHTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 250, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 239, Short.MAX_VALUE)
                 .addGroup(inforPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(thanhPhoTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
                     .addComponent(diachiLabel)
@@ -225,7 +226,6 @@ public class KhachHang extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-
         DefaultTableCellRenderer headerRenderer = new DefaultTableCellRenderer();
         headerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
         headerRenderer.setBackground(new Color(179, 179, 179));
@@ -241,9 +241,11 @@ public class KhachHang extends javax.swing.JPanel {
         tblKhachHang.getColumnModel().getColumn(1).setCellRenderer(customRenderer);
         tblKhachHang.getColumnModel().getColumn(2).setCellRenderer(customRenderer);
         tblKhachHang.getColumnModel().getColumn(3).setCellRenderer(customRenderer);
+        tblKhachHang.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         tblKhachHang.setFocusable(false);
         tblKhachHang.setGridColor(new java.awt.Color(220, 220, 220));
         tblKhachHang.setRowHeight(27);
+        tblKhachHang.setRowSelectionAllowed(false);
         tblKhachHang.setShowGrid(true);
         tblKhachHang.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tblKhachHang);
@@ -269,6 +271,7 @@ public class KhachHang extends javax.swing.JPanel {
         btnThemNCC.setIcon(new FlatSVGIcon("GUI/icon/add.svg")
         );
         btnThemNCC.setText("Thêm");
+        btnThemNCC.setBorder(null);
         btnThemNCC.setFocusPainted(false);
         btnThemNCC.setPreferredSize(new java.awt.Dimension(100, 27));
 
@@ -276,6 +279,7 @@ public class KhachHang extends javax.swing.JPanel {
         btnXoaNCC.setIcon(new FlatSVGIcon("GUI/icon/delete.svg")
         );
         btnXoaNCC.setText("Xóa");
+        btnXoaNCC.setBorder(null);
         btnXoaNCC.setFocusPainted(false);
         btnXoaNCC.setPreferredSize(new java.awt.Dimension(100, 27));
 
@@ -283,6 +287,7 @@ public class KhachHang extends javax.swing.JPanel {
         btnSuaNCC.setIcon(new FlatSVGIcon("GUI/icon/edit.svg")
         );
         btnSuaNCC.setText("Sửa");
+        btnSuaNCC.setBorder(null);
         btnSuaNCC.setFocusPainted(false);
         btnSuaNCC.setPreferredSize(new java.awt.Dimension(100, 27));
 
@@ -355,6 +360,8 @@ public class KhachHang extends javax.swing.JPanel {
             return cell;
         }
     }
+    
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSuaNCC;
