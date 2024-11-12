@@ -435,7 +435,6 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_btnBaoHanhActionPerformed
 
     public static void main(String args[]) throws UnsupportedLookAndFeelException {
-      
         UIManager.setLookAndFeel(new FlatLightLaf());
         EventQueue.invokeLater(new Runnable() {
             public void run() {
