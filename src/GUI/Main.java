@@ -437,7 +437,7 @@ public class Main extends javax.swing.JFrame {
     public static void main(String args[]) throws UnsupportedLookAndFeelException {
       
         UIManager.setLookAndFeel(new FlatLightLaf());
-        java.awt.EventQueue.invokeLater(new Runnable() {
+        EventQueue.invokeLater(new Runnable() {
             public void run() {
 //                new Main().setVisible(true);
                 JFrame frame = new JFrame("");
