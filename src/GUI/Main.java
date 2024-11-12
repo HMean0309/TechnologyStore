@@ -17,9 +17,10 @@ public class Main extends javax.swing.JFrame {
 //        this.setPreferredSize(new Dimension(1366, 677));
         setTitle("Cửa Hàng Bán Đồ Công Nghệ");
         initComponents();
-        contentPanel.removeAll();
-        contentPanel.add(new KhachHang());contentPanel.revalidate();
-        contentPanel.repaint();
+        panelChinh.removeAll();
+        panelChinh.add(new NhaCungCap());
+        panelChinh.revalidate();
+        panelChinh.repaint();
         
     }
 
@@ -27,6 +28,7 @@ public class Main extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
         buttonGroup1 = new javax.swing.ButtonGroup();
         taskBar = new javax.swing.JPanel();
@@ -46,6 +48,7 @@ public class Main extends javax.swing.JFrame {
         btnDangXuat = new javax.swing.JButton();
         Header = new javax.swing.JPanel();
         contentPanel = new javax.swing.JPanel();
+        panelChinh = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -54,7 +57,6 @@ public class Main extends javax.swing.JFrame {
         btnSanPham.setBackground(new java.awt.Color(238, 238, 238));
         buttonGroup1.add(btnSanPham);
         btnSanPham.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        btnSanPham.setForeground(new java.awt.Color(0, 0, 0));
         btnSanPham.setIcon(new FlatSVGIcon("GUI/icon/product.svg"));
         btnSanPham.setText("SẢN PHẨM");
         btnSanPham.setBorder(new MatteBorder(0, 0, 2, 0, new Color(255,255,255)));
@@ -70,7 +72,6 @@ public class Main extends javax.swing.JFrame {
         btnLoai.setBackground(new java.awt.Color(238, 238, 238));
         buttonGroup1.add(btnLoai);
         btnLoai.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        btnLoai.setForeground(new java.awt.Color(0, 0, 0));
         btnLoai.setIcon(new FlatSVGIcon("GUI/icon/cate.svg"));
         btnLoai.setText("LOẠI");
         btnLoai.setBorder(new MatteBorder(0, 0, 2, 0, new Color(255,255,255)));
@@ -86,7 +87,6 @@ public class Main extends javax.swing.JFrame {
         btnDatHang.setBackground(new java.awt.Color(238, 238, 238));
         buttonGroup1.add(btnDatHang);
         btnDatHang.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        btnDatHang.setForeground(new java.awt.Color(0, 0, 0));
         btnDatHang.setIcon(new FlatSVGIcon("GUI/icon/shopping_cart.svg"));
         btnDatHang.setText("ĐẶT HÀNG");
         btnDatHang.setBorder(new MatteBorder(0, 0, 2, 0, new Color(255,255,255)));
@@ -102,7 +102,6 @@ public class Main extends javax.swing.JFrame {
         btnNhanVien.setBackground(new java.awt.Color(238, 238, 238));
         buttonGroup1.add(btnNhanVien);
         btnNhanVien.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        btnNhanVien.setForeground(new java.awt.Color(0, 0, 0));
         btnNhanVien.setIcon(new FlatSVGIcon("GUI/icon/users.svg"));
         btnNhanVien.setText("NHÂN VIÊN");
         btnNhanVien.setBorder(new MatteBorder(0, 0, 2, 0, new Color(255,255,255)));
@@ -118,7 +117,6 @@ public class Main extends javax.swing.JFrame {
         btnPhieuNhap.setBackground(new java.awt.Color(238, 238, 238));
         buttonGroup1.add(btnPhieuNhap);
         btnPhieuNhap.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        btnPhieuNhap.setForeground(new java.awt.Color(0, 0, 0));
         btnPhieuNhap.setIcon(new FlatSVGIcon("GUI/icon/import.svg"));
         btnPhieuNhap.setText("PHIẾU NHẬP");
         btnPhieuNhap.setBorder(new MatteBorder(0, 0, 2, 0, new Color(255,255,255)));
@@ -134,7 +132,6 @@ public class Main extends javax.swing.JFrame {
         btnKhachHang.setBackground(new java.awt.Color(238, 238, 238));
         buttonGroup1.add(btnKhachHang);
         btnKhachHang.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        btnKhachHang.setForeground(new java.awt.Color(0, 0, 0));
         btnKhachHang.setIcon(new FlatSVGIcon("GUI/icon/customer.svg"));
         btnKhachHang.setText("KHÁCH HÀNG");
         btnKhachHang.setBorder(new MatteBorder(0, 0, 2, 0, new Color(255,255,255)));
@@ -150,7 +147,6 @@ public class Main extends javax.swing.JFrame {
         btnNhaCungCap.setBackground(new java.awt.Color(238, 238, 238));
         buttonGroup1.add(btnNhaCungCap);
         btnNhaCungCap.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        btnNhaCungCap.setForeground(new java.awt.Color(0, 0, 0));
         btnNhaCungCap.setIcon(new FlatSVGIcon("GUI/icon/provider.svg"));
         btnNhaCungCap.setText("NHÀ CUNG CẤP");
         btnNhaCungCap.setBorder(new MatteBorder(0, 0, 2, 0, new Color(255,255,255)));
@@ -166,7 +162,6 @@ public class Main extends javax.swing.JFrame {
         btnThongKe.setBackground(new java.awt.Color(238, 238, 238));
         buttonGroup1.add(btnThongKe);
         btnThongKe.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        btnThongKe.setForeground(new java.awt.Color(0, 0, 0));
         btnThongKe.setIcon(new FlatSVGIcon("GUI/icon/bar_chart.svg"));
         btnThongKe.setText("THỐNG KÊ");
         btnThongKe.setBorder(new MatteBorder(0, 0, 2, 0, new Color(255,255,255)));
@@ -183,7 +178,6 @@ public class Main extends javax.swing.JFrame {
         btnHoaDon.setBackground(new java.awt.Color(238, 238, 238));
         buttonGroup1.add(btnHoaDon);
         btnHoaDon.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        btnHoaDon.setForeground(new java.awt.Color(0, 0, 0));
         btnHoaDon.setIcon(new FlatSVGIcon("GUI/icon/bill.svg"));
         btnHoaDon.setText("HÓA ĐƠN");
         btnHoaDon.setBorder(new MatteBorder(0, 0, 2, 0, new Color(255,255,255)));
@@ -199,7 +193,6 @@ public class Main extends javax.swing.JFrame {
         btnPhanQuyen.setBackground(new java.awt.Color(238, 238, 238));
         buttonGroup1.add(btnPhanQuyen);
         btnPhanQuyen.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        btnPhanQuyen.setForeground(new java.awt.Color(0, 0, 0));
         btnPhanQuyen.setIcon(new FlatSVGIcon("GUI/icon/permission.svg"));
         btnPhanQuyen.setText("PHÂN QUYỀN");
         btnPhanQuyen.setBorder(new MatteBorder(0, 0, 2, 0, new Color(255,255,255)));
@@ -215,7 +208,6 @@ public class Main extends javax.swing.JFrame {
         btnKhuyenMai.setBackground(new java.awt.Color(238, 238, 238));
         buttonGroup1.add(btnKhuyenMai);
         btnKhuyenMai.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        btnKhuyenMai.setForeground(new java.awt.Color(0, 0, 0));
         btnKhuyenMai.setIcon(new FlatSVGIcon("GUI/icon/ticket.svg"));
         btnKhuyenMai.setText("KHUYẾN MÃI");
         btnKhuyenMai.setBorder(new MatteBorder(0, 0, 2, 0, new Color(255,255,255)));
@@ -231,7 +223,6 @@ public class Main extends javax.swing.JFrame {
         btnTaiKhoan.setBackground(new java.awt.Color(238, 238, 238));
         buttonGroup1.add(btnTaiKhoan);
         btnTaiKhoan.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        btnTaiKhoan.setForeground(new java.awt.Color(0, 0, 0));
         btnTaiKhoan.setIcon(new FlatSVGIcon("GUI/icon/manage_accounts.svg"));
         btnTaiKhoan.setText("TÀI KHOẢN");
         btnTaiKhoan.setBorder(new MatteBorder(0, 0, 2, 0, new Color(255,255,255)));
@@ -247,13 +238,15 @@ public class Main extends javax.swing.JFrame {
         btnBaoHanh.setBackground(new java.awt.Color(238, 238, 238));
         buttonGroup1.add(btnBaoHanh);
         btnBaoHanh.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        btnBaoHanh.setForeground(new java.awt.Color(0, 0, 0));
         btnBaoHanh.setIcon(new FlatSVGIcon("GUI/icon/shield.svg"));
         btnBaoHanh.setText("BẢO HÀNH");
-        btnBaoHanh.setBorder(new MatteBorder(0, 0, 2, 0, new Color(255,255,255)));
+        btnBaoHanh.setBorder(new MatteBorder(0,0,2,0,new Color(255,255,255)));
+        btnBaoHanh.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnBaoHanh.setFocusPainted(false);
         btnBaoHanh.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        btnBaoHanh.setIconTextGap(7);
+        btnBaoHanh.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        btnBaoHanh.setIconTextGap(15);
+        btnBaoHanh.setMargin(new java.awt.Insets(2, 20, 2, 20));
         btnBaoHanh.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBaoHanhActionPerformed(evt);
@@ -284,10 +277,10 @@ public class Main extends javax.swing.JFrame {
             .addComponent(btnPhanQuyen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btnKhuyenMai, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btnTaiKhoan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(btnBaoHanh, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(taskBarLayout.createSequentialGroup()
                 .addComponent(btnDangXuat, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(btnBaoHanh, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         taskBarLayout.setVerticalGroup(
             taskBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -329,7 +322,7 @@ public class Main extends javax.swing.JFrame {
         Header.setLayout(HeaderLayout);
         HeaderLayout.setHorizontalGroup(
             HeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1366, Short.MAX_VALUE)
+            .addGap(0, 1390, Short.MAX_VALUE)
         );
         HeaderLayout.setVerticalGroup(
             HeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -339,18 +332,13 @@ public class Main extends javax.swing.JFrame {
         getContentPane().add(Header, java.awt.BorderLayout.NORTH);
 
         contentPanel.setBackground(new java.awt.Color(255, 255, 255));
+        contentPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(35, 35, 35, 35));
         contentPanel.setPreferredSize(new java.awt.Dimension(1150, 570));
+        contentPanel.setLayout(new java.awt.BorderLayout());
 
-        javax.swing.GroupLayout contentPanelLayout = new javax.swing.GroupLayout(contentPanel);
-        contentPanel.setLayout(contentPanelLayout);
-        contentPanelLayout.setHorizontalGroup(
-            contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1150, Short.MAX_VALUE)
-        );
-        contentPanelLayout.setVerticalGroup(
-            contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 655, Short.MAX_VALUE)
-        );
+        panelChinh.setBackground(new java.awt.Color(102, 102, 102));
+        panelChinh.setLayout(new java.awt.BorderLayout());
+        contentPanel.add(panelChinh, java.awt.BorderLayout.CENTER);
 
         getContentPane().add(contentPanel, java.awt.BorderLayout.CENTER);
 
@@ -440,6 +428,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JToggleButton btnThongKe;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JPanel contentPanel;
+    private javax.swing.JPanel panelChinh;
     private javax.swing.JPanel taskBar;
     // End of variables declaration//GEN-END:variables
 }
