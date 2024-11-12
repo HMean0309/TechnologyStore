@@ -14,13 +14,13 @@ import java.util.logging.Logger;
 public class Main extends javax.swing.JFrame {
     
     public Main() {
-        this.setPreferredSize(new Dimension(1366, 677));
-        
-//        addIconTaskbar();
+//        this.setPreferredSize(new Dimension(1366, 677));
         setTitle("Cửa Hàng Bán Đồ Công Nghệ");
-        
-        
         initComponents();
+        contentPanel.removeAll();
+        contentPanel.add(new KhachHang());contentPanel.revalidate();
+        contentPanel.repaint();
+        
     }
 
     
@@ -46,10 +46,8 @@ public class Main extends javax.swing.JFrame {
         btnDangXuat = new javax.swing.JButton();
         Header = new javax.swing.JPanel();
         contentPanel = new javax.swing.JPanel();
-        contentPanel2 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         taskBar.setBackground(new java.awt.Color(245, 245, 245));
 
@@ -319,11 +317,11 @@ public class Main extends javax.swing.JFrame {
                 .addComponent(btnTaiKhoan, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(btnBaoHanh, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 95, Short.MAX_VALUE)
                 .addComponent(btnDangXuat, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        getContentPane().add(taskBar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 68, 220, 570));
+        getContentPane().add(taskBar, java.awt.BorderLayout.WEST);
 
         Header.setBackground(new java.awt.Color(170, 211, 249));
 
@@ -331,51 +329,30 @@ public class Main extends javax.swing.JFrame {
         Header.setLayout(HeaderLayout);
         HeaderLayout.setHorizontalGroup(
             HeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1370, Short.MAX_VALUE)
+            .addGap(0, 1366, Short.MAX_VALUE)
         );
         HeaderLayout.setVerticalGroup(
             HeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 65, Short.MAX_VALUE)
         );
 
-        getContentPane().add(Header, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1370, 65));
+        getContentPane().add(Header, java.awt.BorderLayout.NORTH);
 
         contentPanel.setBackground(new java.awt.Color(255, 255, 255));
         contentPanel.setPreferredSize(new java.awt.Dimension(1150, 570));
-
-        contentPanel2.setBackground(new java.awt.Color(255, 255, 255));
-
-        javax.swing.GroupLayout contentPanel2Layout = new javax.swing.GroupLayout(contentPanel2);
-        contentPanel2.setLayout(contentPanel2Layout);
-        contentPanel2Layout.setHorizontalGroup(
-            contentPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1072, Short.MAX_VALUE)
-        );
-        contentPanel2Layout.setVerticalGroup(
-            contentPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 512, Short.MAX_VALUE)
-        );
 
         javax.swing.GroupLayout contentPanelLayout = new javax.swing.GroupLayout(contentPanel);
         contentPanel.setLayout(contentPanelLayout);
         contentPanelLayout.setHorizontalGroup(
             contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(contentPanelLayout.createSequentialGroup()
-                .addGap(39, 39, 39)
-                .addComponent(contentPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(39, Short.MAX_VALUE))
+            .addGap(0, 1150, Short.MAX_VALUE)
         );
         contentPanelLayout.setVerticalGroup(
             contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(contentPanelLayout.createSequentialGroup()
-                .addGap(34, 34, 34)
-                .addComponent(contentPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(34, Short.MAX_VALUE))
+            .addGap(0, 655, Short.MAX_VALUE)
         );
 
-        contentPanel.add(contentPanel2, java.awt.BorderLayout.CENTER);
-
-        getContentPane().add(contentPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 60, 1150, 580));
+        getContentPane().add(contentPanel, java.awt.BorderLayout.CENTER);
 
         pack();
         setLocationRelativeTo(null);
@@ -438,19 +415,9 @@ public class Main extends javax.swing.JFrame {
         UIManager.setLookAndFeel(new FlatMacLightLaf());
         EventQueue.invokeLater(new Runnable() {
             public void run() {
-//                new Main().setVisible(true);
-                JFrame frame = new JFrame("");
-                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                
-//                KhachHang khachHangPanel = new KhachHang();
-//                frame.add(khachHangPanel);
-                
-                NhaCungCap nccPanel = new NhaCungCap();
-                frame.add(nccPanel);
-                
-                frame.pack();
-                frame.setSize(1072, 512);
+                JFrame frame = new Main();
                 frame.setVisible(true);
+               
             }
         });
     }
@@ -473,7 +440,6 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JToggleButton btnThongKe;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JPanel contentPanel;
-    private javax.swing.JPanel contentPanel2;
     private javax.swing.JPanel taskBar;
     // End of variables declaration//GEN-END:variables
 }

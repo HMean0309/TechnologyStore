@@ -30,7 +30,6 @@ public class NhaCungCap extends javax.swing.JPanel {
         phuongTextField.putClientProperty("JTextField.placeholderText", "Phường");
         quanTextField.putClientProperty("JTextField.placeholderText", "Quận");
         thanhPhoTextField.putClientProperty("JTextField.placeholderText", "Thành phố");
-        btnThemNCC.putClientProperty("JButton.buttonType", "roundRect");
         this.setPreferredSize(new Dimension(1072, 512));
         
     }
@@ -54,6 +53,8 @@ public class NhaCungCap extends javax.swing.JPanel {
         phuongTextField = new javax.swing.JTextField();
         quanTextField = new javax.swing.JTextField();
         thanhPhoTextField = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblKhachHang = new javax.swing.JTable();
         centerPanel = new javax.swing.JPanel();
@@ -62,7 +63,6 @@ public class NhaCungCap extends javax.swing.JPanel {
         btnThemNCC = new javax.swing.JButton();
         btnXoaNCC = new javax.swing.JButton();
         btnSuaNCC = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
 
         topPanel.setBackground(new java.awt.Color(255, 255, 255));
         topPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(56, 56, 56), 2));
@@ -135,21 +135,32 @@ public class NhaCungCap extends javax.swing.JPanel {
         thanhPhoTextField.setBorder(new FlatLineBorder(new Insets(5, 5, 5, 5), new Color(0, 0, 0), 1, 15));
         thanhPhoTextField.setFocusable(false);
 
+        jLabel1.setForeground(new java.awt.Color(255, 51, 51));
+        jLabel1.setText("jLabel1");
+
+        jLabel2.setForeground(new java.awt.Color(255, 51, 51));
+        jLabel2.setText("jLabel2");
+
         javax.swing.GroupLayout inforPanelLayout = new javax.swing.GroupLayout(inforPanel);
         inforPanel.setLayout(inforPanelLayout);
         inforPanelLayout.setHorizontalGroup(
             inforPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, inforPanelLayout.createSequentialGroup()
+            .addGroup(inforPanelLayout.createSequentialGroup()
                 .addGap(64, 64, 64)
                 .addGroup(inforPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(maKHLabel)
                     .addComponent(tenKHLabel)
-                    .addComponent(sdtLabel))
+                    .addComponent(sdtLabel, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(maKHLabel, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addGap(18, 18, 18)
                 .addGroup(inforPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(sdtTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tenKHTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(maKHTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(maKHTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(inforPanelLayout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addGroup(inforPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 239, Short.MAX_VALUE)
                 .addGroup(inforPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(thanhPhoTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
@@ -167,26 +178,30 @@ public class NhaCungCap extends javax.swing.JPanel {
                     .addComponent(diachiLabel)
                     .addComponent(maKHLabel)
                     .addComponent(maKHTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(soNhaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(inforPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(phuongTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tenKHLabel)
-                    .addComponent(tenKHTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(inforPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(inforPanelLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGap(17, 17, 17)
                         .addGroup(inforPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(sdtLabel)
-                            .addComponent(sdtTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(tenKHLabel)
+                            .addComponent(tenKHTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(inforPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(sdtTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(sdtLabel))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel2))
                     .addGroup(inforPanelLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(soNhaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(phuongTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(quanTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(thanhPhoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 3, Short.MAX_VALUE)))
-                .addGap(40, 40, 40))
+                        .addComponent(thanhPhoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(45, Short.MAX_VALUE))
         );
 
         topPanel.add(inforPanel, java.awt.BorderLayout.CENTER);
@@ -276,7 +291,6 @@ public class NhaCungCap extends javax.swing.JPanel {
         btnThemNCC.setIcon(new FlatSVGIcon("GUI/icon/add.svg")
         );
         btnThemNCC.setText("Thêm");
-        btnThemNCC.setBorder(null);
         btnThemNCC.setFocusPainted(false);
         btnThemNCC.setPreferredSize(new java.awt.Dimension(100, 27));
 
@@ -284,7 +298,6 @@ public class NhaCungCap extends javax.swing.JPanel {
         btnXoaNCC.setIcon(new FlatSVGIcon("GUI/icon/delete.svg")
         );
         btnXoaNCC.setText("Xóa");
-        btnXoaNCC.setBorder(null);
         btnXoaNCC.setFocusPainted(false);
         btnXoaNCC.setPreferredSize(new java.awt.Dimension(100, 27));
 
@@ -292,13 +305,8 @@ public class NhaCungCap extends javax.swing.JPanel {
         btnSuaNCC.setIcon(new FlatSVGIcon("GUI/icon/edit.svg")
         );
         btnSuaNCC.setText("Sửa");
-        btnSuaNCC.setBorder(null);
         btnSuaNCC.setFocusPainted(false);
         btnSuaNCC.setPreferredSize(new java.awt.Dimension(100, 27));
-
-        jButton1.setBackground(new java.awt.Color(172, 249, 175));
-        jButton1.setText("jButton1");
-        jButton1.setBorder(null);
 
         javax.swing.GroupLayout centerPanelLayout = new javax.swing.GroupLayout(centerPanel);
         centerPanel.setLayout(centerPanelLayout);
@@ -310,8 +318,6 @@ public class NhaCungCap extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(24, 24, 24)
                 .addComponent(btnThemNCC, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnXoaNCC, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -322,19 +328,18 @@ public class NhaCungCap extends javax.swing.JPanel {
         centerPanelLayout.setVerticalGroup(
             centerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, centerPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(centerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnThemNCC, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnXoaNCC, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnSuaNCC, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(29, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, centerPanelLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(centerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(iconSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(14, 14, 14))
+            .addGroup(centerPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(centerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnThemNCC, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnXoaNCC, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSuaNCC, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -384,7 +389,8 @@ public class NhaCungCap extends javax.swing.JPanel {
     private javax.swing.JLabel headLable;
     private javax.swing.JLabel iconSearch;
     private javax.swing.JPanel inforPanel;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel maKHLabel;
     private javax.swing.JTextField maKHTextField;
