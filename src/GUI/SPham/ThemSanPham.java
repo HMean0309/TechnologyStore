@@ -44,7 +44,7 @@ public class ThemSanPham extends javax.swing.JFrame {
         cbLoai = new javax.swing.JComboBox<>();
         lbBaoHanh = new javax.swing.JLabel();
         txtBaoHanh = new javax.swing.JTextField();
-        jSeparator1 = new javax.swing.JSeparator();
+        jLabel1 = new javax.swing.JLabel();
         PanelChooseColor = new javax.swing.JPanel();
         lbColor = new javax.swing.JLabel();
         txtColor = new javax.swing.JTextField();
@@ -63,6 +63,7 @@ public class ThemSanPham extends javax.swing.JFrame {
         PanelLeft.setPreferredSize(new java.awt.Dimension(300, 600));
         PanelLeft.setLayout(new java.awt.BorderLayout(0, 10));
 
+        Panelimage.setBackground(new java.awt.Color(255, 255, 255));
         Panelimage.setPreferredSize(new java.awt.Dimension(300, 270));
 
         lbImage.setBackground(new java.awt.Color(255, 255, 255));
@@ -175,8 +176,10 @@ public class ThemSanPham extends javax.swing.JFrame {
         lbMaSP.setForeground(new java.awt.Color(0, 0, 0));
         lbMaSP.setText("Mã sản phẩm");
 
-        txtMaSp.setBackground(new java.awt.Color(255, 255, 255));
+        txtMaSp.setEditable(false);
+        txtMaSp.setBackground(new java.awt.Color(220, 220, 220));
         txtMaSp.setBorder(new FlatLineBorder(new Insets(5, 5, 5, 5), new Color(146, 143, 143), 1, 15));
+        txtMaSp.setFocusable(false);
         txtMaSp.setSelectionColor(new java.awt.Color(146, 143, 143));
 
         lbTenSP.setFont(new java.awt.Font("Times New Roman", 1, 20)); // NOI18N
@@ -185,7 +188,7 @@ public class ThemSanPham extends javax.swing.JFrame {
 
         txtTenSP.setBackground(new java.awt.Color(255, 255, 255));
         txtTenSP.setForeground(new java.awt.Color(0, 0, 0));
-        txtTenSP.setBorder(new FlatLineBorder(new Insets(5, 5, 5, 5), new Color(0, 0, 0), 1, 15));
+        txtTenSP.setBorder(new FlatLineBorder(new Insets(5, 5, 5, 5), new Color(238, 238, 238), 1, 15));
         txtTenSP.setSelectionColor(new java.awt.Color(0, 0, 0));
 
         lbLoai.setFont(new java.awt.Font("Times New Roman", 1, 20)); // NOI18N
@@ -195,7 +198,7 @@ public class ThemSanPham extends javax.swing.JFrame {
         cbLoai.setBackground(new java.awt.Color(255, 255, 255));
         cbLoai.setForeground(new java.awt.Color(0, 0, 0));
         cbLoai.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        cbLoai.setBorder(new FlatLineBorder(new Insets(5, 5, 5, 5), new Color(0, 0, 0), 1, 15));
+        cbLoai.setBorder(new FlatLineBorder(new Insets(5, 5, 5, 5), new Color(238, 238, 238), 1, 15));
         cbLoai.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cbLoai.setFocusable(false);
         cbLoai.setName(""); // NOI18N
@@ -206,34 +209,37 @@ public class ThemSanPham extends javax.swing.JFrame {
 
         txtBaoHanh.setBackground(new java.awt.Color(255, 255, 255));
         txtBaoHanh.setForeground(new java.awt.Color(0, 0, 0));
-        txtBaoHanh.setBorder(new FlatLineBorder(new Insets(5, 5, 5, 5), new Color(0, 0, 0), 1, 15));
+        txtBaoHanh.setBorder(new FlatLineBorder(new Insets(5, 5, 5, 5), new Color(238, 238, 238), 1, 15));
         txtBaoHanh.setSelectionColor(new java.awt.Color(0, 0, 0));
 
-        jSeparator1.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel1.setText("Tên sản phẩm không hợp lệ");
 
         javax.swing.GroupLayout PanelinforLayout = new javax.swing.GroupLayout(Panelinfor);
         Panelinfor.setLayout(PanelinforLayout);
         PanelinforLayout.setHorizontalGroup(
             PanelinforLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(PanelinforLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelinforLayout.createSequentialGroup()
                 .addGroup(PanelinforLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(PanelinforLayout.createSequentialGroup()
-                        .addContainerGap(32, Short.MAX_VALUE)
+                        .addContainerGap(19, Short.MAX_VALUE)
                         .addGroup(PanelinforLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(lbTenSP)
                             .addComponent(lbLoai)
-                            .addComponent(lbMaSP, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(lbMaSP, javax.swing.GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE)))
                     .addGroup(PanelinforLayout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(lbBaoHanh)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(PanelinforLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtTenSP)
-                    .addComponent(txtMaSp)
-                    .addComponent(cbLoai, 0, 320, Short.MAX_VALUE)
-                    .addComponent(txtBaoHanh))
+                .addGroup(PanelinforLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addGroup(PanelinforLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(txtTenSP)
+                        .addComponent(txtMaSp)
+                        .addComponent(cbLoai, 0, 320, Short.MAX_VALUE)
+                        .addComponent(txtBaoHanh)))
                 .addGap(120, 120, 120))
-            .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING)
         );
         PanelinforLayout.setVerticalGroup(
             PanelinforLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -246,17 +252,20 @@ public class ThemSanPham extends javax.swing.JFrame {
                 .addGroup(PanelinforLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbTenSP)
                     .addComponent(txtTenSP, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(28, 28, 28)
-                .addGroup(PanelinforLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbLoai)
-                    .addComponent(cbLoai, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE))
-                .addGap(27, 27, 27)
+                .addGroup(PanelinforLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(PanelinforLayout.createSequentialGroup()
+                        .addGap(64, 64, 64)
+                        .addComponent(lbLoai))
+                    .addGroup(PanelinforLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(cbLoai, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
                 .addGroup(PanelinforLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txtBaoHanh, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbBaoHanh))
-                .addGap(55, 55, 55)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                    .addComponent(lbBaoHanh)
+                    .addComponent(txtBaoHanh, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(136, 136, 136))
         );
 
         PanelRight.add(Panelinfor, java.awt.BorderLayout.NORTH);
@@ -272,7 +281,7 @@ public class ThemSanPham extends javax.swing.JFrame {
 
         txtColor.setBackground(new java.awt.Color(255, 255, 255));
         txtColor.setForeground(new java.awt.Color(0, 0, 0));
-        txtColor.setBorder(new FlatLineBorder(new Insets(5, 5, 5, 5), new Color(0, 0, 0), 1, 15));
+        txtColor.setBorder(new FlatLineBorder(new Insets(5, 5, 5, 5), new Color(238, 238, 238), 1, 15));
         txtColor.setSelectionColor(new java.awt.Color(0, 0, 0));
 
         PanelButton.setBackground(new java.awt.Color(255, 255, 255));
@@ -298,6 +307,7 @@ public class ThemSanPham extends javax.swing.JFrame {
         btnXoa.setFocusable(false);
         btnXoa.setPreferredSize(new java.awt.Dimension(100, 35));
         PanelButton.add(btnXoa);
+        btnXoa.setVisible(false);
 
         javax.swing.GroupLayout PanelChooseColorLayout = new javax.swing.GroupLayout(PanelChooseColor);
         PanelChooseColor.setLayout(PanelChooseColorLayout);
@@ -323,8 +333,8 @@ public class ThemSanPham extends javax.swing.JFrame {
                             .addComponent(txtColor, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(PanelChooseColorLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(PanelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(30, Short.MAX_VALUE))
+                        .addComponent(PanelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         PanelRight.add(PanelChooseColor, java.awt.BorderLayout.CENTER);
@@ -413,8 +423,8 @@ public class ThemSanPham extends javax.swing.JFrame {
     private javax.swing.JButton btnUpdate;
     private javax.swing.JButton btnXoa;
     private javax.swing.JComboBox<String> cbLoai;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel lbBaoHanh;
     private javax.swing.JLabel lbColor;
     private javax.swing.JLabel lbImage;
