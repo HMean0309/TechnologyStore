@@ -3,14 +3,11 @@ package DAO;
 import java.sql.Statement;
 
 import DTO.PhanLoaiDTO;
-import config.MySQLConnection;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
-import config.MySQLConnection;
 
 public class PhanLoaiDAO extends ObjectDAO {
     public PhanLoaiDAO() {
@@ -18,47 +15,52 @@ public class PhanLoaiDAO extends ObjectDAO {
     }
 
     public ResultSet getAllPhanLoai() {
-        String query = "SELECT * FROM PHAN_LOAI WHERE isDelete = 0 ;";
+        super.connectDB();
+        String query = "SELECT * FROM PHAN_lOAI WHERE isDelete = 0 ;";
+        super.closeDB();
         return super.executeQuery(query);
     }
-
-    public ResultSet getPhanLoaiById(String id) {
+    
+    public ResultSet getCountPhanLoai()
+    {
+        super.connectDB();
+        String query = "SELECT COUNT(*) FROM PHAN_lOAI WHERE isDelete = 0 ;";
+        super.closeDB();
+        return super.executeQuery(query);
+    }
+    
+    public ResultSet getPhanLoaiById(String id)
+    {
+        super.connectDB();
         String query = "SELECT * FROM PHAN_LOAI WHERE isDelete = 0 AND id = ? ;";
-        Object[] params = { id };
+        Object[] params = {id};
+        super.closeDB();
         return super.executeQuery(query, params);
     }
-
-    public ResultSet getPhanLoaiByName(String name) {
-        String query = "SELECT * FROM PHAN_LOAI WHERE isDelete = 0 AND name = ? ;";
-        Object[] params = { name };
-        return super.executeQuery(query, params);
-    }
-
-    public ResultSet getCountPLByName(String name) {
-        String query = "SELECT COUNT(*) FROM PHAN_LOAI WHERE isDelete = 0 AND name = ? ;";
-        Object[] params = { name };
-        ResultSet rs = super.executeQuery(query, params);
-        return rs;
-    }
-
     // Them du lieu vao Phan Loai
-    public void addPLWithData(PhanLoaiDTO category) {
-        String query = "INSERT INTO PHAN_LOAI (id,name)" + "VALUES(?,?)";
-        Object[] params = { category.getId(), category.getName() };
+    public void addPLWithData(PhanLoaiDTO PHAN_lOAI) {
+        super.connectDB();
+        String query = "INSERT INTO PHAN_lOAI (id,name)" + "VALUES(?,?)";
+        Object[] params = { PHAN_lOAI.getId(), PHAN_lOAI.getName() };
+        super.closeDB();
         super.executeNonQuery(query, params);
     }
 
     // Xoa Phan Loai bang id
     public void removePLById(String id) {
-        String query = "UPDATE PHAN_LOAI SET isDelete = 1 WHERE id = ? ;";
+        super.connectDB();
+        String query = "UPDATE PHAN_lOAI SET isDelete = 1 WHERE id = ? ;";
         Object[] params = { id };
+        super.closeDB();
         super.executeNonQuery(query, params);
     }
 
     // Thay doi Phan Loai dua tren id
-    public void updatePLById(PhanLoaiDTO category) {
-        String query = "UPDATE PHAN_LOAI SET name = ? WHERE id = ? ;";
-        Object[] params = { category.getName(), category.getId() };
+    public void updatePLById(PhanLoaiDTO PHAN_lOAI) {
+        super.connectDB();
+        String query = "UPDATE PHAN_lOAI SET name = ? WHERE id = ? AND isDelete = 0 ;";
+        Object[] params = { PHAN_lOAI.getName(), PHAN_lOAI.getId() };
+        super.closeDB();
         super.executeNonQuery(query, params);
     }
 }

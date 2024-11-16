@@ -108,8 +108,8 @@ public class ObjectDAO {
         }
         return null;
     }
-
-    public void connectDB() {
+    
+       public void connectDB() {
         conn = MySQLConnection.getConnection();
     }
 
@@ -119,5 +119,4 @@ public class ObjectDAO {
         pstmt = null;
         rs = null;
     }
-
 }
