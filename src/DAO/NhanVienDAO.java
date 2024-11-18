@@ -18,7 +18,7 @@ public class NhanVienDAO extends ObjectDAO {
         super.connectDB();
         String query = "SELECT * FROM NHAN_VIEN WHERE isDelete = 0;";
         ResultSet rs = super.executeQuery(query);
-        super.closeDB();
+        
         return rs;
     }
      
@@ -27,7 +27,7 @@ public class NhanVienDAO extends ObjectDAO {
         String query = "SELECT * FROM NHAN_VIEN WHERE isDelete = 0 AND id = ?;";
         Object[] params = {id};
         ResultSet rs = super.executeQuery(query, params);
-        super.closeDB();
+        
         return rs;
     }
      
@@ -36,7 +36,7 @@ public class NhanVienDAO extends ObjectDAO {
         super.connectDB();
         String query = "SELECT COUNT(*) FROM NHAN_VIEN WHERE isDelete = 0;";
         ResultSet rs = super.executeQuery(query);
-        super.closeDB();
+        
         return rs;
     }
      // Thay doi Nhan Vien dua tren id
@@ -45,7 +45,7 @@ public class NhanVienDAO extends ObjectDAO {
         String query = "UPDATE NHAN_VIEN SET name = ?, phone = ? WHERE id = ?;";
         Object[] params = {nhanvien.getId(), nhanvien.getName(), nhanvien.getPhone()};
         super.executeNonQuery(query, params);
-        super.closeDB();
+        
     }
      
      // Them du lieu vao Nhan Vien
@@ -54,7 +54,7 @@ public class NhanVienDAO extends ObjectDAO {
         String query = "INSERT INTO NHAN_VIEN (id, name, phone) VALUES (?, ?, ?);";
         Object[] params = {nhanvien.getId(), nhanvien.getName(), nhanvien.getPhone()};
         super.executeNonQuery(query, params);
-        super.closeDB();
+        
     }
 
     // Xoa Nhan Vien bang id
@@ -63,7 +63,7 @@ public class NhanVienDAO extends ObjectDAO {
         String query = "UPDATE NHAN_VIEN SET isDelete = 1 WHERE id = ?;";
         Object[] params = {id};
         super.executeNonQuery(query, params);
-        super.closeDB();
+        
     }
      
 }

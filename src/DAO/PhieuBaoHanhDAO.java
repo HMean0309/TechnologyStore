@@ -14,7 +14,7 @@ public class PhieuBaoHanhDAO extends ObjectDAO {
         super.connectDB();
         String query = "SELECT * FROM PHIEU_BAO_HANH";
         ResultSet rs = super.executeQuery(query);
-        super.closeDB();
+        
         return rs;
     }
 
@@ -22,7 +22,7 @@ public class PhieuBaoHanhDAO extends ObjectDAO {
         super.connectDB();
         String query = "SELECT COUNT(*) FROM PHIEU_BAO_HANH";
         ResultSet rs = super.executeQuery(query);
-        super.closeDB();
+        
         return rs;
     }
 
@@ -31,7 +31,7 @@ public class PhieuBaoHanhDAO extends ObjectDAO {
         String query = "UPDATE PHIEU_BAO_HANH SET ngaytrahang = ? WHERE id = ?";
         Object[] params = {ngayTraHang, id};
         super.executeNonQuery(query, params);
-        super.closeDB();
+        
     }
 
     public void addPhieuBaoHanh(PhieuBaoHanhDTO baohanh) {
@@ -41,6 +41,6 @@ public class PhieuBaoHanhDAO extends ObjectDAO {
         Object[] params = {baohanh.getId(), baohanh.getNgayLap(), 
                 baohanh.getIdNhanVien(), baohanh.getIdHoaDon(), baohanh.getNgayTraHang()};
         super.executeNonQuery(query, params);
-        super.closeDB();
+        
     }
 }

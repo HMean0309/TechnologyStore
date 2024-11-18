@@ -12,7 +12,7 @@ public class NhaCungCapDAO extends ObjectDAO {
         super.connectDB();
         String query = "SELECT * FROM ncc WHERE isDelete = 0;";
         ResultSet rs = super.executeQuery(query);
-        super.closeDB();
+        
         return rs;
     }
 
@@ -20,7 +20,7 @@ public class NhaCungCapDAO extends ObjectDAO {
         super.connectDB();
         String query = "SELECT COUNT(*) FROM ncc WHERE isDelete = 0;";
         ResultSet rs = super.executeQuery(query);
-        super.closeDB();
+        
         return rs;
     }
 
@@ -37,7 +37,7 @@ public class NhaCungCapDAO extends ObjectDAO {
             nhaCungCap.getCity()
         };
         super.executeNonQuery(query, params);
-        super.closeDB();
+        
     }
 
     public void updateNhaCungCap(NhaCungCapDTO nhaCungCap) {
@@ -53,7 +53,7 @@ public class NhaCungCapDAO extends ObjectDAO {
             nhaCungCap.getId()
         };
         super.executeNonQuery(query, params);
-        super.closeDB();
+        
     }
 
     public void deleteNhaCungCap(String id) {
@@ -61,6 +61,6 @@ public class NhaCungCapDAO extends ObjectDAO {
         String query = "UPDATE ncc SET isDelete = 1 WHERE id = ?";
         Object[] params = {id};
         super.executeNonQuery(query, params);
-        super.closeDB();
+        
     }
 }

@@ -17,7 +17,7 @@ public class PhanLoaiDAO extends ObjectDAO {
     public ResultSet getAllPhanLoai() {
         super.connectDB();
         String query = "SELECT * FROM PHAN_lOAI WHERE isDelete = 0 ;";
-        super.closeDB();
+        
         return super.executeQuery(query);
     }
     
@@ -25,7 +25,7 @@ public class PhanLoaiDAO extends ObjectDAO {
     {
         super.connectDB();
         String query = "SELECT COUNT(*) FROM PHAN_lOAI WHERE isDelete = 0 ;";
-        super.closeDB();
+        
         return super.executeQuery(query);
     }
     
@@ -34,7 +34,7 @@ public class PhanLoaiDAO extends ObjectDAO {
         super.connectDB();
         String query = "SELECT * FROM PHAN_LOAI WHERE isDelete = 0 AND id = ? ;";
         Object[] params = {id};
-        super.closeDB();
+        
         return super.executeQuery(query, params);
     }
     // Them du lieu vao Phan Loai
@@ -42,7 +42,7 @@ public class PhanLoaiDAO extends ObjectDAO {
         super.connectDB();
         String query = "INSERT INTO PHAN_lOAI (id,name)" + "VALUES(?,?)";
         Object[] params = { PHAN_lOAI.getId(), PHAN_lOAI.getName() };
-        super.closeDB();
+        
         super.executeNonQuery(query, params);
     }
 
@@ -51,7 +51,7 @@ public class PhanLoaiDAO extends ObjectDAO {
         super.connectDB();
         String query = "UPDATE PHAN_lOAI SET isDelete = 1 WHERE id = ? ;";
         Object[] params = { id };
-        super.closeDB();
+        
         super.executeNonQuery(query, params);
     }
 
@@ -60,7 +60,7 @@ public class PhanLoaiDAO extends ObjectDAO {
         super.connectDB();
         String query = "UPDATE PHAN_lOAI SET name = ? WHERE id = ? AND isDelete = 0 ;";
         Object[] params = { PHAN_lOAI.getName(), PHAN_lOAI.getId() };
-        super.closeDB();
+        
         super.executeNonQuery(query, params);
     }
 }

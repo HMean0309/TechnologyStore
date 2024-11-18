@@ -18,7 +18,7 @@ public class QuyenDAO extends ObjectDAO {
         super.connectDB();
         String query = "SELECT * FROM QUYEN WHERE isDelete = 0;";
         ResultSet rs = super.executeQuery(query);
-        super.closeDB();
+        
         return rs;
     }
 
@@ -27,7 +27,7 @@ public class QuyenDAO extends ObjectDAO {
         String query = "SELECT * FROM QUYEN WHERE isDelete = 0 AND id = ?;";
         Object[] params = {id};
         ResultSet rs = super.executeQuery(query, params);
-        super.closeDB();
+        
         return rs;
     }
 
@@ -35,7 +35,7 @@ public class QuyenDAO extends ObjectDAO {
         super.connectDB();
         String query = "SELECT COUNT(*) FROM QUYEN WHERE isDelete = 0;";
         ResultSet rs = super.executeQuery(query);
-        super.closeDB();
+        
         return rs;
     }
 
@@ -50,7 +50,7 @@ public class QuyenDAO extends ObjectDAO {
             
         };
         super.executeNonQuery(query, params);
-        super.closeDB();
+        
     }
 
     // Xoa quyen bang id
@@ -59,7 +59,7 @@ public class QuyenDAO extends ObjectDAO {
         String query = "UPDATE QUYEN SET isDelete = 1 WHERE id = ?;";
         Object[] params = {id};
         super.executeNonQuery(query, params);
-        super.closeDB();
+        
     }
 
     // Them du lieu vao quyen
@@ -68,6 +68,6 @@ public class QuyenDAO extends ObjectDAO {
         String query = "INSERT INTO QUYEN (id, name, des) VALUES (?, ?, ?);";
         Object[] params = {quyen.getId(), quyen.getName(), quyen.getDes()};
         super.executeNonQuery(query, params);
-        super.closeDB();
+        
     }
 }

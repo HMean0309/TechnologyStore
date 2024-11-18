@@ -18,7 +18,7 @@ public class TaiKhoanDAO extends ObjectDAO {
         super.connectDB();
         String query = "SELECT * FROM TAI_KHOAN WHERE isDelete = 0;";
         ResultSet rs = super.executeQuery(query);
-        super.closeDB();
+        
         return rs;
     }
 
@@ -27,7 +27,7 @@ public class TaiKhoanDAO extends ObjectDAO {
         String query = "SELECT * FROM TAI_KHOAN WHERE isDelete = 0 AND id_nhanvien = ?;";
         Object[] params = {idNV};
         ResultSet rs = super.executeQuery(query, params);
-        super.closeDB();
+        
         return rs;
     }
 
@@ -35,7 +35,7 @@ public class TaiKhoanDAO extends ObjectDAO {
         super.connectDB();
         String query = "SELECT COUNT(*) FROM TAI_KHOAN WHERE isDelete = 0;";
         ResultSet rs = super.executeQuery(query);
-        super.closeDB();
+        
         return rs;
     }
 
@@ -50,7 +50,7 @@ public class TaiKhoanDAO extends ObjectDAO {
             taikhoan.getIdNV()
         };
         super.executeNonQuery(query, params);
-        super.closeDB();
+        
     }
 
     // Xoa Tai Khoan bang id nhan vien
@@ -59,7 +59,7 @@ public class TaiKhoanDAO extends ObjectDAO {
         String query = "UPDATE TAI_KHOAN SET isDelete = 1 WHERE id_nhanvien = ?;";
         Object[] params = {idNV};
         super.executeNonQuery(query, params);
-        super.closeDB();
+        
     }
 
     // Them du lieu vao Tai Khoan
@@ -74,7 +74,7 @@ public class TaiKhoanDAO extends ObjectDAO {
             taikhoan.getIdQuyen()
         };
         super.executeNonQuery(query, params);
-        super.closeDB();
+        
     }
     
 }

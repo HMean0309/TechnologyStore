@@ -16,7 +16,7 @@ public class OptionSanPhamDAO extends ObjectDAO
     {
         super.connectDB();
         String query = "SELECT * FROM OPTION_SAN_PHAM WHERE isDelete = 0 ;";
-        super.closeDB();
+        
         return super.executeQuery(query);
     }
 
@@ -28,7 +28,7 @@ public class OptionSanPhamDAO extends ObjectDAO
         {
             idsp
         };
-        super.closeDB();
+        
         return super.executeQuery(query, params);
     }
 
@@ -36,7 +36,7 @@ public class OptionSanPhamDAO extends ObjectDAO
     {
         super.connectDB();
         String query = "SELECT COUNT(*) FROM OPTION_SAN_PHAM WHERE isDelete = 0 ;";
-        super.closeDB();
+        
         return super.executeQuery(query);
     }
 
@@ -48,7 +48,7 @@ public class OptionSanPhamDAO extends ObjectDAO
         {
             id
         };
-        super.closeDB();
+        
         return super.executeQuery(query, params);
     }
 
@@ -60,7 +60,7 @@ public class OptionSanPhamDAO extends ObjectDAO
         {
             OSP.getIdSP(), OSP.getColor()
         };
-        super.closeDB();
+        
         super.executeNonQuery(query, params);
     }
 
@@ -72,7 +72,7 @@ public class OptionSanPhamDAO extends ObjectDAO
         {
             OSP.getColor(), OSP.getIdSP()
         };
-        super.closeDB();
+        
         super.executeNonQuery(query, params);
     }
 
@@ -84,7 +84,7 @@ public class OptionSanPhamDAO extends ObjectDAO
         {
             OSP.getColor(), OSP.getIdSP()
         };
-        super.closeDB();
+        
         super.executeNonQuery(query, params);
     }
 }

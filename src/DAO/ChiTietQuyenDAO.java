@@ -18,7 +18,7 @@ public class ChiTietQuyenDAO extends ObjectDAO {
         super.connectDB();
         String query = "SELECT * FROM CHI_TIET_QUYEN;";
         ResultSet rs = super.executeQuery(query);
-        super.closeDB();
+        
         return rs;
     }
 
@@ -27,7 +27,7 @@ public class ChiTietQuyenDAO extends ObjectDAO {
         String query = "SELECT * FROM CHI_TIET_QUYEN WHERE id_quyen = ?;";
         Object[] params = {idQuyen};
         ResultSet rs = super.executeQuery(query, params);
-        super.closeDB();
+        
         return rs;
     }
 
@@ -36,7 +36,7 @@ public class ChiTietQuyenDAO extends ObjectDAO {
         String query = "SELECT COUNT(*) FROM CHI_TIET_QUYEN WHERE id_quyen = ?;";
         Object[] params = {idQuyen};
         ResultSet rs = super.executeQuery(query, params);
-        super.closeDB();
+        
         return rs;
     }
 
@@ -49,7 +49,7 @@ public class ChiTietQuyenDAO extends ObjectDAO {
             ctQuyen.getIdChucNang()
         };
         super.executeNonQuery(query, params);
-        super.closeDB();
+        
     }
 
 
@@ -62,6 +62,6 @@ public class ChiTietQuyenDAO extends ObjectDAO {
             ctQuyen.getIdChucNang()
         };
         super.executeNonQuery(query, params);
-        super.closeDB();
+        
     }
 }
