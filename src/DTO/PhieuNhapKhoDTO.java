@@ -6,64 +6,53 @@ public class PhieuNhapKhoDTO {
     private String id;
     private LocalDateTime ngayNhap;
     private Integer total;
-    private String id_nhanvien;
+    private String idNhanVien;
     private String idNCC;
-
-    public PhieuNhapKhoDTO(String id, LocalDateTime ngayNhap, int total, String id_nhanvien, String idNCC) {
-        this.id = id;
-        this.ngayNhap = ngayNhap;
-        this.total = total;
-        this.id_nhanvien = id_nhanvien;
-        this.idNCC = idNCC;
-    }
-
-    public PhieuNhapKhoDTO() {
-        
-    }
-
+    private Boolean isDelete;
     public String getId() {
         return id;
     }
-
     public void setId(String id) {
         this.id = id;
     }
-
     public LocalDateTime getNgayNhap() {
         return ngayNhap;
     }
-
     public void setNgayNhap(LocalDateTime ngayNhap) {
         this.ngayNhap = ngayNhap;
     }
-
-    public int getTotal() {
-        return total.intValue();
+    public Integer getTotal() {
+        return total;
     }
-
-    public void setTotal(int total) {
+    public void setTotal(Integer total) {
         this.total = total;
     }
-
-    public String getidNhanVien() {
-        return id_nhanvien;
-    }
     public String getIdNhanVien() {
-        return id_nhanvien;
+        return idNhanVien;
     }
-
+    public void setIdNhanVien(String idNhanVien) {
+        this.idNhanVien = idNhanVien;
+    }
     public String getIdNCC() {
         return idNCC;
     }
-
     public void setIdNCC(String idNCC) {
         this.idNCC = idNCC;
     }
-    public void setidNhanVien(String id_nhanvien) {
-        this.id_nhanvien = id_nhanvien;
+    public Boolean getIsDelete() {
+        return isDelete;
     }
-    public void setIdNhanVien(String idNhanVien) {
-        this.id_nhanvien = id_nhanvien;
+    public void setIsDelete(Boolean isDelete) {
+        this.isDelete = isDelete;
+    }
+    public PhieuNhapKhoDTO(String id, LocalDateTime ngayNhap, Integer total, String idNhanVien, String idNCC,
+            Boolean isDelete) {
+        this.id = id;
+        this.ngayNhap = ngayNhap;
+        this.total = total;
+        this.idNhanVien = idNhanVien;
+        this.idNCC = idNCC;
+        this.isDelete = isDelete;
+    }
 
-    }
 }

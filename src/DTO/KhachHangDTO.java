@@ -9,18 +9,7 @@ public class KhachHangDTO {
     private String ward;
     private String city;
     private Boolean isDelete;
-
-    public KhachHangDTO(String id, String name, String phone, String address, String district, String ward, String city, boolean isDelete) {
-        this.id = id;
-        this.name = name;
-        this.phone = phone;
-        this.address = address;
-        this.district = district;
-        this.ward = ward;
-        this.city = city;
-        this.isDelete = isDelete;
-    }
-
+    
     public String getId() {
         return id;
     }
@@ -76,4 +65,26 @@ public class KhachHangDTO {
     public void setCity(String city) {
         this.city = city;
     }
+
+    public Boolean getIsDelete() {
+        return isDelete;
+    }
+
+    public void setIsDelete(Boolean isDelete) {
+        this.isDelete = isDelete;
+    }
+
+    public KhachHangDTO(String id, String name, String phone, String address, String district, String ward, String city,
+            Boolean isDelete) {
+        this.id = id;
+        this.name = name;
+        this.phone = phone;
+        this.address = address;
+        this.district = district;
+        this.ward = ward;
+        this.city = city;
+        this.isDelete = isDelete;
+    }
+
+    
 }

@@ -3,12 +3,12 @@ package DTO;
 public class ChiTietQuyenDTO {
     private String idQuyen;
     private String idChucNang;
-    private boolean show;
-    private boolean insert;
-    private boolean edit;
-    private boolean delete;
+    private Boolean show;
+    private Boolean insert;
+    private Boolean edit;
+    private Boolean delete;
 
-    public ChiTietQuyenDTO(String idQuyen, String idChucNang, boolean show, boolean insert, boolean edit, boolean delete) {
+    public ChiTietQuyenDTO(String idQuyen, String idChucNang, Boolean show, Boolean insert, Boolean edit, Boolean delete) {
         this.idQuyen = idQuyen;
         this.idChucNang = idChucNang;
         this.show = show;
@@ -33,35 +33,35 @@ public class ChiTietQuyenDTO {
         this.idChucNang = idChucNang;
     }
 
-    public boolean isShow() {
+    public Boolean isShow() {
         return show;
     }
 
-    public void setShow(boolean show) {
+    public void setShow(Boolean show) {
         this.show = show;
     }
 
-    public boolean isInsert() {
+    public Boolean isInsert() {
         return insert;
     }
 
-    public void setInsert(boolean insert) {
+    public void setInsert(Boolean insert) {
         this.insert = insert;
     }
 
-    public boolean isEdit() {
+    public Boolean isEdit() {
         return edit;
     }
 
-    public void setEdit(boolean edit) {
+    public void setEdit(Boolean edit) {
         this.edit = edit;
     }
 
-    public boolean isDelete() {
+    public Boolean isDelete() {
         return delete;
     }
 
-    public void setDelete(boolean delete) {
+    public void setDelete(Boolean delete) {
         this.delete = delete;
     }
 }

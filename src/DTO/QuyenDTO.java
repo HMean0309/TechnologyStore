@@ -4,9 +4,9 @@ public class QuyenDTO {
     private String id;
     private String name;
     private String des;
-    private boolean isDelete;
+    private Boolean isDelete;
 
-    public QuyenDTO(String id, String name, String des, boolean isDelete) {
+    public QuyenDTO(String id, String name, String des, Boolean isDelete) {
         this.id = id;
         this.name = name;
         this.des = des;
@@ -37,11 +37,11 @@ public class QuyenDTO {
         this.des = des;
     }
 
-    public boolean isDelete() {
+    public Boolean isDelete() {
         return isDelete;
     }
 
-    public void setDelete(boolean isDelete) {
+    public void setDelete(Boolean isDelete) {
         this.isDelete = isDelete;
     }
 }

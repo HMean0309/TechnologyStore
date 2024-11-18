@@ -3,15 +3,13 @@ package DTO;
 public class TaiKhoanDTO {
     private String username;
     private String password;
-    private boolean type;
     private String idNV;
     private String idQuyen;
-    private boolean isDelete;
+    private Boolean isDelete;
 
-    public TaiKhoanDTO(String username, String password, boolean type, String idNV, String idQuyen, boolean isDelete) {
+    public TaiKhoanDTO(String username, String password, String idNV, String idQuyen, Boolean isDelete) {
         this.username = username;
         this.password = password;
-        this.type = type;
         this.idNV = idNV;
         this.idQuyen = idQuyen;
         this.isDelete = isDelete;
@@ -33,14 +31,6 @@ public class TaiKhoanDTO {
         this.password = password;
     }
 
-    public boolean isType() {
-        return type;
-    }
-
-    public void setType(boolean type) {
-        this.type = type;
-    }
-
     public String getIdNV() {
         return idNV;
     }
@@ -57,11 +47,11 @@ public class TaiKhoanDTO {
         this.idQuyen = idQuyen;
     }
 
-    public boolean isDelete() {
+    public Boolean isDelete() {
         return isDelete;
     }
 
-    public void setDelete(boolean isDelete) {
+    public void setDelete(Boolean isDelete) {
         this.isDelete = isDelete;
     }
 }

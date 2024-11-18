@@ -5,12 +5,12 @@ import java.time.LocalDateTime;
 public class PhieuBaoHanhDTO {
     private String id;
     private LocalDateTime ngayLap;
-    private boolean isDelete;
+    private Boolean isDelete;
     private String idNhanVien;
     private String idHoaDon;
     private LocalDateTime ngayTraHang;
 
-    public PhieuBaoHanhDTO(String id, LocalDateTime ngayLap, boolean isDelete, String idNhanVien, String idHoaDon, LocalDateTime ngayTraHang) {
+    public PhieuBaoHanhDTO(String id, LocalDateTime ngayLap, Boolean isDelete, String idNhanVien, String idHoaDon, LocalDateTime ngayTraHang) {
         this.id = id;
         this.ngayLap = ngayLap;
         this.isDelete = isDelete;
@@ -35,11 +35,11 @@ public class PhieuBaoHanhDTO {
         this.ngayLap = ngayLap;
     }
 
-    public boolean isDelete() {
+    public Boolean isDelete() {
         return isDelete;
     }
 
-    public void setDelete(boolean isDelete) {
+    public void setDelete(Boolean isDelete) {
         this.isDelete = isDelete;
     }
 

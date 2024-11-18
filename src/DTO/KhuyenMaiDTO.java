@@ -6,74 +6,53 @@ public class KhuyenMaiDTO {
     private String id;
     private LocalDateTime startDateTime;
     private LocalDateTime endDateTime;
-    private int donViKM;
-    private int value;
-    private boolean isDelete;
-    private String des;
-
-    public KhuyenMaiDTO(String id, LocalDateTime startDateTime, LocalDateTime endDateTime, int donViKM, int value, boolean isDelete, String des) {
-        this.id = id;
-        this.startDateTime = startDateTime;
-        this.endDateTime = endDateTime;
-        this.donViKM = donViKM;
-        this.value = value;
-        this.isDelete = isDelete;
-        this.des = des;
-    }
-
+    private Integer donViKM;
+    private Integer value;
+    private Boolean isDelete;
     public String getId() {
         return id;
     }
-
     public void setId(String id) {
         this.id = id;
     }
-
-    public LocalDateTime getStartLocalDateTimetime() {
+    public LocalDateTime getStartDateTime() {
         return startDateTime;
     }
-
-    public void setStartLocalDateTimetime(LocalDateTime startDateTime) {
+    public void setStartDateTime(LocalDateTime startDateTime) {
         this.startDateTime = startDateTime;
     }
-
-    public LocalDateTime getEndLocalDateTimetime() {
+    public LocalDateTime getEndDateTime() {
         return endDateTime;
     }
-
-    public void setEndLocalDateTimetime(LocalDateTime endDateTime) {
+    public void setEndDateTime(LocalDateTime endDateTime) {
         this.endDateTime = endDateTime;
     }
-
-    public int isDonviKM() {
+    public Integer getDonViKM() {
         return donViKM;
     }
-
-    public void setDonviKM(int donViKM) {
+    public void setDonViKM(Integer donViKM) {
         this.donViKM = donViKM;
     }
-
-    public int getValue() {
+    public Integer getValue() {
         return value;
     }
-
-    public void setValue(int value) {
+    public void setValue(Integer value) {
         this.value = value;
     }
-
-    public boolean isDelete() {
+    public Boolean getIsDelete() {
         return isDelete;
     }
-
-    public void setDelete(boolean isDelete) {
+    public void setIsDelete(Boolean isDelete) {
+        this.isDelete = isDelete;
+    }
+    public KhuyenMaiDTO(String id, LocalDateTime startDateTime, LocalDateTime endDateTime, Integer donViKM,
+            Integer value, Boolean isDelete) {
+        this.id = id;
+        this.startDateTime = startDateTime;
+        this.endDateTime = endDateTime;
+        this.donViKM = donViKM;
+        this.value = value;
         this.isDelete = isDelete;
     }
 
-    public String getDes() {
-        return des;
-    }
-
-    public void setDes(String des) {
-        this.des = des;
-    }
 }

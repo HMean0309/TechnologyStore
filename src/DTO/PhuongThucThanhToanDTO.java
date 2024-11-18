@@ -3,12 +3,10 @@ package DTO;
 public class PhuongThucThanhToanDTO {
     private String id;
     private String name;
-    private boolean isDelete;
 
-    public PhuongThucThanhToanDTO(String id, String name, boolean isDelete) {
+    public PhuongThucThanhToanDTO(String id, String name) {
         this.id = id;
         this.name = name;
-        this.isDelete = isDelete;
     }
 
     public String getId() {
@@ -25,13 +23,5 @@ public class PhuongThucThanhToanDTO {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public boolean isDelete() {
-        return isDelete;
-    }
-
-    public void setDelete(boolean isDelete) {
-        this.isDelete = isDelete;
     }
 }

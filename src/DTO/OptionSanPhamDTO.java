@@ -3,19 +3,19 @@ package DTO;
 public class OptionSanPhamDTO {
     public String idSP;
     public String color;
-    public boolean isDelete;
+    public Boolean isDelete;
 
-    public OptionSanPhamDTO(String idSp, String color, boolean isDelete) {
+    public OptionSanPhamDTO(String idSp, String color, Boolean isDelete) {
         this.idSP = idSp;
         this.color = color;
         this.isDelete = isDelete;
     }
 
-    public boolean isDelete() {
+    public Boolean isDelete() {
         return isDelete;
     }
 
-    public void setDelete(boolean isDelete) {
+    public void setDelete(Boolean isDelete) {
         this.isDelete = isDelete;
     }
 

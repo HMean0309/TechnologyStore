@@ -3,9 +3,9 @@ package DTO;
 public class PhanLoaiDTO {
     private String id;
     private String name;
-    private boolean isDelete;
+    private Boolean isDelete;
 
-    public PhanLoaiDTO(String id, String name, boolean isDelete) {
+    public PhanLoaiDTO(String id, String name, Boolean isDelete) {
         this.id = id;
         this.name = name;
         this.isDelete = isDelete;
@@ -27,11 +27,11 @@ public class PhanLoaiDTO {
         this.name = name;
     }
 
-    public boolean isDelete() {
+    public Boolean isDelete() {
         return isDelete;
     }
 
-    public void setDelete(boolean isDelete) {
+    public void setDelete(Boolean isDelete) {
         this.isDelete = isDelete;
     }
     
