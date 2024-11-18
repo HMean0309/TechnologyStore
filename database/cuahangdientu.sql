@@ -4,7 +4,6 @@ CREATE TABLE `SAN_PHAM` (
   `isDelete` bool DEFAULT 0,
   `id_cate` char(7) COMMENT 'Loại sản phẩm',
   `baohanh` int(4) COMMENT 'Bảo hàng theo tháng',
-  `des` nvarchar(200) COMMENT 'Mô tả',
   `img` varchar(200) COMMENT 'Link ảnh'
 );
 
@@ -25,6 +24,7 @@ CREATE TABLE `CT_SAN_PHAM` (
   `id_sp` char(12) NOT NULL,
   `color` nvarchar(30) NOT NULL COMMENT 'Màu',
   `price` int(10) NOT NULL COMMENT 'Giá bán của sp',
+  'ngaynhap' datetime NOT NULL COMMENT 'Ngày nhập hàng',
   `isDelete` bool DEFAULT 0
 );
 
@@ -33,12 +33,12 @@ CREATE TABLE `HOA_DON` (
   `ngaylap` datetime NOT NULL COMMENT 'Ngày Lập Hóa Đơn',
   `order_amount` int(8) COMMENT 'Tổng tiền theo chi tiết hóa đơn',
   `discount_amount` int(8) COMMENT 'Tổng chiết khấu + giảm giá',
-  `status` ENUM ('CH_THANHTOAN', 'CH_GIAO', 'CH_HUY', 'CH_BAOHANH') NOT NULL COMMENT 'Trạng thái của đơn',
-  `ghichu` nvarchar(100) COMMENT 'Ghi chú cho đơn',
+  `ghichu` nvarchar(200) COMMENT 'Ghi chú cho đơn',
   `km` char(14) COMMENT 'Khuyến Mãi',
   `pttt` char(6) NOT NULL COMMENT 'Phương thức thanh toán',
   `id_khachhang` char(14) NOT NULL COMMENT 'Địa chỉ giao hàng',
-  `id_nhanvien` char(10) NOT NULL COMMENT 'Nhân viên bán hàng'
+  `id_nhanvien` char(10) NOT NULL COMMENT 'Nhân viên bán hàng',
+  `isDelete` bool DEFAULT 0
 );
 
 CREATE TABLE `CT_HOA_DON` (
@@ -51,7 +51,6 @@ CREATE TABLE `CT_HOA_DON` (
 CREATE TABLE `PTTT` (
   `id` char(6) PRIMARY KEY NOT NULL,
   `name` nvarchar(50) UNIQUE NOT NULL,
-  `isDelete` bool DEFAULT 0
 );
 
 CREATE TABLE `KHUYEN_MAI` (
@@ -60,8 +59,7 @@ CREATE TABLE `KHUYEN_MAI` (
   `endDatetime` datetime NOT NULL COMMENT 'Ngày kết thúc',
   `donviKM` bool DEFAULT 0,
   `value` int(10) NOT NULL COMMENT 'Giá trị áp dụng theo đơn vị',
-  `isDelete` bool DEFAULT 0 ,
-  `des` nvarchar(500) COMMENT 'Mô tả khuyến mãi'
+  `isDelete` bool DEFAULT 0 
 );
 
 CREATE TABLE `CT_KM` (
@@ -82,8 +80,7 @@ CREATE TABLE `KHACH_HANG` (
 
 CREATE TABLE `TAI_KHOAN` (
   `username` varchar(30) PRIMARY KEY,
-  `password` varchar(20),
-  `type` bool DEFAULT 0,
+  `password` varchar(20) NOT NULL,
   `id_nhanvien` varchar(14) COMMENT 'Mã Thông Tin Tài Khoản',
   `id_quyen` char(6) COMMENT 'Mã Quyền',
   `isDelete` bool DEFAULT 0 
@@ -93,29 +90,30 @@ CREATE TABLE `NHAN_VIEN` (
   `id` char(10) PRIMARY KEY NOT NULL,
   `name` nvarchar(50) NOT NULL,
   `phone` varchar(12) NOT NULL COMMENT 'Số điện thoại',
+  `gender` bool NOT NULL COMMENT 'Giới tính',
+  `birth` date NOT NULL COMMENT 'Ngày sinh',
+  `email` varchar(50) NOT NULL COMMENT 'Email',
   `isDelete` bool DEFAULT 0 
 );
 
 CREATE TABLE `QUYEN` (
   `id` char(6) PRIMARY KEY NOT NULL,
-  `name` nvarchar(50),
-  `des` nvarchar(100) COMMENT 'Mô tả chức vụ',
+  `name` nvarchar(50) NOT NULL,
   `isDelete` bool DEFAULT 0
 );
 
 CREATE TABLE `CHUC_NANG` (
   `id` char(6) PRIMARY KEY NOT NULL,
-  `name` nvarchar(100) UNIQUE NOT NULL,
-  `isDelete` bool DEFAULT 0 
+  `name` nvarchar(50) UNIQUE NOT NULL,
 );
 
 CREATE TABLE `CT_QUYEN` (
   `id_quyen` char(6) COMMENT 'Mã Quyền',
   `id_chucnang` char(6) COMMENT 'Mã Chức năng',
   `show` bool DEFAULT 1,
-  `insert` bool DEFAULT 1,
+  `create` bool DEFAULT 1,
   `edit` bool DEFAULT 1,
-  `delete` bool DEFAULT 1,
+  `remove` bool DEFAULT 1,
   PRIMARY KEY (`id_quyen`, `id_chucnang`)
 );
 
@@ -123,15 +121,15 @@ CREATE TABLE `PHIEU_NHAP_KHO` (
   `id` char(8) PRIMARY KEY NOT NULL,
   `ngaynhap` datetime NOT NULL COMMENT 'Ngày nhập hàng',
   `total` int(8) NOT NULL COMMENT 'Tổng tiền nhập hàng',
-  `isDelete` bool DEFAULT 0,
   `id_nhanvien` char(10) COMMENT 'Nhân viên phụ trách',
-  `id_ncc` char(7) COMMENT 'Nhà cung cấp'
+  `id_ncc` char(7) COMMENT 'Nhà cung cấp',
+  `isDelete` bool DEFAULT 0
 );
 
 CREATE TABLE `CT_NHAP_KHO` (
   `id_pn` char(12) COMMENT 'Mã Phiếu Nhập Kho',
   `seri` char(14) COMMENT 'Số seri',
-  `cost` int(8) NOT NULL COMMENT 'Đơn giá / Giá gốc thu mua',
+  `cost` int(8) NOT NULL COMMENT 'Giá gốc thu mua',
   PRIMARY KEY (`id_pn`, `seri`)
 );
 
@@ -149,10 +147,10 @@ CREATE TABLE `NCC` (
 CREATE TABLE `PHIEU_BAO_HANH` (
   `id` char(8) PRIMARY KEY NOT NULL,
   `ngaylap` datetime NOT NULL COMMENT 'Ngày lập phiếu',
-  `isDelete` bool DEFAULT 0,
   `id_nhanvien` char(10) COMMENT 'Nhân viên phụ trách',
   `id_hoadon` char(16) COMMENT 'Mã Hóa Đơn',
-  `ngaytrahang` datetime NOT NULL COMMENT 'Ngày trả hàng dự kiến'
+  `ngaytrahang` datetime NOT NULL COMMENT 'Ngày trả hàng dự kiến',
+  `isDelete` bool DEFAULT 0
 );
 
 CREATE TABLE `CT_BAOHANH` (
