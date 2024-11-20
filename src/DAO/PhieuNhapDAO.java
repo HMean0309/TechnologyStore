@@ -41,4 +41,11 @@ public class PhieuNhapDAO extends ObjectDAO {
         super.executeNonQuery(query, params);
         super.closeDB();
     }
+    public ResultSet getLatestMaPhieuNhap(){
+        super.connectDB();
+        String query = "SELECT MAX(id) FROM phieu_nhap_kho";
+        ResultSet rs = super.executeQuery(query);
+        super.closeDB();
+        return rs;
+    }
 }

@@ -22,7 +22,7 @@ public class NhanVienDAO extends ObjectDAO {
         return rs;
     }
      
-     public ResultSet getNhanVien(String id){
+     public ResultSet getNhanVienbyID(String id){
         super.connectDB();
         String query = "SELECT * FROM NHAN_VIEN WHERE isDelete = 0 AND id = ?;";
         Object[] params = {id};

@@ -20,6 +20,10 @@ public class SanPhamDTO {
         this.des = des;
         this.img = img;
     }
+
+    public SanPhamDTO() {
+        
+    }
     
     public String getId() {
         return id;

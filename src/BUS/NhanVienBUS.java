@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.util.LinkedHashSet;
 
 import DAO.NhanVienDAO;
+import DTO.NhaCungCapDTO;
 import DTO.NhanVienDTO;
 
 public class NhanVienBUS {
@@ -67,6 +68,9 @@ public class NhanVienBUS {
             e.printStackTrace();
         }
         return count;
+    }
+    public LinkedHashSet<NhanVienDTO> getAllNhanVien() {
+        return setNV;
     }
     
     

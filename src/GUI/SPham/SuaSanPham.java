@@ -44,7 +44,7 @@ public class SuaSanPham extends javax.swing.JFrame {
         cbLoai = new javax.swing.JComboBox<>();
         lbBaoHanh = new javax.swing.JLabel();
         txtBaoHanh = new javax.swing.JTextField();
-        jSeparator1 = new javax.swing.JSeparator();
+        jLabel1 = new javax.swing.JLabel();
         PanelChooseColor = new javax.swing.JPanel();
         lbColor = new javax.swing.JLabel();
         txtColor = new javax.swing.JTextField();
@@ -211,13 +211,15 @@ public class SuaSanPham extends javax.swing.JFrame {
         txtBaoHanh.setBorder(new FlatLineBorder(new Insets(5, 5, 5, 5), new Color(0, 0, 0), 1, 15));
         txtBaoHanh.setSelectionColor(new java.awt.Color(0, 0, 0));
 
-        jSeparator1.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel1.setText("Tên sản phẩm không hợp lệ");
 
         javax.swing.GroupLayout PanelinforLayout = new javax.swing.GroupLayout(Panelinfor);
         Panelinfor.setLayout(PanelinforLayout);
         PanelinforLayout.setHorizontalGroup(
             PanelinforLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(PanelinforLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelinforLayout.createSequentialGroup()
                 .addGroup(PanelinforLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(PanelinforLayout.createSequentialGroup()
                         .addContainerGap(32, Short.MAX_VALUE)
@@ -229,13 +231,14 @@ public class SuaSanPham extends javax.swing.JFrame {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(lbBaoHanh)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(PanelinforLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtTenSP)
-                    .addComponent(txtMaSp)
-                    .addComponent(cbLoai, 0, 320, Short.MAX_VALUE)
-                    .addComponent(txtBaoHanh))
+                .addGroup(PanelinforLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addGroup(PanelinforLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(txtTenSP)
+                        .addComponent(txtMaSp)
+                        .addComponent(cbLoai, 0, 320, Short.MAX_VALUE)
+                        .addComponent(txtBaoHanh)))
                 .addGap(120, 120, 120))
-            .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING)
         );
         PanelinforLayout.setVerticalGroup(
             PanelinforLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -248,17 +251,17 @@ public class SuaSanPham extends javax.swing.JFrame {
                 .addGroup(PanelinforLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbTenSP)
                     .addComponent(txtTenSP, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(28, 28, 28)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel1)
+                .addGap(19, 19, 19)
                 .addGroup(PanelinforLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbLoai)
-                    .addComponent(cbLoai, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE))
-                .addGap(27, 27, 27)
-                .addGroup(PanelinforLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txtBaoHanh, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbBaoHanh))
-                .addGap(55, 55, 55)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                    .addComponent(cbLoai, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(25, 25, 25)
+                .addGroup(PanelinforLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbBaoHanh)
+                    .addComponent(txtBaoHanh, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(55, 55, 55))
         );
 
         PanelRight.add(Panelinfor, java.awt.BorderLayout.NORTH);
@@ -292,6 +295,7 @@ public class SuaSanPham extends javax.swing.JFrame {
         btnSua.setFocusable(false);
         btnSua.setPreferredSize(new java.awt.Dimension(100, 35));
         PanelButton.add(btnSua);
+        btnSua.setVisible(false);
 
         btnXoa.setBackground(new java.awt.Color(247, 108, 108));
         btnXoa.setForeground(new java.awt.Color(255, 255, 255));
@@ -299,6 +303,7 @@ public class SuaSanPham extends javax.swing.JFrame {
         btnXoa.setFocusable(false);
         btnXoa.setPreferredSize(new java.awt.Dimension(100, 35));
         PanelButton.add(btnXoa);
+        btnXoa.setVisible(false);
 
         javax.swing.GroupLayout PanelChooseColorLayout = new javax.swing.GroupLayout(PanelChooseColor);
         PanelChooseColor.setLayout(PanelChooseColorLayout);
@@ -414,8 +419,8 @@ public class SuaSanPham extends javax.swing.JFrame {
     private javax.swing.JButton btnUpdate;
     private javax.swing.JButton btnXoa;
     private javax.swing.JComboBox<String> cbLoai;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel lbBaoHanh;
     private javax.swing.JLabel lbColor;
     private javax.swing.JLabel lbImage;

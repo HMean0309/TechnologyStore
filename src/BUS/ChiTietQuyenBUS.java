@@ -70,4 +70,38 @@ public class ChiTietQuyenBUS {
         }
         return count;
     }
+    
+    
+    
+    public boolean checkPermisson(int maquyen, String chucnang, String hanhdong) throws SQLException {
+        // Lấy ResultSet từ DAO
+        ResultSet rs = daoCtQuyen.getChiTietQuyen(Integer.toString(maquyen));
+
+        // Chuyển ResultSet thành LinkedHashSet
+        LinkedHashSet<ChiTietQuyenDTO> ctQuyenSet = ChiTietQuyenBUS.toSet(rs);
+
+        // Duyệt qua LinkedHashSet để kiểm tra quyền
+        for (ChiTietQuyenDTO ctQuyen : ctQuyenSet) {
+            if (ctQuyen.getIdChucNang().equals(chucnang)) {
+                switch (hanhdong.toLowerCase()) {
+                    case "show":
+                        if (ctQuyen.isShow()) return true;
+                        break;
+                    case "insert":
+                        if (ctQuyen.isInsert()) return true;
+                        break;
+                    case "edit":
+                        if (ctQuyen.isEdit()) return true;
+                        break;
+                    case "delete":
+                        if (ctQuyen.isDelete()) return true;
+                        break;
+                    default:
+                        return false;
+                }
+            }
+        }
+        return false;
+    }
+
 }

@@ -37,7 +37,7 @@ public class ChiTietKhachHang extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(600, 300));
+        setPreferredSize(new java.awt.Dimension(600, 310));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setPreferredSize(new java.awt.Dimension(350, 300));
@@ -49,7 +49,7 @@ public class ChiTietKhachHang extends javax.swing.JFrame {
         jTextField1.setEditable(false);
         jTextField1.setBackground(new java.awt.Color(255, 255, 255));
         jTextField1.setForeground(new java.awt.Color(0, 0, 0));
-        jTextField1.setBorder(new FlatLineBorder(new Insets(7, 7, 7, 7), new Color(0, 0, 0), 1, 15));
+        jTextField1.setBorder(new FlatLineBorder(new Insets(7, 7, 7, 7), new Color(238, 238, 238), 1, 15));
         jTextField1.setFocusable(false);
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -59,7 +59,7 @@ public class ChiTietKhachHang extends javax.swing.JFrame {
         jTextField2.setEditable(false);
         jTextField2.setBackground(new java.awt.Color(255, 255, 255));
         jTextField2.setForeground(new java.awt.Color(0, 0, 0));
-        jTextField2.setBorder(new FlatLineBorder(new Insets(7, 7, 7, 7), new Color(0, 0, 0), 1, 15));
+        jTextField2.setBorder(new FlatLineBorder(new Insets(7, 7, 7, 7), new Color(238, 238, 238), 1, 15));
         jTextField2.setEnabled(false);
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -69,11 +69,11 @@ public class ChiTietKhachHang extends javax.swing.JFrame {
         jTextField3.setEditable(false);
         jTextField3.setBackground(new java.awt.Color(255, 255, 255));
         jTextField3.setForeground(new java.awt.Color(0, 0, 0));
-        jTextField3.setBorder(new FlatLineBorder(new Insets(7, 7, 7, 7), new Color(0, 0, 0), 1, 15));
+        jTextField3.setBorder(new FlatLineBorder(new Insets(7, 7, 7, 7), new Color(238, 238, 238), 1, 15));
         jTextField3.setFocusable(false);
 
         jSeparator1.setBackground(new java.awt.Color(0, 0, 0));
-        jSeparator1.setForeground(new java.awt.Color(146, 143, 143));
+        jSeparator1.setForeground(new java.awt.Color(238, 238, 238));
         jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -127,23 +127,24 @@ public class ChiTietKhachHang extends javax.swing.JFrame {
 
         jTextField4.setBackground(new java.awt.Color(255, 255, 255));
         jTextField4.setForeground(new java.awt.Color(0, 0, 0));
-        jTextField4.setBorder(new FlatLineBorder(new Insets(7, 7, 7, 7), new Color(0, 0, 0), 1, 15));
+        jTextField4.setBorder(new FlatLineBorder(new Insets(7, 7, 7, 7), new Color(238, 238, 238), 1, 15));
 
         jTextField5.setBackground(new java.awt.Color(255, 255, 255));
         jTextField5.setForeground(new java.awt.Color(0, 0, 0));
-        jTextField5.setBorder(new FlatLineBorder(new Insets(7, 7, 7, 7), new Color(0, 0, 0), 1, 15));
+        jTextField5.setBorder(new FlatLineBorder(new Insets(7, 7, 7, 7), new Color(238, 238, 238), 1, 15));
 
         jTextField6.setBackground(new java.awt.Color(255, 255, 255));
         jTextField6.setForeground(new java.awt.Color(0, 0, 0));
-        jTextField6.setBorder(new FlatLineBorder(new Insets(7, 7, 7, 7), new Color(0, 0, 0), 1, 15));
+        jTextField6.setBorder(new FlatLineBorder(new Insets(7, 7, 7, 7), new Color(238, 238, 238), 1, 15));
 
         jTextField7.setBackground(new java.awt.Color(255, 255, 255));
         jTextField7.setForeground(new java.awt.Color(0, 0, 0));
-        jTextField7.setBorder(new FlatLineBorder(new Insets(7, 7, 7, 7), new Color(0, 0, 0), 1, 15));
+        jTextField7.setBorder(new FlatLineBorder(new Insets(7, 7, 7, 7), new Color(238, 238, 238), 1, 15));
 
-        jButton1.setBackground(new java.awt.Color(255, 255, 255));
-        jButton1.setForeground(new java.awt.Color(0, 0, 0));
+        jButton1.setBackground(new java.awt.Color(0, 0, 0));
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("Thoát");
+        jButton1.setFocusable(false);
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -170,13 +171,8 @@ public class ChiTietKhachHang extends javax.swing.JFrame {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(22, 22, 22)
-                        .addComponent(jLabel4))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jButton1)))
+                .addGap(22, 22, 22)
+                .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -185,7 +181,9 @@ public class ChiTietKhachHang extends javax.swing.JFrame {
                 .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(99, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addContainerGap())
         );
 
         getContentPane().add(jPanel2, java.awt.BorderLayout.EAST);

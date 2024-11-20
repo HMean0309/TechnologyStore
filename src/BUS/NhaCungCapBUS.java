@@ -14,7 +14,10 @@ public class NhaCungCapBUS {
     public NhaCungCapBUS() {
         daoNCC = new NhaCungCapDAO();
         setNCC = new LinkedHashSet<>();
-
+        loadData();
+    }
+    
+    public void loadData() {
         setNCC = NhaCungCapBUS.toSet(daoNCC.getAllNhaCungCap());
     }
 
@@ -75,5 +78,7 @@ public class NhaCungCapBUS {
     public void setDaoNCC(NhaCungCapDAO daoNCC) {
         this.daoNCC = daoNCC;
     }
-
+    public LinkedHashSet<NhaCungCapDTO> getAllNhaCungCap() {
+        return setNCC;
+    }
 }
