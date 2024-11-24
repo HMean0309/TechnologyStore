@@ -1,13 +1,19 @@
 package BUS;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.LinkedHashSet;
-
 import DAO.KhachHangDAO;
 import DTO.KhachHangDTO;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.LinkedHashSet;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 public class KhachHangBUS {
+    public static String[] type = { "Tất cả", "Mã khách hàng", "Tên khách hàng", "Địa chỉ", "Số điện thoại" };
+    public static String[] duplicateMess = {
+            "Số điện thoại đã tồn tại. Vui lòng chọn số điện thoại khác!"
+    };
     private LinkedHashSet<KhachHangDTO> setKH;
     private KhachHangDAO daoKH;
 
@@ -34,6 +40,7 @@ public class KhachHangBUS {
         setKH = toSet(daoKH.getAllKhachHang());
         daoKH.closeDB();
     }
+
 
     public static LinkedHashSet<KhachHangDTO> toSet(ResultSet rs) {
         LinkedHashSet<KhachHangDTO> setKH = new LinkedHashSet<>();
@@ -75,7 +82,7 @@ public class KhachHangBUS {
         return count;
     }
 
-    public void updateKhachHang(KhachHangDTO kh) {
+    public boolean updateKhachHang(KhachHangDTO kh) {
         boolean updateSuccess = setKH.stream()
                 .filter(khachHang -> khachHang.getId().equals(kh.getId()))
                 .findFirst()
@@ -94,12 +101,88 @@ public class KhachHangBUS {
             daoKH.updateKhachHang(kh);
             daoKH.closeDB();
         }
+
+        return updateSuccess;
     }
 
-    public void addKhachHang(KhachHangDTO kh) {
-        if (setKH.add(kh)) {
-            daoKH.addKhachHang(kh);
+    public int addKhachHang(KhachHangDTO kh) {
+        if (containsPhone(kh.getPhone())) {
+            return 0;
+        }
+        setKH.add(kh);
+        daoKH.addKhachHang(kh);
+        daoKH.closeDB();
+        return -1;
+    }
+
+    public boolean removeKhachHang(KhachHangDTO kh) {
+        boolean removeSuccess = setKH.remove(kh);
+        if (removeSuccess) {
+            daoKH.removeKhachHang(kh.getId());
             daoKH.closeDB();
         }
+
+        return removeSuccess;
+    }
+
+    public boolean containsPhone(String phone) {
+        return setKH.stream()
+                .anyMatch(kh -> kh.getPhone().equals(phone));
+    }
+
+    public String createID() {
+        int index = getCountKhachHang() + 1;
+        return String.format("CUSTOMER%05d", index);
+    }
+
+    public LinkedHashSet<KhachHangDTO> searchName(String content) {
+        return setKH.stream()
+                .filter(khachHangDTO -> khachHangDTO.getName().toLowerCase().contains(content.toLowerCase()))
+                .collect(Collectors.toCollection(LinkedHashSet::new));
+    }
+
+    public LinkedHashSet<KhachHangDTO> searchID(String content) {
+        return setKH.stream()
+                .filter(khachHangDTO -> khachHangDTO.getId().contains(content))
+                .collect(Collectors.toCollection(LinkedHashSet::new));
+    }
+
+    public LinkedHashSet<KhachHangDTO> searchFullAddress(String content) {
+        return setKH.stream()
+                .filter(khachHangDTO -> khachHangDTO.getFullAddress().toLowerCase().contains(content.toLowerCase()))
+                .collect(Collectors.toCollection(LinkedHashSet::new));
+    }
+
+    public LinkedHashSet<KhachHangDTO> searchPhone(String content) {
+        return setKH.stream()
+                .filter(khachHangDTO -> khachHangDTO.getPhone().startsWith(content))
+                .collect(Collectors.toCollection(LinkedHashSet::new));
+    }
+
+    public LinkedHashSet<KhachHangDTO> search(String content, String typeSearch) {
+        if (typeSearch.equals(type[0])) {
+            LinkedHashSet<KhachHangDTO> setName = searchName(content);
+            LinkedHashSet<KhachHangDTO> setID = searchID(content);
+            LinkedHashSet<KhachHangDTO> setPhone = searchPhone(content);
+            LinkedHashSet<KhachHangDTO> setFullAddress = searchFullAddress(content);
+            LinkedHashSet<KhachHangDTO> setAll = Stream.of(setID, setName, setPhone, setFullAddress)
+                    .flatMap(LinkedHashSet::stream)
+                    .collect(Collectors.toCollection(LinkedHashSet::new));
+            return setAll;
+        }
+
+        if (typeSearch.equals(type[1])) {
+            return searchID(content);
+        }
+        if (typeSearch.equals(type[2])) {
+            return searchName(content);
+        }
+        if (typeSearch.equals(type[3])) {
+            return searchFullAddress(content);
+        }
+        if (typeSearch.equals(type[4])) {
+            return searchPhone(content);
+        }
+        return getSetKH();
     }
 }

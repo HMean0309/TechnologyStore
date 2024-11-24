@@ -13,12 +13,16 @@ public class QuyenDAO extends ObjectDAO {
     public QuyenDAO(){
         super();
     }
-    
+
+    public static QuyenDAO getInstance(){
+        return new QuyenDAO();
+    }
+
     public ResultSet getAllQuyen(){
         super.connectDB();
         String query = "SELECT * FROM QUYEN WHERE isDelete = 0;";
         ResultSet rs = super.executeQuery(query);
-        super.closeDB();
+        
         return rs;
     }
 
@@ -27,30 +31,28 @@ public class QuyenDAO extends ObjectDAO {
         String query = "SELECT * FROM QUYEN WHERE isDelete = 0 AND id = ?;";
         Object[] params = {id};
         ResultSet rs = super.executeQuery(query, params);
-        super.closeDB();
+        
         return rs;
     }
 
-    public ResultSet getCountQuyen(String id){
+    public ResultSet getCountQuyen(){
         super.connectDB();
-        String query = "SELECT COUNT(*) FROM QUYEN WHERE isDelete = 0;";
+        String query = "SELECT COUNT(*) FROM QUYEN";
         ResultSet rs = super.executeQuery(query);
-        super.closeDB();
+        
         return rs;
     }
 
     // Thay doi quyen dua tren id
     public void updateQuyenById(QuyenDTO quyen){
         super.connectDB();
-        String query = "UPDATE QUYEN SET name = ?, des = ? WHERE id = ?;";
+        String query = "UPDATE QUYEN SET name = ? WHERE id = ?;";
         Object[] params = {
             quyen.getId(),
-            quyen.getName(),
-            quyen.getDes()
-            
+            quyen.getName()
         };
         super.executeNonQuery(query, params);
-        super.closeDB();
+        
     }
 
     // Xoa quyen bang id
@@ -59,15 +61,15 @@ public class QuyenDAO extends ObjectDAO {
         String query = "UPDATE QUYEN SET isDelete = 1 WHERE id = ?;";
         Object[] params = {id};
         super.executeNonQuery(query, params);
-        super.closeDB();
+        
     }
 
     // Them du lieu vao quyen
     public void addQuyenWithData(QuyenDTO quyen){
         super.connectDB();
-        String query = "INSERT INTO QUYEN (id, name, des) VALUES (?, ?, ?);";
-        Object[] params = {quyen.getId(), quyen.getName(), quyen.getDes()};
+        String query = "INSERT INTO QUYEN (id, name) VALUES (?, ?);";
+        Object[] params = {quyen.getId(), quyen.getName() };
         super.executeNonQuery(query, params);
-        super.closeDB();
+        
     }
 }

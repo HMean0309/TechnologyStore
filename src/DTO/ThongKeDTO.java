@@ -2,10 +2,10 @@ package DTO;
 
 public class ThongKeDTO {
     private String key;
-    private int value;
-    private int count;
+    private Integer value;
+    private Integer count;
 
-    public ThongKeDTO(String key, int value, int count) {
+    public ThongKeDTO(String key, Integer value, Integer count) {
         this.key = key;
         this.value = value;
         this.count = count;
@@ -19,19 +19,19 @@ public class ThongKeDTO {
         this.key = key;
     }
 
-    public int getValue() {
+    public Integer getValue() {
         return value;
     }
 
-    public void setValue(int value) {
+    public void setValue(Integer value) {
         this.value = value;
     }
 
-    public int getCount() {
+    public Integer getCount() {
         return count;
     }
 
-    public void setCount(int count) {
+    public void setCount(Integer count) {
         this.count = count;
     }
      @Override

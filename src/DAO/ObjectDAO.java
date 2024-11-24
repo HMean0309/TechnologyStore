@@ -1,21 +1,20 @@
 package DAO;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
 import config.MySQLConnection;
+
+import java.sql.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class ObjectDAO {
     protected Connection conn;
     protected Statement stmt;
     protected PreparedStatement pstmt;
     protected ResultSet rs;
-    public ObjectDAO(){}
-    
+
+    public ObjectDAO() {
+    }
+
     public ResultSet executeQuery(String query) {
         try {
             stmt = conn.createStatement();
@@ -26,23 +25,26 @@ public class ObjectDAO {
         return rs;
     }
 
-    public void executeNonQuery(String query) {
+    public int executeNonQuery(String query) {
+        int result = -1;
         try {
             stmt = conn.createStatement();
-            stmt.executeUpdate(query);
+            result = stmt.executeUpdate(query);
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return result;
     }
 
     /**
      * Hàm dùng để tự động gán dữ liệu vào câu truy vấn dựa theo kiểu dữ liệu của phần tử chứa trong params.
      * Không có kiểu trả về (phù hợp cho Update/Insert SQL)
-     * @param query Câu truy vấn chứa các ? có thứ tự
-     * @param params Mảng dữ liệu có thứ tự để thêm vào câu truy vấn hoàn chỉnh
      *
+     * @param query  Câu truy vấn chứa các ? có thứ tự
+     * @param params Mảng dữ liệu có thứ tự để thêm vào câu truy vấn hoàn chỉnh
      */
-    public void executeNonQuery(String query, Object[] params) {
+    public int executeNonQuery(String query, Object[] params) {
+        int result = -1;
         try {
             pstmt = conn.prepareStatement(query);
             int i = 1; /*Thứ tự vị trí của dấu ? được thêm dữ liệu vào*/
@@ -55,6 +57,11 @@ public class ObjectDAO {
                         pstmt.setInt(i, (int) obj);
                         break;
                     }
+                    case "Boolean": {
+                        /*Thêm vào câu query sao cho sql hiểu là dữ liệu kiểu boolean*/
+                        pstmt.setBoolean(i, (boolean) obj);
+                        break;
+                    }
                     case "String": {
                         /*Thêm vào câu query sao cho sql hiểu là dữ liệu kiểu nvarchar/varchar (phần này thì code tự động biết để thêm N'' cho câu lệnh sql)*/
                         pstmt.setString(i, (String) obj);
@@ -65,21 +72,27 @@ public class ObjectDAO {
                         pstmt.setTimestamp(i, Timestamp.valueOf((LocalDateTime) obj));
                         break;
                     }
+                    case "LocalDate": {
+                        /*Thêm vào câu query sao cho sql hiểu là dữ liệu kiểu Date*/
+                        pstmt.setDate(i, Date.valueOf((LocalDate) obj));
+                        break;
+                    }
                 }
                 i++; /*Tiếp tục xét đến vị trí (dấu ?) tiếp theo cần thêm giá trị*/
             }
-            pstmt.executeUpdate();
+            result = pstmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return result;
     }
 
     /**
      * Hàm dùng để tự động gán dữ liệu vào câu truy vấn dựa theo kiểu dữ liệu của phần tử chứa trong params.
      * Có kiểu trả về (phù hợp cho Select SQL)
-     * @param query Câu truy vấn chứa các ? có thứ tự
-     * @param params Mảng dữ liệu có thứ tự để thêm vào câu truy vấn hoàn chỉnh
      *
+     * @param query  Câu truy vấn chứa các ? có thứ tự
+     * @param params Mảng dữ liệu có thứ tự để thêm vào câu truy vấn hoàn chỉnh
      */
     public ResultSet executeQuery(String query, Object[] params) {
         try {
@@ -91,12 +104,20 @@ public class ObjectDAO {
                         pstmt.setInt(i, (int) obj);
                         break;
                     }
+                    case "Boolean": {
+                        pstmt.setBoolean(i, (boolean) obj);
+                        break;
+                    }
                     case "String": {
                         pstmt.setString(i, (String) obj);
                         break;
                     }
                     case "LocalDateTime": {
                         pstmt.setTimestamp(i, Timestamp.valueOf((LocalDateTime) obj));
+                        break;
+                    }
+                    case "LocalDate": {
+                        pstmt.setDate(i, Date.valueOf((LocalDate) obj));
                         break;
                     }
                 }
@@ -108,8 +129,8 @@ public class ObjectDAO {
         }
         return null;
     }
-    
-       public void connectDB() {
+
+    public void connectDB() {
         conn = MySQLConnection.getConnection();
     }
 

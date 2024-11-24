@@ -7,104 +7,84 @@ public class HoaDonDTO {
     private LocalDateTime ngayLap;
     private Integer orderAmount;
     private Integer discountAmount;
-    private String status;
     private String ghiChu;
     private String km;
     private String pttt;
     private String khachHang;
     private String nhanVien;
-
-    public HoaDonDTO(String id, LocalDateTime ngayLap, Integer orderAmount, Integer discountAmount, String status, String ghiChu, String km, String pttt, String khachHang, String nhanVien) {
-        this.id = id;
-        this.ngayLap = ngayLap;
-        this.orderAmount = orderAmount;
-        this.discountAmount = discountAmount;
-        this.status = status;
-        this.ghiChu = ghiChu;
-        this.km = km;
-        this.pttt = pttt;
-        this.khachHang = khachHang;
-        this.nhanVien = nhanVien;
-    }
-
+    private Boolean isDelete;
     public String getId() {
         return id;
     }
-
     public void setId(String id) {
         this.id = id;
     }
-
     public LocalDateTime getNgayLap() {
         return ngayLap;
     }
-
     public void setNgayLap(LocalDateTime ngayLap) {
         this.ngayLap = ngayLap;
     }
-
-    public int getOrderAmount() {
-        return orderAmount.intValue();
+    public Integer getOrderAmount() {
+        return orderAmount;
     }
-
-    public void setOrderAmount(int orderAmount) {
+    public void setOrderAmount(Integer orderAmount) {
         this.orderAmount = orderAmount;
     }
-
-    public int getDiscountAmount() {
-        return discountAmount.intValue();
+    public Integer getDiscountAmount() {
+        return discountAmount;
     }
-
-    public void setDiscountAmount(int discountAmount) {
+    public void setDiscountAmount(Integer discountAmount) {
         this.discountAmount = discountAmount;
     }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public String getGhichu() {
+    public String getGhiChu() {
         return ghiChu;
     }
-
-    public void setGhichu(String ghiChu) {
+    public void setGhiChu(String ghiChu) {
         this.ghiChu = ghiChu;
     }
-
-    public String getKhuyenMai() {
+    public String getKm() {
         return km;
     }
-
-    public void setKhuyenMai(String km) {
+    public void setKm(String km) {
         this.km = km;
     }
-
-    public String getPhuongThucTT() {
+    public String getPttt() {
         return pttt;
     }
-
-    public void setPhuongThucTT(String pttt) {
+    public void setPttt(String pttt) {
         this.pttt = pttt;
     }
-
     public String getKhachHang() {
         return khachHang;
     }
-
     public void setKhachHang(String khachHang) {
         this.khachHang = khachHang;
     }
-
     public String getNhanVien() {
         return nhanVien;
     }
-
     public void setNhanVien(String nhanVien) {
         this.nhanVien = nhanVien;
     }
-    
+    public Boolean getIsDelete() {
+        return isDelete;
+    }
+    public void setIsDelete(Boolean isDelete) {
+        this.isDelete = isDelete;
+    }
+    public HoaDonDTO(String id, LocalDateTime ngayLap, Integer orderAmount, Integer discountAmount, String ghiChu,
+            String km, String pttt, String khachHang, String nhanVien, Boolean isDelete) {
+        this.id = id;
+        this.ngayLap = ngayLap;
+        this.orderAmount = orderAmount;
+        this.discountAmount = discountAmount;
+        this.ghiChu = ghiChu;
+        this.km = km;
+        this.pttt = pttt;
+        this.khachHang = khachHang;
+        this.nhanVien = nhanVien;
+        this.isDelete = isDelete;
+    }
+
 }

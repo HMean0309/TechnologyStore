@@ -1,8 +1,8 @@
 package DAO;
 
-import java.sql.ResultSet;
-
 import DTO.KhachHangDTO;
+
+import java.sql.ResultSet;
 
 public class KhachHangDAO extends ObjectDAO {
     public KhachHangDAO() {
@@ -18,7 +18,7 @@ public class KhachHangDAO extends ObjectDAO {
 
     public ResultSet getCountKhachHang() {
         super.connectDB();
-        String query = "SELECT COUNT(*) FROM KHACH_HANG WHERE isDelete = 0";
+        String query = "SELECT COUNT(*) FROM KHACH_HANG";
         ResultSet rs = super.executeQuery(query);
         return rs;
     }
@@ -37,6 +37,13 @@ public class KhachHangDAO extends ObjectDAO {
                 + "VALUES(?,?,?,?,?,?,?)";
         Object[] params = { kh.getId(), kh.getName(), kh.getPhone(), kh.getAddress(),
                 kh.getDistrict(), kh.getWard(), kh.getCity() };
+        super.executeNonQuery(query, params);
+    }
+
+    public void removeKhachHang(String id) {
+        super.connectDB();
+        String query = "UPDATE KHACH_HANG SET isDelete = 1 WHERE id = ?";
+        Object[] params = { id };
         super.executeNonQuery(query, params);
     }
 

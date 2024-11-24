@@ -1,20 +1,22 @@
 package DTO;
 
+import java.util.Objects;
+
 public class ChiTietQuyenDTO {
     private String idQuyen;
     private String idChucNang;
-    private boolean show;
-    private boolean insert;
-    private boolean edit;
-    private boolean delete;
+    private String permission;
 
-    public ChiTietQuyenDTO(String idQuyen, String idChucNang, boolean show, boolean insert, boolean edit, boolean delete) {
-        this.idQuyen = idQuyen;
-        this.idChucNang = idChucNang;
-        this.show = show;
-        this.insert = insert;
-        this.edit = edit;
-        this.delete = delete;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof ChiTietQuyenDTO that)) return false;
+        return getIdQuyen().equals(that.getIdQuyen()) && getIdChucNang().equals(that.getIdChucNang()) && getPermission().equals(that.getPermission());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getIdQuyen(), getIdChucNang(), getPermission());
     }
 
     public String getIdQuyen() {
@@ -33,35 +35,17 @@ public class ChiTietQuyenDTO {
         this.idChucNang = idChucNang;
     }
 
-    public boolean isShow() {
-        return show;
+    public String getPermission() {
+        return permission;
     }
 
-    public void setShow(boolean show) {
-        this.show = show;
+    public void setPermission(String permission) {
+        this.permission = permission;
     }
 
-    public boolean isInsert() {
-        return insert;
-    }
-
-    public void setInsert(boolean insert) {
-        this.insert = insert;
-    }
-
-    public boolean isEdit() {
-        return edit;
-    }
-
-    public void setEdit(boolean edit) {
-        this.edit = edit;
-    }
-
-    public boolean isDelete() {
-        return delete;
-    }
-
-    public void setDelete(boolean delete) {
-        this.delete = delete;
+    public ChiTietQuyenDTO(String idQuyen, String idChucNang, String permission) {
+        this.idQuyen = idQuyen;
+        this.idChucNang = idChucNang;
+        this.permission = permission;
     }
 }

@@ -34,7 +34,7 @@ public class ThongKeDAO extends ObjectDAO {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        super.closeDB();
+        
         return results;
     }
 
@@ -62,7 +62,7 @@ public class ThongKeDAO extends ObjectDAO {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        super.closeDB();
+        
         return results;
     }
 
@@ -89,7 +89,7 @@ public class ThongKeDAO extends ObjectDAO {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        super.closeDB();
+        
         return results;
     }
 
@@ -119,7 +119,7 @@ public class ThongKeDAO extends ObjectDAO {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        super.closeDB();
+        
         return results;
     }
 }

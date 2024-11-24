@@ -1,15 +1,15 @@
 package DTO;
 
+import java.util.Objects;
+
 public class QuyenDTO {
     private String id;
     private String name;
-    private String des;
-    private boolean isDelete;
+    private Boolean isDelete;
 
-    public QuyenDTO(String id, String name, String des, boolean isDelete) {
+    public QuyenDTO(String id, String name, Boolean isDelete) {
         this.id = id;
         this.name = name;
-        this.des = des;
         this.isDelete = isDelete;
     }
 
@@ -29,19 +29,23 @@ public class QuyenDTO {
         this.name = name;
     }
 
-    public String getDes() {
-        return des;
-    }
-
-    public void setDes(String des) {
-        this.des = des;
-    }
-
-    public boolean isDelete() {
+    public Boolean isDelete() {
         return isDelete;
     }
 
-    public void setDelete(boolean isDelete) {
+    public void setDelete(Boolean isDelete) {
         this.isDelete = isDelete;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof QuyenDTO quyenDTO)) return false;
+        return getId().equals(quyenDTO.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId());
     }
 }

@@ -1,23 +1,16 @@
 package DTO;
 
+import java.util.Objects;
+
 public class NhaCungCapDTO {
     private String id;
     private String name;
-    private String phone; 
+    private String phone;
     private String address;
     private String ward;
     private String district;
     private String city;
-
-    public NhaCungCapDTO(String id, String name, String phone, String address, String ward, String district, String city) {
-        this.id = id;
-        this.name = name;
-        this.phone = phone;
-        this.address = address;
-        this.ward = ward;
-        this.district = district;
-        this.city = city;
-    }
+    private Boolean isDelete;
 
     public String getId() {
         return id;
@@ -73,5 +66,41 @@ public class NhaCungCapDTO {
 
     public void setCity(String city) {
         this.city = city;
+    }
+
+    public Boolean getIsDelete() {
+        return isDelete;
+    }
+
+    public void setIsDelete(Boolean isDelete) {
+        this.isDelete = isDelete;
+    }
+
+    public String getFullAddress() {
+        return String.join(", ", address, ward, district, city);
+    }
+
+    public NhaCungCapDTO(String id, String name, String phone, String address, String ward, String district,
+                         String city, Boolean isDelete) {
+        this.id = id;
+        this.name = name;
+        this.phone = phone;
+        this.address = address;
+        this.ward = ward;
+        this.district = district;
+        this.city = city;
+        this.isDelete = isDelete;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof NhaCungCapDTO that)) return false;
+        return getId().equals(that.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId());
     }
 }
