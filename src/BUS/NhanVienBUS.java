@@ -140,7 +140,13 @@ public class NhanVienBUS {
         return removeSuccess;
     }
 
-    public boolean updateNhanVien(NhanVienDTO nhanVienDTO) {
+    public int updateNhanVien(NhanVienDTO nhanVienDTO, boolean checkDupliPhone, boolean checkDupliEmail) {
+        if (checkDupliPhone && containsPhone(nhanVienDTO.getPhone())) {
+            return 0;
+        }
+        if (checkDupliEmail && containsEmail(nhanVienDTO.getEmail())) {
+            return 1;
+        }
         boolean updateSuccess = setNV.stream()
                 .filter(nv -> nv.getId().equals(nhanVienDTO.getId()))
                 .findFirst()
@@ -158,7 +164,7 @@ public class NhanVienBUS {
             daoNV.closeDB();
         }
 
-        return updateSuccess;
+        return -1;
     }
 
     public LinkedHashSet<NhanVienDTO> searchName(String content) {

@@ -1,117 +1,84 @@
 package BUS;
-import DTO.OptionSanPhamDTO;
+
 import DAO.OptionSanPhamDAO;
+import DTO.OptionSanPhamDTO;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedHashSet;
-import java.util.List;
+import java.util.stream.Collectors;
 
 public class OptionSanPhamBUS {
+    public static String[] duplicateMess = {
+            "Màu đã tồn tại!"
+    };
     private LinkedHashSet<OptionSanPhamDTO> setOSP;
     private OptionSanPhamDAO daoOSP;
-    private List<String> listColorSP;
-    
-    public OptionSanPhamBUS(){
+
+    public OptionSanPhamBUS() {
         setOSP = new LinkedHashSet<>();
         daoOSP = new OptionSanPhamDAO();
-        
-        setOSP= OptionSanPhamBUS.toSet(daoOSP.getAllOSP());
+
+        setOSP = OptionSanPhamBUS.toSet(daoOSP.getAllOSP());
+        daoOSP.connectDB();
     }
-    
-    public static LinkedHashSet<OptionSanPhamDTO> toSet(ResultSet rs)
-    {
-        LinkedHashSet<OptionSanPhamDTO> setPL = new LinkedHashSet<>();
-        try{
-            while(rs.next())
-            {
+
+    public static LinkedHashSet<OptionSanPhamDTO> toSet(ResultSet rs) {
+        LinkedHashSet<OptionSanPhamDTO> setOSP = new LinkedHashSet<>();
+        try {
+            while (rs.next()) {
                 OptionSanPhamDTO that = new OptionSanPhamDTO(
                         rs.getString("id_sp"),
                         rs.getString("color"),
                         false);
-                setPL.add(that);
-            }
-        }catch(SQLException e)
-        {
-            e.printStackTrace();
-        }
-        return setPL;
-    }
-    
-    public OptionSanPhamBUS(LinkedHashSet<OptionSanPhamDTO> setCTKM, OptionSanPhamDAO daoCTKM){
-        this.setOSP = setCTKM;
-        this.daoOSP = daoCTKM;
-   }
-    
-   public LinkedHashSet<OptionSanPhamDTO> getSetCTKM(){
-       return setOSP;
-   } 
-   
-    public LinkedHashSet<OptionSanPhamDTO> getOSPById(String id)
-    {
-        ResultSet rs = daoOSP.getOSPById(id);
-        try{
-            while(rs.next())
-            {
-                OptionSanPhamDTO that = new OptionSanPhamDTO(
-                        rs.getString("id_km"),
-                        rs.getString("color"),
-                        false);
                 setOSP.add(that);
             }
-        }catch(SQLException e)
-        {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return setOSP;
     }
-      
-   public void setSetOSP (LinkedHashSet<OptionSanPhamDTO> setCTKM) {
-       this.setOSP = setCTKM;
-   }
-   
-   public OptionSanPhamDAO getDaoOSP()
-   {
-       return daoOSP;
-   }
-   
-   public void setDaoOSP(OptionSanPhamDAO daoCTKM){
-       this.daoOSP = daoCTKM;
-   }
-   
-    public int getAllCountOSP(){
-        ResultSet rs = daoOSP.getCountAllOSP();
-        int count = -1;
-        try {
-            rs.next();
-            count = rs.getInt(1);
-        } catch (SQLException e) {
-            e.printStackTrace();
+
+    public OptionSanPhamBUS(LinkedHashSet<OptionSanPhamDTO> setOSP, OptionSanPhamDAO daoOSP) {
+        this.setOSP = setOSP;
+        this.daoOSP = daoOSP;
+    }
+
+    public LinkedHashSet<OptionSanPhamDTO> getSetOSP() {
+        return setOSP;
+    }
+
+    public void setSetOSP(LinkedHashSet<OptionSanPhamDTO> setOSP) {
+        this.setOSP = setOSP;
+    }
+
+    public OptionSanPhamDAO getDaoOSP() {
+        return daoOSP;
+    }
+
+    public void setDaoOSP(OptionSanPhamDAO daoOSP) {
+        this.daoOSP = daoOSP;
+    }
+
+    public int addOSP(OptionSanPhamDTO option) {
+        if (setOSP.add(option)) {
+            daoOSP.addOSPWithData(option);
+            daoOSP.closeDB();
+            return -1;
         }
-        return count;
+        return 0;
     }
-    
-    public List<String> getColorOSPById(String id)
-    {
-        ResultSet rs = daoOSP.getColorOSPById(id);
-          try {
-            rs.next();
-            listColorSP.add(rs.getString("color"));
-        } catch (SQLException e) {
-            e.printStackTrace();
+
+    public void removeOSP(OptionSanPhamDTO option) {
+        if (setOSP.remove(option)) {
+            daoOSP.removeOSP(option);
+            daoOSP.closeDB();
         }
-        return listColorSP;
     }
-    
-    public void addOSPWithData(OptionSanPhamDTO CTKM){
-        daoOSP.addOSPWithData(CTKM);
-    }
-    
-    public void updateOSPByIdK(OptionSanPhamDTO CTKM){
-        daoOSP.updateOSPById(CTKM);
-    }
-    
-    public void removeOSPById(OptionSanPhamDTO CTKM){
-        daoOSP.removeOSPById(CTKM);
+
+    public LinkedHashSet<OptionSanPhamDTO> getAllOSPByIDSP(String idSP) {
+        return setOSP.stream()
+                .filter(optionSanPhamDTO -> optionSanPhamDTO.getIdSP().equals(idSP))
+                .collect(Collectors.toCollection(LinkedHashSet::new));
     }
 }

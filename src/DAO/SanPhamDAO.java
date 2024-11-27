@@ -1,87 +1,57 @@
 package DAO;
 
-import java.sql.Statement;
-
 import DTO.SanPhamDTO;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 
 public class SanPhamDAO extends ObjectDAO {
-    public SanPhamDAO(){
+    public SanPhamDAO() {
         super();
     }
 
-    public ResultSet getAllSanPham(){
+    public ResultSet getAllSanPham() {
         super.connectDB();
-        String query = "SELECT * FROM PRODUCT WHERE isDelete = 0 ;";
-        
+        String query = "SELECT * FROM sanpham_count;";
+
         return super.executeQuery(query);
     }
 
-    public ResultSet getSanPhamOfPhanLoai(String idCate){
+    public ResultSet getCountSanPham() {
         super.connectDB();
-        String query = "SELECT * FROM PRODUCT WHERE isDelete = 0 AND id_cate = ? ;";
-        Object[] params = {idCate};
-        
-        return super.executeQuery(query, params);
-    }
+        String query = "SELECT COUNT(*) FROM SAN_PHAM;";
+        ResultSet rs = super.executeQuery(query);
 
-    public ResultSet getCountSPOfPhanLoai(String idCate){
-        super.connectDB();
-        String query = "SELECT COUNT(*) FROM PRODUCT WHERE isDelete = 0 AND id_cate = ? ;";
-        Object[] params = {idCate};
-        ResultSet rs = super.executeQuery(query, params);
-        
         return rs;
     }
 
-    public ResultSet getSanPhamById(String id)
-    {
-        super.connectDB();
-        String query = "SELECT * FROM PRODUCT WHERE isDelete = 0 AND id = ? ;";
-        Object[] params = {id};
-        
-        return super.executeQuery(query, params);
-    }
-    
-    public ResultSet getSPByIdCate(String idCate)
-    {
-        super.connectDB();
-        String query = "SELECT * FROM PHAN_LOAI WHERE isDelete = 0 AND id_cate = ? ;";
-        Object[] params = {idCate};
-        
-        return super.executeQuery(query, params);
-    }
+
     // Thay doi san pham dua tren id
-    public void updateSPById(SanPhamDTO product){
+    public void updateSP(SanPhamDTO product) {
         super.connectDB();
-        String query = "UPDATE PRODUCT SET name = ?, id_cate = ?, baohanh = ?, des = ?, img = ? WHERE id = ? ;";
-        Object[] params = {product.getName(), product.getIdCate(), product.getBaoHanh(), product.getDes(), product.getImg(), product.getId() };
-        
+        String query = "UPDATE SAN_PHAM SET name = ?, id_cate = ?, baohanh = ?, img = ? WHERE id = ? ;";
+        Object[] params = { product.getName(), product.getIdCate(), product.getBaoHanh(), product.getImg(), product.getId() };
+
         super.executeNonQuery(query, params);
-        
+
     }
 
     // Xoa san pham bang id
-    public void removeSPById(String id){
+    public void removeSPById(String id) {
         super.connectDB();
-        String query = "UPDATE PRODUCT SET isDelete = 1 WHERE id = ? ;";
-        Object[] params = {id};
-        
+        String query = "UPDATE SAN_PHAM SET isDelete = 1 WHERE id = ? ;";
+        Object[] params = { id };
+
         super.executeNonQuery(query, params);
-        
+
     }
 
     // Them du lieu vao san pham
-    public void addSPWithData(SanPhamDTO product){
+    public void addSPWithData(SanPhamDTO product) {
         super.connectDB();
-        String query = "INSERT INTO PRODUCT (id,name,id_cate,baohanh,des,img)"+"VALUES(?,?,?,?,?,?) ;";
-        Object[] params = {product.getId(),product.getName(),product.getIdCate(),product.getBaoHanh(),product.getDes(),product.getImg()};
-        
-        super.executeNonQuery(query,params);
-        
+        String query = "INSERT INTO SAN_PHAM (id,name,id_cate,baohanh,img)" + "VALUES(?,?,?,?,?) ;";
+        Object[] params = { product.getId(), product.getName(), product.getIdCate(), product.getBaoHanh(), product.getImg() };
+
+        super.executeNonQuery(query, params);
+
     }
 }

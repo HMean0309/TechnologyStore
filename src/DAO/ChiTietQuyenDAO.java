@@ -25,22 +25,10 @@ public class ChiTietQuyenDAO extends ObjectDAO {
         return rs;
     }
 
-    // Thay doi Chi Tiet Quyen dua tren id
-    public void updateChiTietQuyenById(ChiTietQuyenDTO ctQuyen) {
-        super.connectDB();
-        String query = "UPDATE CT_QUYEN SET permission = ? WHERE id_quyen = ? AND id_chuc_nang = ?;";
-        Object[] params = {
-                ctQuyen.getPermission(),
-                ctQuyen.getIdQuyen(),
-                ctQuyen.getIdChucNang()
-        };
-        super.executeNonQuery(query, params);
-    }
-
     // Them du lieu vao chi tiet quyen
     public void addChiTietQuyenWithData(ChiTietQuyenDTO ctQuyen) {
         super.connectDB();
-        String query = "INSERT INTO CT_QUYEN (id_quyen, id_chuc_nang, permission) VALUES (?, ?, ?);";
+        String query = "INSERT INTO CT_QUYEN (id_quyen, id_chucnang, permission) VALUES (?, ?, ?);";
         Object[] params = {
                 ctQuyen.getIdQuyen(),
                 ctQuyen.getIdChucNang(),
@@ -51,7 +39,7 @@ public class ChiTietQuyenDAO extends ObjectDAO {
 
     public void removeChiTietQuyen(String idQuyen) {
         super.connectDB();
-        String query = "DELETE FROM CT_QUYEN WHERE id_quyen = ? ;";
+        String query = "DELETE FROM CT_QUYEN WHERE id_quyen = ?;";
         Object[] params = { idQuyen };
         super.executeNonQuery(query, params);
     }

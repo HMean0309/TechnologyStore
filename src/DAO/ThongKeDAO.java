@@ -54,7 +54,7 @@ public class ThongKeDAO extends ObjectDAO {
         try (ResultSet rs = executeQuery(query, new Object[]{nam})) {
             while (rs.next()) {
                 results.add(new ThongKeDTO(
-                    "Tháng " + rs.getInt("thang") + "/" + rs.getInt("nam"),
+                    "Tháng " + rs.getInt("thang"),
                     rs.getInt("doanhThu"),
                     rs.getInt("chiPhi")
                 ));
@@ -67,21 +67,24 @@ public class ThongKeDAO extends ObjectDAO {
     }
 
     // Thống kê theo năm
-    public LinkedHashSet<ThongKeDTO> thongKeTheoNam() {
+    public LinkedHashSet<ThongKeDTO> thongKeTheoNam(int year_start, int year_end) {
         super.connectDB();
-        String query = "SELECT YEAR(hd.ngaylap) AS nam, SUM(hd.order_amount - hd.discount_amount) AS doanhThu, " +
+        String query = "SELECT YEAR(hd.ngaylap) AS nam, " +
+                       "SUM(hd.order_amount - hd.discount_amount) AS doanhThu, " +
                        "SUM(ctnk.cost) AS chiPhi " +
                        "FROM HOA_DON hd " +
                        "JOIN CT_HOA_DON cthd ON hd.id = cthd.id_hoadon " +
                        "JOIN CT_SAN_PHAM ctsp ON cthd.seri = ctsp.seri " +
                        "JOIN CT_NHAP_KHO ctnk ON ctsp.seri = ctnk.seri " +
-                       "GROUP BY YEAR(hd.ngaylap)";
+                       "WHERE YEAR(hd.ngaylap) BETWEEN ? AND ? " +
+                       "GROUP BY YEAR(hd.ngaylap) " +
+                       "ORDER BY YEAR(hd.ngaylap) ASC";
         LinkedHashSet<ThongKeDTO> results = new LinkedHashSet<>();
         
-        try (ResultSet rs = executeQuery(query)) {
+        try (ResultSet rs = executeQuery(query, new Object[]{year_start, year_end})) {
             while (rs.next()) {
                 results.add(new ThongKeDTO(
-                    "Năm " + rs.getInt("nam"),
+                    String.valueOf(rs.getInt("nam")),
                     rs.getInt("doanhThu"),
                     rs.getInt("chiPhi")
                 ));
@@ -92,6 +95,7 @@ public class ThongKeDAO extends ObjectDAO {
         
         return results;
     }
+
 
     // Thống kê sản phẩm bán chạy theo tháng/năm
     public LinkedHashSet<ThongKeDTO> thongKeSanPhamBanChay(int thang, int nam) {

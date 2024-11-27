@@ -74,19 +74,29 @@ public class ChiTietQuyenBUS {
         return count;
     }
 
-    public void addChiTietQuyen(ChiTietQuyenDTO ctQuyen) {
-        if (setCTQuyen.add(ctQuyen)) {
-            daoCTQuyen.addChiTietQuyenWithData(ctQuyen);
+    public boolean addAllChiTietQuyen(LinkedHashSet<ChiTietQuyenDTO> ctQuyen) {
+        boolean addSuccess = setCTQuyen.addAll(ctQuyen);
+        if (addSuccess) {
+            for (ChiTietQuyenDTO ctq : ctQuyen) {
+                daoCTQuyen.addChiTietQuyenWithData(ctq);
+            }
             daoCTQuyen.closeDB();
         }
+        return addSuccess;
     }
 
-    public void removeChiTietQuyen(ChiTietQuyenDTO ctQuyen) {
-        if (setCTQuyen.remove(ctQuyen)) {
-            daoCTQuyen.removeChiTietQuyen(ctQuyen.getIdQuyen());
+    public boolean removeAllChiTietQuyen(String idQuyen) {
+        LinkedHashSet<ChiTietQuyenDTO> removeCTQuyen = setCTQuyen.stream()
+                .filter(chiTietQuyenDTO -> chiTietQuyenDTO.getIdQuyen().equals(idQuyen))
+                .collect(Collectors.toCollection(LinkedHashSet::new));
+        boolean removeSuccess = setCTQuyen.removeAll(removeCTQuyen);
+        if (removeSuccess) {
+            daoCTQuyen.removeChiTietQuyen(idQuyen);
             daoCTQuyen.closeDB();
         }
+        return removeSuccess;
     }
+
 
     public boolean checkPermission(ChiTietQuyenDTO ctQuyen) {
         return setCTQuyen.contains(ctQuyen);
@@ -96,7 +106,7 @@ public class ChiTietQuyenBUS {
         LinkedHashSet<ChiTietQuyenDTO> result = setCTQuyen.stream()
                 .filter(ctq -> ctq.getIdQuyen().equals(idQuyen))
                 .collect(Collectors.toCollection(LinkedHashSet::new));
-        
+
         return result.isEmpty() ? null : result;
     }
 }

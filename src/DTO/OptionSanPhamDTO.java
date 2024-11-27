@@ -1,5 +1,7 @@
 package DTO;
 
+import java.util.Objects;
+
 public class OptionSanPhamDTO {
     public String idSP;
     public String color;
@@ -33,5 +35,17 @@ public class OptionSanPhamDTO {
 
     public void setColor(String color) {
         this.color = color;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof OptionSanPhamDTO that)) return false;
+        return getIdSP().equals(that.getIdSP()) && getColor().equals(that.getColor());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getIdSP(), getColor());
     }
 }

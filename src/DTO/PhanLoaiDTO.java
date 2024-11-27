@@ -1,5 +1,7 @@
 package DTO;
 
+import java.util.Objects;
+
 public class PhanLoaiDTO {
     private String id;
     private String name;
@@ -34,5 +36,16 @@ public class PhanLoaiDTO {
     public void setDelete(Boolean isDelete) {
         this.isDelete = isDelete;
     }
-    
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof PhanLoaiDTO that)) return false;
+        return getId().equals(that.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId());
+    }
 }

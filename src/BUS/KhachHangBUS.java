@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class KhachHangBUS {
-    public static String[] type = { "Tất cả", "Mã khách hàng", "Tên khách hàng", "Địa chỉ", "Số điện thoại" };
+    public static String[] typeSearch = { "Tất cả", "Mã khách hàng", "Tên khách hàng", "Địa chỉ", "Số điện thoại" };
     public static String[] duplicateMess = {
             "Số điện thoại đã tồn tại. Vui lòng chọn số điện thoại khác!"
     };
@@ -82,7 +82,11 @@ public class KhachHangBUS {
         return count;
     }
 
-    public boolean updateKhachHang(KhachHangDTO kh) {
+    public int updateKhachHang(KhachHangDTO kh, boolean checkDupliPhone) {
+        if (checkDupliPhone && containsPhone(kh.getPhone())) {
+            return 0;
+        }
+
         boolean updateSuccess = setKH.stream()
                 .filter(khachHang -> khachHang.getId().equals(kh.getId()))
                 .findFirst()
@@ -102,7 +106,7 @@ public class KhachHangBUS {
             daoKH.closeDB();
         }
 
-        return updateSuccess;
+        return -1;
     }
 
     public int addKhachHang(KhachHangDTO kh) {
@@ -159,8 +163,8 @@ public class KhachHangBUS {
                 .collect(Collectors.toCollection(LinkedHashSet::new));
     }
 
-    public LinkedHashSet<KhachHangDTO> search(String content, String typeSearch) {
-        if (typeSearch.equals(type[0])) {
+    public LinkedHashSet<KhachHangDTO> search(String content, String searchType) {
+        if (searchType.equals(KhachHangBUS.typeSearch[0])) {
             LinkedHashSet<KhachHangDTO> setName = searchName(content);
             LinkedHashSet<KhachHangDTO> setID = searchID(content);
             LinkedHashSet<KhachHangDTO> setPhone = searchPhone(content);
@@ -171,16 +175,16 @@ public class KhachHangBUS {
             return setAll;
         }
 
-        if (typeSearch.equals(type[1])) {
+        if (searchType.equals(KhachHangBUS.typeSearch[1])) {
             return searchID(content);
         }
-        if (typeSearch.equals(type[2])) {
+        if (searchType.equals(KhachHangBUS.typeSearch[2])) {
             return searchName(content);
         }
-        if (typeSearch.equals(type[3])) {
+        if (searchType.equals(KhachHangBUS.typeSearch[3])) {
             return searchFullAddress(content);
         }
-        if (typeSearch.equals(type[4])) {
+        if (searchType.equals(KhachHangBUS.typeSearch[4])) {
             return searchPhone(content);
         }
         return getSetKH();

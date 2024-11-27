@@ -61,8 +61,7 @@ public class NhaCungCapBUS {
     }
 
     public int addNhaCungCap(NhaCungCapDTO ncc) {
-        boolean addSuccess = containsPhone(ncc.getPhone());
-        if (!addSuccess) {
+        if (containsPhone(ncc.getPhone())) {
             return 0;
         }
         setNCC.add(ncc);
@@ -71,7 +70,10 @@ public class NhaCungCapBUS {
         return -1;
     }
 
-    public boolean updateNhaCungCap(NhaCungCapDTO ncc) {
+    public int updateNhaCungCap(NhaCungCapDTO ncc, boolean checkDupliPhone) {
+        if (checkDupliPhone && containsPhone(ncc.getPhone())) {
+            return 0;
+        }
         boolean updateSuccess = setNCC.stream()
                 .filter(nhaCungCap -> nhaCungCap.getId().equals(ncc.getId()))
                 .findFirst()
@@ -91,7 +93,7 @@ public class NhaCungCapBUS {
             daoNCC.closeDB();
         }
 
-        return updateSuccess;
+        return -1;
     }
 
     public boolean removeNhaCungCap(NhaCungCapDTO ncc) {

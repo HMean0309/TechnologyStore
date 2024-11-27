@@ -101,7 +101,10 @@ public class TaiKhoanBUS {
                 .collect(Collectors.toCollection(LinkedHashSet::new));
     }
 
-    public boolean updateTaiKhoan(TaiKhoanDTO tk) {
+    public int updateTaiKhoan(TaiKhoanDTO tk, boolean checkDupliUsername) {
+        if (checkDupliUsername && containsUsername(tk.getUsername())) {
+            return 0;
+        }
         boolean updateSuccess = setTK.stream()
                 .filter(taiKhoan -> taiKhoan.getUsername().equals(tk.getUsername()))
                 .findFirst()
@@ -121,7 +124,7 @@ public class TaiKhoanBUS {
             daoTK.updateTaiKhoan(tk);
             daoTK.closeDB();
         }
-        return updateSuccess;
+        return -1;
     }
 
     public boolean containsUsername(String username) {
