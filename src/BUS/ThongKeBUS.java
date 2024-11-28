@@ -44,19 +44,43 @@ public class ThongKeBUS {
 //    public LinkedHashSet<ThongKeDTO> getThongKeTheoThang(int nam) {
 //        LinkedHashSet<ThongKeDTO> mockData = new LinkedHashSet<>();
 //        for (int i = 1; i <= 12; i++) {
-//            int doanhThu = 1000000 * i + (nam % 10) * 500000;
-//            int chiPhi = 500000 * i + (nam % 10) * 200000;
-//            mockData.add(new ThongKeDTO("Tháng " + i , doanhThu, chiPhi));
+//            int doanhThu = (int) (Math.random() * 10_000_000); // Doanh thu ngẫu nhiên
+//            int chiPhi = (int) (Math.random() * 8_000_000);    // Chi phí ngẫu nhiên
+//            if (chiPhi > doanhThu) chiPhi = doanhThu - (int) (Math.random() * 2_000_000); // Đảm bảo chi phí không lớn hơn doanh thu
+//            mockData.add(new ThongKeDTO(String.format("Tháng %02d", i), doanhThu, chiPhi));
 //        }
 //        return mockData;
 //    }
+    
+//    private int getDaysInMonth(int thang, int nam) {
+//        switch (thang) {
+//            case 2: // Tháng 2
+//                return (nam % 4 == 0 && (nam % 100 != 0 || nam % 400 == 0)) ? 29 : 28;
+//            case 4: case 6: case 9: case 11: // Các tháng có 30 ngày
+//                return 30;
+//            default: // Các tháng có 31 ngày
+//                return 31;
+//        }
+//    }
 //    public LinkedHashSet<ThongKeDTO> getThongKeTungNgayTrongThang(int thang, int nam) {
 //        LinkedHashSet<ThongKeDTO> mockData = new LinkedHashSet<>();
-//        for (int day = 1; day <= 30; day++) {
-//            int doanhThu = 1000000 * day + (nam % 10) * 500000; 
-//            int chiPhi = 500000 * day + (thang % 5) * 200000;
-//            mockData.add(new ThongKeDTO("Ngày " + day + "/" + thang + "/" + nam, doanhThu, chiPhi));
+//        int daysInMonth = getDaysInMonth(thang, nam); // Lấy số ngày thực tế trong tháng
+//        for (int day = 1; day <= daysInMonth; day++) {
+//            int baseDoanhThu = 5_000_000;
+//            int baseChiPhi = 3_000_000;
+//
+//            int doanhThu = baseDoanhThu + (int) (Math.random() * 2_000_000) - 1_000_000;
+//            int chiPhi = baseChiPhi + (int) (Math.random() * 1_500_000) - 750_000;
+//
+//            if (chiPhi > doanhThu) chiPhi = doanhThu - (int) (Math.random() * 500_000);
+//
+//            mockData.add(new ThongKeDTO(
+//                String.format("%04d-%02d-%02d", nam, thang, day),
+//                doanhThu,
+//                chiPhi
+//            ));
 //        }
+//
 //        return mockData;
 //    }
 

@@ -109,7 +109,7 @@ public final class ThongKeDoanhThuTungThang extends JPanel {
 
         TableSorter.configureTableColumnSorter(tableThongKe, 0, TableSorter.STRING_COMPARATOR);
         TableSorter.configureTableColumnSorter(tableThongKe, 1, TableSorter.VND_CURRENCY_COMPARATOR);
-        TableSorter.configureTableColumnSorter(tableThongKe, 2, TableSorter.NUMERIC_COMPARATOR);
+        TableSorter.configureTableColumnSorter(tableThongKe, 2, TableSorter.VND_CURRENCY_COMPARATOR);
 
         this.add(pnl_top, BorderLayout.NORTH);
         this.add(pnlChart, BorderLayout.CENTER);
@@ -162,7 +162,7 @@ public final class ThongKeDoanhThuTungThang extends JPanel {
             tblModel.addRow(new Object[]{
                 tk.getKey(),
                 Formater.formatVND(tk.getValue()),
-                tk.getCount(),
+                Formater.formatVND(tk.getCount()),
                 Formater.formatVND(loiNhuan)
             });
         }

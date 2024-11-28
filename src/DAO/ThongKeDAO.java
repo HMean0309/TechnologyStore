@@ -26,7 +26,7 @@ public class ThongKeDAO extends ObjectDAO {
         try (ResultSet rs = executeQuery(query, new Object[]{thang, nam})) {
             while (rs.next()) {
                 results.add(new ThongKeDTO(
-                    "Ngày " + rs.getInt("ngay") + "/" + rs.getInt("thang") + "/" + rs.getInt("nam"),
+                    String.format("%04d-%02d-%02d", rs.getInt("nam"), rs.getInt("thang"), rs.getInt("ngay")),
                     rs.getInt("doanhThu"),
                     rs.getInt("chiPhi")
                 ));
@@ -54,7 +54,7 @@ public class ThongKeDAO extends ObjectDAO {
         try (ResultSet rs = executeQuery(query, new Object[]{nam})) {
             while (rs.next()) {
                 results.add(new ThongKeDTO(
-                    "Tháng " + rs.getInt("thang"),
+                    String.format("Tháng %02d", rs.getInt("thang")),
                     rs.getInt("doanhThu"),
                     rs.getInt("chiPhi")
                 ));

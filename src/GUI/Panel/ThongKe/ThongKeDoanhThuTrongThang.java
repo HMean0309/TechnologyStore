@@ -145,7 +145,7 @@ public final class ThongKeDoanhThuTrongThang extends JPanel{
             String dateKey = String.format("%04d-%02d-%02d", nam, thang, day); // Định dạng yyyy-MM-dd
             boolean exists = list.stream().anyMatch(dto -> dto.getKey().equals(dateKey));
             if (!exists) {
-                list.add(new ThongKeDTO(dateKey, 0, 0)); // Thêm ngày mặc định với giá trị 0
+                list.add(new ThongKeDTO(String.format("%04d-%02d-%02d", nam, thang, day), 0, 0)); // Thêm ngày mặc định với giá trị 0
             }
         }
 
