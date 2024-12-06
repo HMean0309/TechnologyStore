@@ -12,7 +12,6 @@ public class ChiTietSanPhamDTO {
 
     private String idPhieuNhap;
     private String idHoaDon;
-    private String idBaoHanh;
 
     public ChiTietSanPhamDTO(String seri, String idSP, String color, Integer price,
                              Boolean isDelete) {
@@ -25,7 +24,7 @@ public class ChiTietSanPhamDTO {
 
     public ChiTietSanPhamDTO(String seri, String idSP, String color,
                              Integer price, Integer cost,
-                             String idPhieuNhap, String idHoaDon, String idBaoHanh, Boolean isDelete) {
+                             String idPhieuNhap, String idHoaDon, Boolean isDelete) {
         this.seri = seri;
         this.idSP = idSP;
         this.color = color;
@@ -34,7 +33,6 @@ public class ChiTietSanPhamDTO {
         this.isDelete = isDelete;
         this.idPhieuNhap = idPhieuNhap;
         this.idHoaDon = idHoaDon;
-        this.idBaoHanh = idBaoHanh;
     }
 
     public String getSeri() {
@@ -99,14 +97,6 @@ public class ChiTietSanPhamDTO {
 
     public void setIdHoaDon(String idHoaDon) {
         this.idHoaDon = idHoaDon;
-    }
-
-    public String getIdBaoHanh() {
-        return idBaoHanh;
-    }
-
-    public void setIdBaoHanh(String idBaoHanh) {
-        this.idBaoHanh = idBaoHanh;
     }
 
     @Override

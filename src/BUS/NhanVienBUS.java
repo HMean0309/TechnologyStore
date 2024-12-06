@@ -26,13 +26,12 @@ public class NhanVienBUS {
     };
     private LinkedHashSet<NhanVienDTO> setNV;
     private NhanVienDAO daoNV;
-    private int currentIndex;
+
     public NhanVienBUS() {
         setNV = new LinkedHashSet<>();
         daoNV = new NhanVienDAO();
 
         setNV = NhanVienBUS.toSet(daoNV.getAllNhanVien());
-        currentIndex = getCountNhanVien();
         daoNV.closeDB();
     }
 
@@ -95,8 +94,8 @@ public class NhanVienBUS {
     }
 
     public String createID() {
-        currentIndex++;
-        return String.format("STAFF%05d", currentIndex);
+        int index = getCountNhanVien() + 1;
+        return String.format("STAFF%05d", index);
     }
 
     public NhanVienDTO getNhanVien(String idNhanVien) {

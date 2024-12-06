@@ -1,6 +1,7 @@
 package GUI.Component;
 
 import DTO.ChiTietSanPhamDTO;
+import DTO.HoaDonDTO;
 import DTO.SanPhamDTO;
 import com.formdev.flatlaf.FlatClientProperties;
 import helper.Formater;
@@ -197,6 +198,15 @@ public class ProductItem extends JPanel implements MouseListener {
         this.support = new PropertyChangeSupport(this);
     }
 
+    public ProductItem(SanPhamDTO sanPham, ProductType type, HoaDonDTO hd) {
+        this.sanPham = sanPham;
+        this.isProduct = true;
+        initComponents(sanPham.getImg(), sanPham.getName(), sanPham.getId(),
+                new String[]{ "Bảo hành", "" }, new String[]{ sanPham.getBaoHanhString(), hd.getId() },
+                type);
+        this.support = new PropertyChangeSupport(this);
+    }
+
     public ProductItem(ChiTietSanPhamDTO ctsp, ProductType type) {
         this.ctsanPham = ctsp;
         this.isProduct = false;
@@ -256,5 +266,9 @@ public class ProductItem extends JPanel implements MouseListener {
 
     public void setSanPham(SanPhamDTO sanPham) {
         this.sanPham = sanPham;
+    }
+
+    public void setDisable() {
+        this.setEnabled(false);
     }
 }

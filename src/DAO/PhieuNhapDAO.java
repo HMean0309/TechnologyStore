@@ -33,6 +33,7 @@ public class PhieuNhapDAO extends ObjectDAO {
         super.executeNonQuery(query, params);
 
     }
+    // in pdf
     public static PhieuNhapDAO getInstance() {
         return new PhieuNhapDAO();
     }

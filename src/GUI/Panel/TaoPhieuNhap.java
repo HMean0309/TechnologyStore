@@ -510,7 +510,7 @@ public class TaoPhieuNhap extends JPanel implements ActionListener, ItemListener
             ArrayList<ChiTietSanPhamDTO> listCTSP = new ArrayList<>();
             for (String seri : listSeri) {
                 listCTSP.add(new ChiTietSanPhamDTO(seri, idSP, color,
-                        giaBan, giaNhap, null, null, null, false));
+                        giaBan, giaNhap, null, null, false));
             }
 
             if (isDupliIdSP) {
@@ -571,7 +571,7 @@ public class TaoPhieuNhap extends JPanel implements ActionListener, ItemListener
                 ArrayList<ChiTietSanPhamDTO> listCTSP = new ArrayList<>();
                 for (String seri : listSeri) {
                     listCTSP.add(new ChiTietSanPhamDTO(seri, idSP, option,
-                            giaBanCTSP, giaNhapCTSP, null, null, null, false));
+                            giaBanCTSP, giaNhapCTSP, null, null, false));
                 }
                 option_seri.put(option, listCTSP);
                 startIndex += size;

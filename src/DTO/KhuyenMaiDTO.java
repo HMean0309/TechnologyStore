@@ -1,102 +1,58 @@
 package DTO;
 
-import java.util.Date;
-import java.util.Objects;
+import java.time.LocalDateTime;
 
 public class KhuyenMaiDTO {
     private String id;
-    private String name;
-    private int discountPercent;
-    private int minOrder;
-    private Date startDate;
-    private Date endDate;
-    private String status;
-    
-    public KhuyenMaiDTO(){
-        
-    }
-
-    public KhuyenMaiDTO(String id, String name, int discountPercent, int minOrder,
-            Date startDate, Date endDate, String status) {
-        this.id = id;
-        this.name = name;
-        this.discountPercent = discountPercent;
-        this.minOrder = minOrder;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.status = status;
-    }
-
-    public KhuyenMaiDTO(String id, String name, int discountPercent, int minOrder, String status) {
-        
-    }
-
+    private LocalDateTime startDateTime;
+    private LocalDateTime endDateTime;
+    private Integer donViKM;
+    private Integer value;
+    private Boolean isDelete;
     public String getId() {
         return id;
     }
-
     public void setId(String id) {
         this.id = id;
     }
-
-    public String getName() {
-        return name;
+    public LocalDateTime getStartDateTime() {
+        return startDateTime;
     }
-
-    public void setName(String name) {
-        this.name = name;
+    public void setStartDateTime(LocalDateTime startDateTime) {
+        this.startDateTime = startDateTime;
     }
-
-    public int getDiscountPercent() {
-        return discountPercent;
+    public LocalDateTime getEndDateTime() {
+        return endDateTime;
     }
-
-    public void setDiscountPercent(int discountPercent) {
-        this.discountPercent = discountPercent;
+    public void setEndDateTime(LocalDateTime endDateTime) {
+        this.endDateTime = endDateTime;
     }
-
-    public int getMinOrder() {
-        return minOrder;
+    public Integer getDonViKM() {
+        return donViKM;
     }
-
-    public void setMinOrder(int minOrder) {
-        this.minOrder = minOrder;
+    public void setDonViKM(Integer donViKM) {
+        this.donViKM = donViKM;
     }
-
-    public Date getStartDate() {
-        return startDate;
+    public Integer getValue() {
+        return value;
     }
-
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
+    public void setValue(Integer value) {
+        this.value = value;
     }
-
-    public Date getEndDate() {
-        return endDate;
+    public Boolean getIsDelete() {
+        return isDelete;
     }
-
-    public void setEndDate(Date endDate) {
-        this.endDate = endDate;
+    public void setIsDelete(Boolean isDelete) {
+        this.isDelete = isDelete;
     }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        KhuyenMaiDTO that = (KhuyenMaiDTO) o;
-        return id == that.id;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
+    public KhuyenMaiDTO(String id, LocalDateTime startDateTime, LocalDateTime endDateTime, Integer donViKM,
+            Integer value, Boolean isDelete) {
+        this.id = id;
+        this.startDateTime = startDateTime;
+        this.endDateTime = endDateTime;
+        this.donViKM = donViKM;
+        this.value = value;
+        this.isDelete = isDelete;
     }
 
 }

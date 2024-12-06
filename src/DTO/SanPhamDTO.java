@@ -11,15 +11,7 @@ public class SanPhamDTO {
     private Integer baoHanh;
     private Integer tonKho;
     private Boolean isDelete;
-    
-    public SanPhamDTO(){
-        
-    }
-    
-    public SanPhamDTO(String id, String name){
-        
-    }
-    
+
     public String getId() {
         return id;
     }

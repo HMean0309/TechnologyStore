@@ -88,7 +88,7 @@ public class PhieuNhap extends JPanel implements ActionListener {
         functionBar.setLayout(new GridLayout(2, 1, 0, 20));
         functionBar.setBorder(new EmptyBorder(10, 10, 10, 10));
 
-        String[] action = { "create", "delete", "detail", "export" };
+        String[] action = { "create", "delete", "detail" };
         mainFunction = new MainFunction(m.user.getIdQuyen(), "SER004", action);
         for (String ac : action) {
             mainFunction.btn.get(ac).addActionListener(this);
@@ -477,7 +477,7 @@ public class PhieuNhap extends JPanel implements ActionListener {
                 ChiTietPhieuDialog ctPhieu = new ChiTietPhieuDialog(owner, "Thông tin phiếu nhập", true, resultTable.get(index));
             }
         } else if (e.getSource() == mainFunction.btn.get("import")) {
-//            importExcel();
+            //importExcel();
             System.out.println("Nhập excel");
         } else if (e.getSource() == mainFunction.btn.get("export")) {
             try {

@@ -68,6 +68,7 @@ public class NhaCungCapDAO extends ObjectDAO {
         super.executeNonQuery(query, params);
 
     }
+    
     public NhaCungCapDTO selectById(String id) {
         super.connectDB();
         String query = "SELECT * FROM NCC WHERE id = ? ";

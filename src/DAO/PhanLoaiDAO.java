@@ -1,14 +1,8 @@
 package DAO;
 
 import DTO.PhanLoaiDTO;
-import config.MySQLConnection;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.Map;
 
 public class PhanLoaiDAO extends ObjectDAO {
     public PhanLoaiDAO() {

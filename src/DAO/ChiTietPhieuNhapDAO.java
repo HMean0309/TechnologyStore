@@ -8,9 +8,7 @@ public class ChiTietPhieuNhapDAO extends ObjectDAO {
     public ChiTietPhieuNhapDAO() {
         super();
     }
-    public static ChiTietPhieuNhapDAO getInstance() {
-        return new ChiTietPhieuNhapDAO();
-    }
+
     public ResultSet getAllChiTietPhieuNhap() {
         super.connectDB();
         String query = "SELECT * FROM ct_nhap_kho";

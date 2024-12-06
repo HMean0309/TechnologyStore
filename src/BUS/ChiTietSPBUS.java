@@ -22,6 +22,10 @@ public class ChiTietSPBUS {
         daoCTSP.closeDB();
     }
 
+    public static ChiTietSPBUS getInstance() {
+        return new ChiTietSPBUS();
+    }
+
     public static LinkedHashSet<ChiTietSanPhamDTO> toSet(ResultSet rs) {
         LinkedHashSet<ChiTietSanPhamDTO> setPL = new LinkedHashSet<>();
         try {
@@ -34,7 +38,6 @@ public class ChiTietSPBUS {
                         rs.getInt("cost"),
                         rs.getString("id_pn"),
                         rs.getString("id_hoadon"),
-                        rs.getString("id_bh"),
                         false);
                 setPL.add(that);
             }
@@ -95,7 +98,7 @@ public class ChiTietSPBUS {
 
     public ArrayList<ChiTietSanPhamDTO> getSeriByColorSP(String idSP, String color) {
         return setCTSP.stream()
-                .filter(ctsp -> ctsp.getIdSP().equals(idSP) && ctsp.getColor().equals(color))
+                .filter(ctsp -> ctsp.getIdSP().equals(idSP) && ctsp.getColor().equals(color) && ctsp.getIdHoaDon() == null)
                 .collect(Collectors.toCollection(ArrayList::new));
     }
 

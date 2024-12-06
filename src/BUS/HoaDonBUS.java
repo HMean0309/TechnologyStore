@@ -108,7 +108,7 @@ public class HoaDonBUS {
 
     public LinkedHashSet<HoaDonDTO> searchID(String content) {
         return setHD.stream()
-                .filter(phieuNhapDTO -> phieuNhapDTO.getId().contains(content))
+                .filter(hoadonDTO -> hoadonDTO.getId().contains(content))
                 .collect(Collectors.toCollection(LinkedHashSet::new));
     }
 
@@ -127,16 +127,16 @@ public class HoaDonBUS {
             return setHD;
         }
         return setHD.stream()
-                .filter(phieuNhapDTO -> phieuNhapDTO.getNameNhanVien().equals(nameNV))
+                .filter(hoadonDTO -> hoadonDTO.getNameNhanVien().equals(nameNV))
                 .collect(Collectors.toCollection(LinkedHashSet::new));
     }
 
-    public LinkedHashSet<HoaDonDTO> filterNameKhachHang(String nameNCC) {
-        if (nameNCC.equals("Tất cả")) {
+    public LinkedHashSet<HoaDonDTO> filterNameKhachHang(String nameKH) {
+        if (nameKH.equals("Tất cả")) {
             return setHD;
         }
         return setHD.stream()
-                .filter(phieuNhapDTO -> phieuNhapDTO.getNameKhachHang().equals(nameNCC))
+                .filter(hoadonDTO -> hoadonDTO.getNameKhachHang().equals(nameKH))
                 .collect(Collectors.toCollection(LinkedHashSet::new));
     }
 
@@ -146,7 +146,7 @@ public class HoaDonBUS {
         }
         LocalDateTime fromDateTime = fromDate.atTime(0, 0, 0);
         return setHD.stream()
-                .filter(phieuNhapDTO -> phieuNhapDTO.getNgayLap().isAfter(fromDateTime) || phieuNhapDTO.getNgayLap().equals(fromDateTime))
+                .filter(hoadonDTO -> hoadonDTO.getNgayLap().isAfter(fromDateTime) || hoadonDTO.getNgayLap().equals(fromDateTime))
                 .collect(Collectors.toCollection(LinkedHashSet::new));
     }
 
@@ -156,7 +156,7 @@ public class HoaDonBUS {
         }
         LocalDateTime toDateTime = toDate.atTime(23, 59, 59);
         return setHD.stream()
-                .filter(phieuNhapDTO -> phieuNhapDTO.getNgayLap().isBefore(toDateTime) || phieuNhapDTO.getNgayLap().equals(toDateTime))
+                .filter(hoadonDTO -> hoadonDTO.getNgayLap().isBefore(toDateTime) || hoadonDTO.getNgayLap().equals(toDateTime))
                 .collect(Collectors.toCollection(LinkedHashSet::new));
     }
 
@@ -165,7 +165,7 @@ public class HoaDonBUS {
             return setHD;
         }
         return setHD.stream()
-                .filter(phieuNhapDTO -> phieuNhapDTO.getTotal() >= fromTotal)
+                .filter(hoadonDTO -> hoadonDTO.getTotal() >= fromTotal)
                 .collect(Collectors.toCollection(LinkedHashSet::new));
     }
 
@@ -174,7 +174,7 @@ public class HoaDonBUS {
             return setHD;
         }
         return setHD.stream()
-                .filter(phieuNhapDTO -> phieuNhapDTO.getTotal() <= toTotal)
+                .filter(hoadonDTO -> hoadonDTO.getTotal() <= toTotal)
                 .collect(Collectors.toCollection(LinkedHashSet::new));
     }
 

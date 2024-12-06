@@ -88,7 +88,7 @@ public class HoaDon extends JPanel implements ActionListener {
         functionBar.setLayout(new GridLayout(2, 1, 0, 20));
         functionBar.setBorder(new EmptyBorder(10, 10, 10, 10));
 
-        String[] action = { "create", "delete", "detail", "export" };
+        String[] action = { "create", "delete", "detail" };
         mainFunction = new MainFunction(m.user.getIdQuyen(), "SER010", action);
         for (String ac : action) {
             mainFunction.btn.get(ac).addActionListener(this);

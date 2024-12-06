@@ -57,10 +57,8 @@ public class JTableExporter {
             try (FileOutputStream fileOut = new FileOutputStream(filePath)) {
                 workbook.write(fileOut);
             }
-            JOptionPane.showMessageDialog(null, "Xuất Excel thành công!");
+
             workbook.close();
-        }else {
-            JOptionPane.showMessageDialog(null, "Đã hủy thao tác xuất file Excel.");
         }
     }
 }

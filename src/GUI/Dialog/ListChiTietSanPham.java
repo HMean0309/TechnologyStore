@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
 public class ListChiTietSanPham extends JDialog {
     Color BackgroundColor = new Color(240, 247, 250);
     private ArrayList<ChiTietSanPhamDTO> dataList;
-    private ArrayList<ChiTietSanPhamDTO> resultList;
+    private ArrayList<ChiTietSanPhamDTO> resultList = new ArrayList<>();
     private JTextField tfSearch;
     private JPanel panelSearch;
     private JPanel panelTable;
@@ -108,7 +108,11 @@ public class ListChiTietSanPham extends JDialog {
                         resultList.add(item.getCtsanPham());
                     }
                 }
-                dispose();
+                if (resultList.isEmpty()) {
+                    JOptionPane.showMessageDialog(null, "Vui lòng chọn ít nhất 1 seri", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
+                } else {
+                    dispose();
+                }
             }
         });
 

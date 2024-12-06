@@ -1,22 +1,15 @@
 package GUI.Component;
 
 import com.formdev.flatlaf.FlatClientProperties;
-import java.awt.Color;
-import java.awt.Cursor;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
+import com.formdev.flatlaf.extras.FlatSVGIcon;
+
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import com.formdev.flatlaf.extras.FlatSVGIcon;
-import java.awt.BorderLayout;
-import javax.swing.ImageIcon;
-import javax.swing.JCheckBox;
-import javax.swing.JFrame;
-import javax.swing.border.EmptyBorder;
 
 public class itemTaskbar extends JPanel implements MouseListener {
 
@@ -32,7 +25,7 @@ public class itemTaskbar extends JPanel implements MouseListener {
         this.setLayout(new FlowLayout(1, 10, 7));
         this.setPreferredSize(new Dimension(225, 45));
         this.setBackground(DefaultColor);
-        this.putClientProperty( FlatClientProperties.STYLE, "arc: 15" );
+        this.putClientProperty(FlatClientProperties.STYLE, "arc: 15");
         this.addMouseListener(this);
         lblIcon = new JLabel();
         lblIcon.setBorder(new EmptyBorder(0, 10, 0, 0));
@@ -51,7 +44,7 @@ public class itemTaskbar extends JPanel implements MouseListener {
         this.setLayout(new FlowLayout(0, 20, 50));
 //        this.setPreferredSize(new Dimension(250, 45));
         this.setBackground(DefaultColor);
-        this.putClientProperty( FlatClientProperties.STYLE, "arc: 15" );
+        this.putClientProperty(FlatClientProperties.STYLE, "arc: 15");
         this.addMouseListener(this);
 
         lblIcon = new JLabel();
@@ -74,7 +67,7 @@ public class itemTaskbar extends JPanel implements MouseListener {
         this.setLayout(new BorderLayout(0, 0));
         this.setPreferredSize(new Dimension(380, 60));
         this.setBackground(Color.white);
-        this.putClientProperty( FlatClientProperties.STYLE, "arc: 15" );
+        this.putClientProperty(FlatClientProperties.STYLE, "arc: 15");
 
         img = new JLabel("");
         img.setIcon(InputImage.resizeImage(new ImageIcon("./src/img_product/" + linkImg), 38));
@@ -98,14 +91,14 @@ public class itemTaskbar extends JPanel implements MouseListener {
         right.add(pnlSoLuong);
 
     }
-    
-    public itemTaskbar(String linkImg, String tenSP, int soLuong, String phanLoai){
+
+    public itemTaskbar(String linkImg, String tenSP, int soLuong, String phanLoai) {
         this.setLayout(new BorderLayout(10, 0));
         this.setPreferredSize(new Dimension(380, 80));
         this.setBorder(new EmptyBorder(10, 20, 10, 20));
         this.setBackground(Color.white);
-        this.putClientProperty( FlatClientProperties.STYLE, "arc: 15" );
-        
+        this.putClientProperty(FlatClientProperties.STYLE, "arc: 15");
+
         JCheckBox checkbox = new JCheckBox();
         checkbox.setOpaque(false);
         checkbox.addActionListener(new ActionListener() {
@@ -117,19 +110,19 @@ public class itemTaskbar extends JPanel implements MouseListener {
             }
         });
         this.add(checkbox, BorderLayout.WEST);
-        
+
         right = new JPanel();
-        right.setLayout(new BorderLayout(10,0));
+        right.setLayout(new BorderLayout(10, 0));
         right.setBorder(new EmptyBorder(0, 0, 0, 0));
         right.setOpaque(false);
         this.add(right, BorderLayout.CENTER);
-        
+
         JPanel right_center = new JPanel();
         right_center.setLayout(new FlowLayout(0, 0, 1));
         right_center.setBorder(new EmptyBorder(0, 0, 0, 0));
         right_center.setOpaque(false);
-        right.add(right_center,BorderLayout.CENTER);
-        
+        right.add(right_center, BorderLayout.CENTER);
+
         pnlContent = new JLabel(tenSP);
         pnlContent.putClientProperty("FlatLaf.style", "font: 120% $semibold.font");
         pnlContent.setForeground(Color.black);
@@ -140,13 +133,13 @@ public class itemTaskbar extends JPanel implements MouseListener {
         pnlSoLuong.putClientProperty("FlatLaf.style", "font: 100% $medium.font");
         pnlSoLuong.setForeground(Color.gray);
         right_center.add(pnlSoLuong);
-        
+
         JLabel pnlPhanLoai = new JLabel("Phân loại: " + phanLoai);
         pnlPhanLoai.setPreferredSize(new Dimension(350, 20));
         pnlPhanLoai.putClientProperty("FlatLaf.style", "font: 100% $medium.font");
         pnlPhanLoai.setForeground(Color.gray);
         right_center.add(pnlPhanLoai);
-        
+
         img = new JLabel("");
         img.setIcon(InputImage.resizeImage(new ImageIcon("./src/img_product/" + linkImg), 38));
         img.setOpaque(false);
@@ -214,16 +207,16 @@ public class itemTaskbar extends JPanel implements MouseListener {
             setBackground(new Color(255, 255, 255));
         }
     }
-    
+
     public static void main(String[] args) {
         JFrame frame = new JFrame("Test sp");
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setSize(500, 500);
-        
+
         itemTaskbar item1 = new itemTaskbar("oppo_f9.png", "OPPO F9", 10, "Điện thoại");
         frame.getContentPane().setLayout(new FlowLayout());
         frame.add(item1);
-        
+
         frame.pack();
         frame.setVisible(true);
     }

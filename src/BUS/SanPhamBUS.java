@@ -1,6 +1,5 @@
 package BUS;
 
-import DAO.PhanLoaiDAO;
 import DAO.SanPhamDAO;
 import DTO.SanPhamDTO;
 
@@ -9,8 +8,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -23,20 +20,27 @@ public class SanPhamBUS {
     };
     private LinkedHashSet<SanPhamDTO> setSP;
     private SanPhamDAO daoSP;
-    private ArrayList<SanPhamDTO> sanPhamList;
 
     public SanPhamBUS() {
         setSP = new LinkedHashSet<>();
         daoSP = new SanPhamDAO();
+
         setSP = SanPhamBUS.toSet(daoSP.getAllSanPham());
-        sanPhamList = new ArrayList<>();
         daoSP.closeDB();
     }
-    public void add(SanPhamDTO sanPham) {
-        System.out.println("Gọi phương thức add trong SanPhamBUS.");
-        sanPhamList.add(sanPham);
-        SanPhamDAO.getInstance().addSPWithData(sanPham);
+
+    public SanPhamBUS(ArrayList<String> limitListID) {
+        setSP = new LinkedHashSet<>();
+        daoSP = new SanPhamDAO();
+
+        setSP = SanPhamBUS.toSet(daoSP.getAllSanPham());
+        daoSP.closeDB();
+        LinkedHashSet<SanPhamDTO> limitSanPham = setSP.stream()
+                .filter(sanPhamDTO -> limitListID.contains(sanPhamDTO.getId()))
+                .collect(Collectors.toCollection(LinkedHashSet::new));
+        setSetSP(limitSanPham);
     }
+
     public static SanPhamBUS getInstance() {
         return new SanPhamBUS();
     }
@@ -198,5 +202,5 @@ public class SanPhamBUS {
 
         return result;
     }
-    
+
 }

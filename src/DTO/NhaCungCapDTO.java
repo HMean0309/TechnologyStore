@@ -13,7 +13,7 @@ public class NhaCungCapDTO {
     private Boolean isDelete;
 
     public NhaCungCapDTO() {
-        this.id = id;
+        
     }
 
     public String getId() {

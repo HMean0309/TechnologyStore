@@ -18,7 +18,7 @@ public class KhachHangDAO extends ObjectDAO {
 
     public ResultSet getCountKhachHang() {
         super.connectDB();
-        String query = "SELECT COUNT(*) FROM KHACH_HANG WHERE isDelete = 0";
+        String query = "SELECT COUNT(*) FROM KHACH_HANG";
         ResultSet rs = super.executeQuery(query);
         return rs;
     }

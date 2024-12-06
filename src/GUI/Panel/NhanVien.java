@@ -17,19 +17,10 @@ import java.awt.*;
 import java.awt.event.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.io.BufferedInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.filechooser.FileNameExtensionFilter;
-import org.apache.poi.xssf.usermodel.XSSFRow;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public class NhanVien extends JPanel implements ActionListener {
 
@@ -302,65 +293,7 @@ public class NhanVien extends JPanel implements ActionListener {
 //        }
 //        loadDataTable(listkh);
 //    }
-    public void importExcel() {
-        File excelFile;
-        FileInputStream excelFIS = null;
-        BufferedInputStream excelBIS = null;
-        XSSFWorkbook excelJTableImport = null;
-        ArrayList<NhanVienDTO> listExcel = new ArrayList<>();
-        JFileChooser jf = new JFileChooser();
-        jf.setDialogTitle("Open file");
-        jf.setFileFilter(new FileNameExtensionFilter("Excel Files", "xls", "xlsx"));
-        int result = jf.showOpenDialog(null);
-        int k = 0;
-        if (result == JFileChooser.APPROVE_OPTION) {
-            try {
-                excelFile = jf.getSelectedFile();
-                excelFIS = new FileInputStream(excelFile);
-                excelBIS = new BufferedInputStream(excelFIS);
-                excelJTableImport = new XSSFWorkbook(excelBIS);
-                XSSFSheet excelSheet = excelJTableImport.getSheetAt(0);
-                for (int row = 1; row <= excelSheet.getLastRowNum(); row++) {
-                    int check = 1;
-                    XSSFRow excelRow = excelSheet.getRow(row);
-                    String id = nhanvienBUS.createID(); // Tạo ID mới cho mỗi nhân viên
-                    String name = excelRow.getCell(0).getStringCellValue();
-                    String phone = String.valueOf((long) excelRow.getCell(1).getNumericCellValue());
-                    boolean gender = excelRow.getCell(2).getStringCellValue().equalsIgnoreCase("Nam");
-                    LocalDate birth = excelRow.getCell(3).getLocalDateTimeCellValue().toLocalDate();
-                    String email = excelRow.getCell(4).getStringCellValue();
 
-                    if (Validation.isEmpty(name) || Validation.isEmpty(phone) || !Validation.isEmail(email)) {
-                        check = 0;
-                    }
-
-                    if (check == 1) {
-                        NhanVienDTO nhanVien = new NhanVienDTO(id, name, phone, email, birth, gender, null, false);
-                        nhanvienBUS.addNhanVien(nhanVien);
-                    } else {
-                        k += 1;
-                    }
-                }
-                JOptionPane.showMessageDialog(this, "Nhập thành công");
-            } catch (FileNotFoundException ex) {
-                System.out.println("Lỗi đọc file");
-            } catch (IOException ex) {
-                System.out.println("Lỗi đọc file");
-            } finally {
-                try {
-                    if (excelFIS != null) excelFIS.close();
-                    if (excelBIS != null) excelBIS.close();
-                    if (excelJTableImport != null) excelJTableImport.close();
-                } catch (IOException ex) {
-                    System.out.println("Lỗi đóng file");
-                }
-            }
-        }
-        if (k != 0) {
-            JOptionPane.showMessageDialog(this, "Những dữ liệu không hợp lệ không được thêm vào");
-        }
-        loadDataTable();
-    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -389,7 +322,7 @@ public class NhanVien extends JPanel implements ActionListener {
                 NhanVienDialog khDialog = new NhanVienDialog(this, owner, "Xem nhân viên", true, "view", resultTable.get(index));
             }
         } else if (e.getSource() == mainFunction.btn.get("import")) {
-            importExcel();
+            //importExcel();
             System.out.println("Nhập excel");
         } else if (e.getSource() == mainFunction.btn.get("export")) {
             try {

@@ -1,14 +1,15 @@
 package BUS;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.LinkedHashSet;
-
 import DAO.ChiTietBaoHanhDAO;
 import DTO.ChiTietBaoHanhDTO;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.LinkedHashSet;
+import java.util.stream.Collectors;
+
 public class ChiTietBaoHanhBUS {
-    private String idBaoHanh;
     private LinkedHashSet<ChiTietBaoHanhDTO> setCTBH;
     private ChiTietBaoHanhDAO daoCTBH;
 
@@ -28,14 +29,10 @@ public class ChiTietBaoHanhBUS {
         this.daoCTBH = daoCTBH;
     }
 
-    public String getIdBaoHanh() {
-        return idBaoHanh;
-    }
-    
-    public ChiTietBaoHanhBUS(String idBaoHanh) {
-        this.idBaoHanh = idBaoHanh;
+
+    public ChiTietBaoHanhBUS() {
         setCTBH = new LinkedHashSet<>();
-        daoCTBH = new ChiTietBaoHanhDAO(idBaoHanh);
+        daoCTBH = new ChiTietBaoHanhDAO();
 
         setCTBH = toSet(daoCTBH.getAllCTBaoHanh());
         daoCTBH.closeDB();
@@ -47,7 +44,9 @@ public class ChiTietBaoHanhBUS {
             while (rs.next()) {
                 ChiTietBaoHanhDTO that = new ChiTietBaoHanhDTO(
                         rs.getString("id_bh"),
-                        rs.getString("seri"));
+                        rs.getString("seri"),
+                        rs.getString("color"),
+                        rs.getString("id_sp"));
                 setCTBH.add(that);
             }
         } catch (SQLException e) {
@@ -56,30 +55,36 @@ public class ChiTietBaoHanhBUS {
         return setCTBH;
     }
 
-    public LinkedHashSet<ChiTietBaoHanhDTO> getAllCTBaoHanh() {
-        setSetCTBH(toSet(daoCTBH.getAllCTBaoHanh()));
-        daoCTBH.closeDB();
-        return getSetCTBH();
-    }
-
-    public int getCountCTBaoHanh() {
-        ResultSet rs = daoCTBH.getCountCTBaoHanh();
-        int count = -1;
-        try {
-            rs.next();
-            count = rs.getInt(1);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        daoCTBH.closeDB();
-        return count;
-    }
-
-    public void addCTBaoHanh(ChiTietBaoHanhDTO ctBaoHanh) {
-        if (setCTBH.add(ctBaoHanh)) {
-            daoCTBH.addCTBaoHanh(ctBaoHanh);
+    public void addAllChiTietBaoHanh(ArrayList<ChiTietBaoHanhDTO> ctBaoHanh) {
+        LinkedHashSet<ChiTietBaoHanhDTO> data = new LinkedHashSet<>(ctBaoHanh);
+        if (setCTBH.addAll(data)) {
+            for (ChiTietBaoHanhDTO ctbh : data) {
+                daoCTBH.addCTBaoHanh(ctbh);
+            }
             daoCTBH.closeDB();
         }
     }
 
+    public LinkedHashSet<String> getAllIdSPInBH(String idBH) {
+        return setCTBH.stream()
+                .filter(chiTietBaoHanhDTO -> chiTietBaoHanhDTO.getIdBH().equals(idBH))
+                .map(ChiTietBaoHanhDTO::getIdSP)
+                .collect(Collectors.toCollection(LinkedHashSet::new));
+    }
+
+    public LinkedHashSet<String> getAllOptionOfIdSPInBH(String idBH, String idSP) {
+        return setCTBH.stream()
+                .filter(chiTietBaoHanhDTO -> chiTietBaoHanhDTO.getIdBH().equals(idBH)
+                        && chiTietBaoHanhDTO.getIdSP().equals(idSP))
+                .map(ChiTietBaoHanhDTO::getColor)
+                .collect(Collectors.toCollection(LinkedHashSet::new));
+    }
+
+    public LinkedHashSet<ChiTietBaoHanhDTO> getListOSPHaveIdSPColorInBH(String idBH, String idSP, String option) {
+        return setCTBH.stream()
+                .filter(chiTietBaoHanhDTO -> chiTietBaoHanhDTO.getIdBH().equals(idBH)
+                        && chiTietBaoHanhDTO.getIdSP().equals(idSP)
+                        && chiTietBaoHanhDTO.getColor().equals(option))
+                .collect(Collectors.toCollection(LinkedHashSet::new));
+    }
 }
