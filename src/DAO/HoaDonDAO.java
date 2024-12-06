@@ -33,10 +33,10 @@ public class HoaDonDAO extends ObjectDAO {
 
     public void addHoaDon(HoaDonDTO hoadon) {
         super.connectDB();
-        String query = "INSERT INTO HOA_DON (id,ngaylap,order_amount,discount_amount,km,pttt,id_khachhang,id_nhanvien) "
-                + "VALUES(?,?,?,?,?,?,?,?)";
-        Object[] params = { hoadon.getId(), hoadon.getNgayLap(), hoadon.getOrderAmount(), hoadon.getDiscountAmount(),
-                hoadon.getKm(), hoadon.getPttt(), hoadon.getIdKhachHang(), hoadon.getIdNhanVien()
+        String query = "INSERT INTO HOA_DON (id,ngaylap,order_amount,id_khachhang,id_nhanvien) "
+                + "VALUES(?,?,?,?,?)";
+        Object[] params = { hoadon.getId(), hoadon.getNgayLap(), hoadon.getOrderAmount(),
+                hoadon.getIdKhachHang(), hoadon.getIdNhanVien()
         };
         super.executeNonQuery(query, params);
 

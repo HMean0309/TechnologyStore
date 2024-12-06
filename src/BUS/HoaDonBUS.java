@@ -40,11 +40,8 @@ public class HoaDonBUS {
                         rs.getTimestamp("ngaylap").toLocalDateTime(),
                         rs.getInt("order_amount"),
                         rs.getInt("discount_amount"),
-                        rs.getString("km"),
-                        rs.getString("pttt"),
                         rs.getString("id_khachhang"),
                         rs.getString("id_nhanvien"),
-                        rs.getString("name_pttt"),
                         rs.getString("name_khachhang"),
                         rs.getString("name_nhanvien"),
                         false);

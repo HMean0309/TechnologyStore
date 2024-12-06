@@ -548,7 +548,7 @@ public class TaoHoaDon extends JPanel implements ActionListener, ItemListener {
             String idKH = mapKH.get(txtKh.getText());
 
             hoadonBUS.addHoaDon(new HoaDonDTO(idHD, LocalDateTime.now(), tongTien, 0,
-                    null, null, idKH, idNV, null, nv.getName(), txtKh.getText(), false));
+                    idKH, idNV, txtKh.getText(), nv.getName(), false));
             for (String idSP : gioHang.keySet()) {
                 HashMap<String, ArrayList<ChiTietSanPhamDTO>> option_seri = gioHang.get(idSP);
                 for (String color : option_seri.keySet()) {

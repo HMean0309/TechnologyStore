@@ -196,7 +196,7 @@ public class Loai extends JPanel implements ActionListener {
         dataSP = new ArrayList<>(sanPhamBUS.filterNameCate(nameCate));
         listSP = new ProductItem[dataSP.size()];
         for (int i = 0; i < dataSP.size(); i++) {
-            listSP[i] = new ProductItem(dataSP.get(i), ProductItem.ProductType.CHECKBOX);
+            listSP[i] = new ProductItem(dataSP.get(i), ProductItem.ProductType.NONE);
             contentDSSP.add(listSP[i]);
             listSP[i].setPreferredSize(new Dimension(380, 80));
             contentDSSP.add(Box.createRigidArea(new Dimension(0, 10)));

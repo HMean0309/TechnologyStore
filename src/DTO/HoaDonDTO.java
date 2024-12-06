@@ -8,29 +8,20 @@ public class HoaDonDTO {
     private LocalDateTime ngayLap;
     private Integer orderAmount;
     private Integer discountAmount;
-    private String ghiChu;
-    private String km;
-    private String pttt;
     private String idKhachHang;
     private String idNhanVien;
-    private String namePttt;
     private String nameKhachHang;
     private String nameNhanVien;
     private Boolean isDelete;
 
-    public HoaDonDTO(String id, LocalDateTime ngayLap, Integer orderAmount, Integer discountAmount,
-                     String km, String pttt, String idKhachHang, String idNhanVien,
-                     String namePttt, String nameKhachHang, String nameNhanVien,
-                     Boolean isDelete) {
+    public HoaDonDTO(String id, LocalDateTime ngayLap, Integer orderAmount, Integer discountAmount, String idKhachHang, String idNhanVien,
+                     String nameKhachHang, String nameNhanVien, Boolean isDelete) {
         this.id = id;
         this.ngayLap = ngayLap;
         this.orderAmount = orderAmount;
         this.discountAmount = discountAmount;
-        this.km = km;
-        this.pttt = pttt;
         this.idKhachHang = idKhachHang;
         this.idNhanVien = idNhanVien;
-        this.namePttt = namePttt;
         this.nameKhachHang = nameKhachHang;
         this.nameNhanVien = nameNhanVien;
         this.isDelete = isDelete;
@@ -56,40 +47,12 @@ public class HoaDonDTO {
         return orderAmount;
     }
 
+    public int getTotal() {
+        return orderAmount - discountAmount;
+    }
+
     public void setOrderAmount(Integer orderAmount) {
         this.orderAmount = orderAmount;
-    }
-
-    public Integer getDiscountAmount() {
-        return discountAmount;
-    }
-
-    public void setDiscountAmount(Integer discountAmount) {
-        this.discountAmount = discountAmount;
-    }
-
-    public String getGhiChu() {
-        return ghiChu;
-    }
-
-    public void setGhiChu(String ghiChu) {
-        this.ghiChu = ghiChu;
-    }
-
-    public String getKm() {
-        return km;
-    }
-
-    public void setKm(String km) {
-        this.km = km;
-    }
-
-    public String getPttt() {
-        return pttt;
-    }
-
-    public void setPttt(String pttt) {
-        this.pttt = pttt;
     }
 
     public String getIdKhachHang() {
@@ -106,14 +69,6 @@ public class HoaDonDTO {
 
     public void setIdNhanVien(String idNhanVien) {
         this.idNhanVien = idNhanVien;
-    }
-
-    public String getNamePttt() {
-        return namePttt;
-    }
-
-    public void setNamePttt(String namePttt) {
-        this.namePttt = namePttt;
     }
 
     public String getNameKhachHang() {
@@ -138,10 +93,6 @@ public class HoaDonDTO {
 
     public void setDelete(Boolean delete) {
         isDelete = delete;
-    }
-
-    public int getTotal() {
-        return (orderAmount - discountAmount);
     }
 
     @Override

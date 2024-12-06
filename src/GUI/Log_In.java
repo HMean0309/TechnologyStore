@@ -30,8 +30,8 @@ public class Log_In extends JFrame implements KeyListener {
 
     public Log_In() {
         initComponent();
-        txtUsername.setText("duongdonate");
-        txtPassword.setPass("HD12345678");
+        txtUsername.setText("admin");
+        txtPassword.setPass("Admin12345678");
     }
 
     private void initComponent() {
