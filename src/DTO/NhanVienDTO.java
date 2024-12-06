@@ -13,6 +13,10 @@ public class NhanVienDTO {
     private String username;
     private Boolean isDelete;
 
+    public NhanVienDTO() {
+        
+    }
+
     public String getId() {
         return id;
     }

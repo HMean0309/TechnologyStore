@@ -28,13 +28,62 @@ public class KhachHangDialog extends JDialog implements MouseListener {
     private SelectForm cbCity, cbDistrict, cbWard;
     KhachHangDTO kh;
     private AddressAPI addressAPI;
+    KhachHangBUS khachhangBUS;
 
     public KhachHangDialog(KhachHang jpKH, JFrame owner, String title, boolean modal, String type) {
         super(owner, title, modal);
         this.jpKH = jpKH;
+        this.khachhangBUS = jpKH.khachhangBUS;
         this.addressAPI = new AddressAPI();
         maKH = new InputForm("Mã khách hàng");
         setMaKH(jpKH.khachhangBUS.createID());
+        tenKH = new InputForm("Tên khách hàng");
+        sdtKH = new InputForm("Số điện thoại");
+        PlainDocument phonex = (PlainDocument) sdtKH.getTxtForm().getDocument();
+        phonex.setDocumentFilter((new NumericDocumentFilter()));
+        diachiKH = new InputForm("Số nhà, Tên đường");
+        cbCity = new SelectForm("Tỉnh/Thành phố", addressAPI.getAllCity());
+        cbCity.getCbb().addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                if (!cbCity.getValue().equals("Chọn Tỉnh/Thành phố")) {
+                    addressAPI.setCodeCity(cbCity.getValue());
+                    cbDistrict.setArr(addressAPI.getAllDistrict());
+                    cbDistrict.setEnable(true);
+                }
+            }
+        });
+        cbDistrict = new SelectForm("Quận/Huyện", new String[]{ "Vui lòng chọn Tỉnh/Thành phố" });
+        cbDistrict.setEnable(false);
+        cbDistrict.getCbb().addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                if (!cbDistrict.getValue().equals("Chọn Quận/Huyện")) {
+                    addressAPI.setCodeDistrict(cbDistrict.getValue());
+                    cbWard.setArr(addressAPI.getAllWard());
+                    cbWard.setEnable(true);
+                }
+            }
+        });
+        cbWard = new SelectForm("Phường/Xã", new String[]{ "Vui lòng chọn Quận/Huyện" });
+        cbWard.setEnable(false);
+        cbWard.getCbb().addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                if (!cbWard.getValue().equals("Chọn Phường/Xã")) {
+                    addressAPI.setCodeWard(cbWard.getValue());
+                }
+            }
+        });
+        initComponents(type);
+    }
+
+    public KhachHangDialog(KhachHangBUS bus, JFrame owner, String title, boolean modal, String type) {
+        super(owner, title, modal);
+        this.khachhangBUS = bus;
+        this.addressAPI = new AddressAPI();
+        maKH = new InputForm("Mã khách hàng");
+        setMaKH(khachhangBUS.createID());
         tenKH = new InputForm("Tên khách hàng");
         sdtKH = new InputForm("Số điện thoại");
         PlainDocument phonex = (PlainDocument) sdtKH.getTxtForm().getDocument();
@@ -88,6 +137,7 @@ public class KhachHangDialog extends JDialog implements MouseListener {
         diachiKH = new InputForm("Số nhà, tên đường");
         setDiaChiKH(kh.getAddress());
         this.jpKH = jpKH;
+        this.khachhangBUS = jpKH.khachhangBUS;
         addressAPI = new AddressAPI(kh.getCity(), kh.getDistrict(), kh.getWard());
         cbCity = new SelectForm("Tỉnh/Thành phố", addressAPI.getAllCity());
         cbCity.setSelectedItem(kh.getCity());
@@ -274,11 +324,11 @@ public class KhachHangDialog extends JDialog implements MouseListener {
     @Override
     public void mousePressed(MouseEvent e) {
         if (e.getSource() == btnThem && validation()) {
-            int addSuccess = jpKH.khachhangBUS.addKhachHang(new KhachHangDTO(maKH.getText().trim(), tenKH.getText().trim(), sdtKH.getText().trim(),
+            int addSuccess = khachhangBUS.addKhachHang(new KhachHangDTO(maKH.getText().trim(), tenKH.getText().trim(), sdtKH.getText().trim(),
                     diachiKH.getText().trim(), cbDistrict.getValue(), cbWard.getValue(), cbCity.getValue(), false));
             if (addSuccess == -1) {
                 JOptionPane.showMessageDialog(this, "Thêm khách hàng thành công", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
-                jpKH.loadDataTable();
+                if (jpKH != null) jpKH.loadDataTable();
                 dispose();
             } else {
                 JOptionPane.showMessageDialog(this, KhachHangBUS.duplicateMess[addSuccess], "Cảnh báo", JOptionPane.WARNING_MESSAGE);
@@ -288,12 +338,12 @@ public class KhachHangDialog extends JDialog implements MouseListener {
             dispose();
         } else if (e.getSource() == btnCapNhat && validation()) {
             String sdt = sdtKH.getText().trim();
-            int updateSuccess = jpKH.khachhangBUS.updateKhachHang(new KhachHangDTO(kh.getId(), tenKH.getText().trim(), sdtKH.getText().trim(),
+            int updateSuccess = khachhangBUS.updateKhachHang(new KhachHangDTO(kh.getId(), tenKH.getText().trim(), sdtKH.getText().trim(),
                             diachiKH.getText().trim(), cbDistrict.getValue(), cbWard.getValue(), cbCity.getValue(), false),
                     !kh.getPhone().equals(sdt));
             if (updateSuccess == -1) {
                 JOptionPane.showMessageDialog(this, "Cập nhật thành công", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
-                jpKH.loadDataTable();
+                if (jpKH != null) jpKH.loadDataTable();
                 dispose();
             } else {
                 JOptionPane.showMessageDialog(this, KhachHangBUS.duplicateMess[updateSuccess], "Báo lỗi", JOptionPane.ERROR_MESSAGE);

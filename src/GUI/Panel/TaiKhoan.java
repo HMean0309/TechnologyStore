@@ -256,11 +256,11 @@ public class TaiKhoan extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == mainFunction.btn.get("create")) {
             System.out.println("ok");
-            ListNhanVien khDialog = new ListNhanVien(this, owner, "Thêm tài khoản", true);
+            ListNhanVien nvDialog = new ListNhanVien(this, owner, "Thêm tài khoản", true);
         } else if (e.getSource() == mainFunction.btn.get("update")) {
             int index = getRowSelected();
             if (index != -1) {
-                TaiKhoanDialog khDialog = new TaiKhoanDialog(this, owner, "Chỉnh sửa tài khoản", true, "update", resultTable.get(index));
+                TaiKhoanDialog tkDialog = new TaiKhoanDialog(this, owner, "Chỉnh sửa tài khoản", true, "update", resultTable.get(index));
             }
         } else if (e.getSource() == mainFunction.btn.get("delete")) {
             int index = getRowSelected();

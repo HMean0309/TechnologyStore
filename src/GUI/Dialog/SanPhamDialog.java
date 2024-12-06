@@ -89,15 +89,25 @@ public final class SanPhamDialog extends JDialog implements ActionListener {
         baohanh.setDocumentFilter((new NumericDocumentFilter()));
         //Gán giá trị mặc định
         baohanh.addDocumentListener(new DocumentListener() {
+            private boolean isRemovingZero = false;
+
             private void setDefault() {
                 if (baoHanhSP.getText().trim().isEmpty()) {
                     baoHanhSP.setText("0");
                 }
             }
 
+            private void removeZero() {
+                if (!isRemovingZero && baoHanhSP.getText().startsWith("0") && baoHanhSP.getText().length() > 1) {
+                    isRemovingZero = true;
+                    baoHanhSP.setText(baoHanhSP.getText().substring(1)); // Xóa số 0 đầu tiên
+                    isRemovingZero = false;
+                }
+            }
+
             @Override
             public void insertUpdate(DocumentEvent e) {
-
+                SwingUtilities.invokeLater(this::removeZero);
             }
 
             @Override
@@ -376,6 +386,7 @@ public final class SanPhamDialog extends JDialog implements ActionListener {
                 jpSP.loadDataTable();
                 btnXemOption.setEnabled(true);
                 btnAddSanPham.setEnabled(false);
+                btnHuyBo.setEnabled(false);
             }
             return;
         }
@@ -442,7 +453,8 @@ public final class SanPhamDialog extends JDialog implements ActionListener {
         String idCate = mapCate.get(nameCate);
         int baoHanh = Integer.parseInt(baoHanhSP.getText().trim());
         String nameSP = tenSP.getText().trim();
-        int updateSuccess = jpSP.sanphamBUS.updateSanPham(new SanPhamDTO(sp.getId(), nameSP, inputHinhAnh.getUrl_img(),
+        String img = addImage(inputHinhAnh.getUrl_img());
+        int updateSuccess = jpSP.sanphamBUS.updateSanPham(new SanPhamDTO(sp.getId(), nameSP, img,
                         idCate, nameCate, baoHanh, sp.getTonKho(), false),
                 !sp.getName().equals(nameSP));
         if (updateSuccess == -1) {

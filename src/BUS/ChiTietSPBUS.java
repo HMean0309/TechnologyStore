@@ -1,113 +1,72 @@
 package BUS;
 
-import DTO.ChiTietSanPhamDTO;
 import DAO.ChiTietSPDAO;
+import DTO.ChiTietSanPhamDTO;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.LinkedHashSet;
-import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class ChiTietSPBUS {
     private LinkedHashSet<ChiTietSanPhamDTO> setCTSP;
     private ChiTietSPDAO daoCTSP;
-    private List<String> listColorSP;
-    private List<Integer> listPriceSP;
-    
-    public ChiTietSPBUS(){
+
+    public ChiTietSPBUS() {
         setCTSP = new LinkedHashSet<>();
         daoCTSP = new ChiTietSPDAO();
-        
+
         setCTSP = ChiTietSPBUS.toSet(daoCTSP.getAllCTSP());
+        daoCTSP.closeDB();
     }
-    
-    public static LinkedHashSet<ChiTietSanPhamDTO> toSet(ResultSet rs)
-    {
+
+    public static LinkedHashSet<ChiTietSanPhamDTO> toSet(ResultSet rs) {
         LinkedHashSet<ChiTietSanPhamDTO> setPL = new LinkedHashSet<>();
-        try{
-            while(rs.next())
-            {
+        try {
+            while (rs.next()) {
                 ChiTietSanPhamDTO that = new ChiTietSanPhamDTO(
                         rs.getString("seri"),
                         rs.getString("id_sp"),
                         rs.getString("color"),
                         rs.getInt("price"),
+                        rs.getInt("cost"),
+                        rs.getString("id_pn"),
+                        rs.getString("id_hoadon"),
+                        rs.getString("id_bh"),
                         false);
                 setPL.add(that);
             }
-        }catch(SQLException e)
-        {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return setPL;
     }
-    
-    public ChiTietSPBUS(LinkedHashSet<ChiTietSanPhamDTO> setCTSP, ChiTietSPDAO daoCTSP){
+
+    public ChiTietSPBUS(LinkedHashSet<ChiTietSanPhamDTO> setCTSP, ChiTietSPDAO daoCTSP) {
         this.setCTSP = setCTSP;
         this.daoCTSP = daoCTSP;
-   }
-    
-   public LinkedHashSet<ChiTietSanPhamDTO> getSetCTSP(){
-       return setCTSP;
-   } 
-   
-    public LinkedHashSet<ChiTietSanPhamDTO> getCTSPBySeri(String seri)
-    {
-        ResultSet rs = daoCTSP.getCTSPBySeri(seri);
-        try{
-            while(rs.next())
-            {
-                ChiTietSanPhamDTO that = new ChiTietSanPhamDTO(
-                        rs.getString("seri"),
-                        rs.getString("id_sp"),
-                        rs.getString("color"),
-                        rs.getInt("price"),
-                        false);
-                setCTSP.add(that);
-            }
-        }catch(SQLException e)
-        {
-            e.printStackTrace();
-        }
+    }
+
+    public LinkedHashSet<ChiTietSanPhamDTO> getSetCTSP() {
         return setCTSP;
     }
-   
-    public LinkedHashSet<ChiTietSanPhamDTO> getCTSPByIdSP(String id)
-    {
-        ResultSet rs = daoCTSP.getCTSPByIdSP(id);
-        try{
-            while(rs.next())
-            {
-                ChiTietSanPhamDTO that = new ChiTietSanPhamDTO(
-                        rs.getString("seri"),
-                        rs.getString("id_sp"),
-                        rs.getString("color"),
-                        rs.getInt("price"),
-                        false);
-                setCTSP.add(that);
-            }
-        }catch(SQLException e)
-        {
-            e.printStackTrace();
-        }
-        return setCTSP;
+
+    public void setSetCTSP(LinkedHashSet<ChiTietSanPhamDTO> setCTSP) {
+        this.setCTSP = setCTSP;
     }
-      
-   public void setSetCTSP (LinkedHashSet<ChiTietSanPhamDTO> setCTSP) {
-       this.setCTSP = setCTSP;
-   }
-   
-   public ChiTietSPDAO getDaoCTSP()
-   {
-       return daoCTSP;
-   }
-   
-   public void setDaoCTSP(ChiTietSPDAO daoCTSP){
-       this.daoCTSP = daoCTSP;
-   }
-   
-    public int getAllCountCTSP(){
-        ResultSet rs = daoCTSP.getAllCountCTSP();
+
+    public ChiTietSPDAO getDaoCTSP() {
+        return daoCTSP;
+    }
+
+    public void setDaoCTSP(ChiTietSPDAO daoCTSP) {
+        this.daoCTSP = daoCTSP;
+    }
+
+    public int getAllCountCTSPByIdSP(String idSP) {
+        ResultSet rs = daoCTSP.getAllCountCTSPByIdSP(idSP);
         int count = -1;
         try {
             rs.next();
@@ -116,74 +75,87 @@ public class ChiTietSPBUS {
             e.printStackTrace();
         }
         return count;
-    }  
-    
-    public int getCountCTSPByIdSP(String id_sp){
-        ResultSet rs = daoCTSP.getCountCTSPByIdSP(id_sp);
-        int count = -1;
-        try {
-            rs.next();
-            count = rs.getInt(1);
-        } catch (SQLException e) {
-            e.printStackTrace();
+    }
+
+    public String createSeri(String idSP) {
+        int index = getAllCountCTSPByIdSP(idSP) + 1;
+        String indexSP = idSP.replace("PRODUCT", "");
+        return String.format("SERI%s%05d", indexSP, index);
+    }
+
+    public ArrayList<String> createListSeri(String idSP, int startIndex, int size) {
+        int count = getAllCountCTSPByIdSP(idSP);
+        String indexSP = idSP.replace("PRODUCT", "");
+        ArrayList<String> listID = new ArrayList<>(size);
+        for (int i = 1; i <= size; i++) {
+            listID.add(String.format("SERI%s%05d", indexSP, count + startIndex + i));
         }
-        return count;
-    }  
-    
-    public List<String> getColorInCTSPByIdSP(String id){
-        ResultSet rs = daoCTSP.getColorInCTSPByIdSP(id);
-        try {
-            rs.next();
-            listColorSP.add(rs.getString("color"));
-        } catch (SQLException e) {
-            e.printStackTrace();
+        return listID;
+    }
+
+    public ArrayList<ChiTietSanPhamDTO> getSeriByColorSP(String idSP, String color) {
+        return setCTSP.stream()
+                .filter(ctsp -> ctsp.getIdSP().equals(idSP) && ctsp.getColor().equals(color))
+                .collect(Collectors.toCollection(ArrayList::new));
+    }
+
+    public void addAllOSP(ArrayList<ChiTietSanPhamDTO> series) {
+        LinkedHashSet<ChiTietSanPhamDTO> seriSet = new LinkedHashSet<>(series);
+        if (setCTSP.addAll(seriSet)) {
+            for (ChiTietSanPhamDTO ctsp : seriSet) {
+                daoCTSP.addCTSPWithData(ctsp);
+            }
+            daoCTSP.closeDB();
         }
-        return listColorSP;
     }
-    
-    public List<String> getColorInCTSPBySeri(String seri){
-        ResultSet rs = daoCTSP.getColorInCTSPBySeri(seri);
-        try {
-            rs.next();
-            listColorSP.add(rs.getString("color"));
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return listColorSP;
+
+    public LinkedHashSet<String> getAllIdSPInPN(String idPN) {
+        return setCTSP.stream()
+                .filter(chiTietSanPhamDTO -> chiTietSanPhamDTO.getIdPhieuNhap().equals(idPN))
+                .map(ChiTietSanPhamDTO::getIdSP)
+                .collect(Collectors.toCollection(LinkedHashSet::new));
     }
-    
-    public List<Integer> getPriceinCTSPByIdSP(String id)
-    {
-        ResultSet rs = daoCTSP.getPriceInCTSPByIdSP(id);
-        try {
-            rs.next();
-            listPriceSP.add(rs.getInt("price"));
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return listPriceSP;      
+
+    public LinkedHashSet<String> getAllOptionOfIdSPInPN(String idPN, String idSP) {
+        return setCTSP.stream()
+                .filter(chiTietSanPhamDTO -> chiTietSanPhamDTO.getIdPhieuNhap().equals(idPN)
+                        && chiTietSanPhamDTO.getIdSP().equals(idSP))
+                .map(ChiTietSanPhamDTO::getColor)
+                .collect(Collectors.toCollection(LinkedHashSet::new));
     }
-    
-    public List<Integer> getPriceInCTSPBySeri(String seri){
-        ResultSet rs = daoCTSP.getPriceInCTSPBySeri(seri);
-        try {
-            rs.next();
-            listPriceSP.add(rs.getInt("price"));
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return listPriceSP;
+
+    public LinkedHashSet<ChiTietSanPhamDTO> getListOSPHaveIdSPColorInPN(String idPN, String idSP, String color) {
+        return setCTSP.stream()
+                .filter(chiTietSanPhamDTO -> chiTietSanPhamDTO.getIdPhieuNhap().equals(idPN)
+                        && chiTietSanPhamDTO.getIdSP().equals(idSP)
+                        && chiTietSanPhamDTO.getColor().equals(color))
+                .collect(Collectors.toCollection(LinkedHashSet::new));
     }
-    
-    public void addCTSPWithData(ChiTietSanPhamDTO CTSP){
-        daoCTSP.addCTSPWithData(CTSP);
+
+    public LinkedHashSet<String> getAllIdSPInHD(String idHD) {
+        return setCTSP.stream()
+                .filter(chiTietSanPhamDTO -> Objects.equals(chiTietSanPhamDTO.getIdHoaDon(), idHD))
+                .map(ChiTietSanPhamDTO::getIdSP)
+                .collect(Collectors.toCollection(LinkedHashSet::new));
     }
-    
-    public void updateCTSPBySeri(ChiTietSanPhamDTO CTSP){
-        daoCTSP.updateCTSPBySeri(CTSP);
+
+    public LinkedHashSet<String> getAllOptionOfIdSPInHD(String idHD, String idSP) {
+        return setCTSP.stream()
+                .filter(chiTietSanPhamDTO -> Objects.equals(chiTietSanPhamDTO.getIdHoaDon(), idHD)
+                        && chiTietSanPhamDTO.getIdSP().equals(idSP))
+                .map(ChiTietSanPhamDTO::getColor)
+                .collect(Collectors.toCollection(LinkedHashSet::new));
     }
-    
-    public void removeCTSPBySeri(String id){
-        daoCTSP.removeCTSPBySeri(id);
+
+    public LinkedHashSet<ChiTietSanPhamDTO> getListOSPHaveIdSPColorInHD(String idHD, String idSP, String color) {
+        return setCTSP.stream()
+                .filter(chiTietSanPhamDTO -> Objects.equals(chiTietSanPhamDTO.getIdHoaDon(), idHD)
+                        && chiTietSanPhamDTO.getIdSP().equals(idSP)
+                        && chiTietSanPhamDTO.getColor().equals(color))
+                .collect(Collectors.toCollection(LinkedHashSet::new));
+    }
+
+    public static void main(String[] args) {
+
     }
 }

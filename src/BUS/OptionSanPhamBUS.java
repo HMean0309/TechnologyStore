@@ -81,4 +81,10 @@ public class OptionSanPhamBUS {
                 .filter(optionSanPhamDTO -> optionSanPhamDTO.getIdSP().equals(idSP))
                 .collect(Collectors.toCollection(LinkedHashSet::new));
     }
+
+    public LinkedHashSet<String> getAllColor(String idSP) {
+        return getAllOSPByIDSP(idSP).stream()
+                .map(OptionSanPhamDTO::getColor)
+                .collect(Collectors.toCollection(LinkedHashSet::new));
+    }
 }

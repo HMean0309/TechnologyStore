@@ -12,6 +12,10 @@ public class NhaCungCapDTO {
     private String city;
     private Boolean isDelete;
 
+    public NhaCungCapDTO() {
+        this.id = id;
+    }
+
     public String getId() {
         return id;
     }

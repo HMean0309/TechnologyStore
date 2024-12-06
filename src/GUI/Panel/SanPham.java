@@ -3,23 +3,34 @@ package GUI.Panel;
 import BUS.OptionSanPhamBUS;
 import BUS.PhanLoaiBUS;
 import BUS.SanPhamBUS;
+import DAO.SanPhamDAO;
 import DTO.SanPhamDTO;
 import GUI.Component.*;
 import GUI.Dialog.SanPhamDialog;
 import GUI.Main;
+import helper.ExcelReader;
 import helper.JTableExporter;
-
+import helper.Validation;
+import java.util.List;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public class SanPham extends JPanel implements ActionListener {
 
@@ -237,7 +248,69 @@ public class SanPham extends JPanel implements ActionListener {
 //        }
 //        loadDataTable(listkh);
 //    }
+    public void importExcel() {
+        File excelFile;
+        FileInputStream excelFIS = null;
+        BufferedInputStream excelBIS = null;
+        XSSFWorkbook excelJTableImport = null;
+        ArrayList<SanPhamDTO> listExcel = new ArrayList<>();
+        JFileChooser jf = new JFileChooser();
+        jf.setDialogTitle("Open file");
+        jf.setFileFilter(new FileNameExtensionFilter("Excel Files", "xls", "xlsx"));
+        int result = jf.showOpenDialog(null);
+        int k = 0;
+        if (result == JFileChooser.APPROVE_OPTION) {
+            try {
+                excelFile = jf.getSelectedFile();
+                excelFIS = new FileInputStream(excelFile);
+                excelBIS = new BufferedInputStream(excelFIS);
+                excelJTableImport = new XSSFWorkbook(excelBIS);
+                XSSFSheet excelSheet = excelJTableImport.getSheetAt(0);
+                for (int row = 1; row <= excelSheet.getLastRowNum(); row++) {
+                    int check = 1;
+                    XSSFRow excelRow = excelSheet.getRow(row);
+                    String id = excelRow.getCell(0).getStringCellValue();
+                    String tenSP = excelRow.getCell(1).getStringCellValue();
+                    String nameCate = excelRow.getCell(2).getStringCellValue();
+                    Integer baoHanh = (int) excelRow.getCell(3).getNumericCellValue();
 
+                    String idCate = mapCate.get(nameCate);
+                    if (idCate == null) {
+                        check = 0; // Nếu không tìm thấy idCate, đánh dấu là không hợp lệ
+                        System.out.println("Không tìm thấy idCate");
+                    }
+
+                    if (Validation.isEmpty(id) || Validation.isEmpty(tenSP) || baoHanh == null) {
+                        check = 0;
+                    }
+
+                    if (check == 1) {
+                        System.out.println("đã tìm thấy");
+                        sanphamBUS.add(new SanPhamDTO(id, tenSP, null, idCate, nameCate, baoHanh, 0, false));
+                    } else {
+                        k += 1;
+                    }
+                }
+                JOptionPane.showMessageDialog(this, "Nhập thành công");
+            } catch (FileNotFoundException ex) {
+                System.out.println("Lỗi đọc file");
+            } catch (IOException ex) {
+                System.out.println("Lỗi đọc file");
+            } finally {
+                try {
+                    if (excelFIS != null) excelFIS.close();
+                    if (excelBIS != null) excelBIS.close();
+                    if (excelJTableImport != null) excelJTableImport.close();
+                } catch (IOException ex) {
+                    System.out.println("Lỗi đóng file");
+                }
+            }
+        }
+        if (k != 0) {
+            JOptionPane.showMessageDialog(this, "Những dữ liệu không hợp lệ không được thêm vào");
+        }
+        loadDataTable();
+    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -266,7 +339,7 @@ public class SanPham extends JPanel implements ActionListener {
                 SanPhamDialog khDialog = new SanPhamDialog(this, owner, "Xem sản phẩm", true, "view", resultTable.get(index));
             }
         } else if (e.getSource() == mainFunction.btn.get("import")) {
-            //importExcel();
+            importExcel();
             System.out.println("Nhập excel");
         } else if (e.getSource() == mainFunction.btn.get("export")) {
             try {

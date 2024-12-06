@@ -6,6 +6,7 @@ import DTO.NhanVienDTO;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -25,12 +26,13 @@ public class NhanVienBUS {
     };
     private LinkedHashSet<NhanVienDTO> setNV;
     private NhanVienDAO daoNV;
-
+    private int currentIndex;
     public NhanVienBUS() {
         setNV = new LinkedHashSet<>();
         daoNV = new NhanVienDAO();
 
         setNV = NhanVienBUS.toSet(daoNV.getAllNhanVien());
+        currentIndex = getCountNhanVien();
         daoNV.closeDB();
     }
 
@@ -93,8 +95,8 @@ public class NhanVienBUS {
     }
 
     public String createID() {
-        int index = getCountNhanVien() + 1;
-        return String.format("STAFF%05d", index);
+        currentIndex++;
+        return String.format("STAFF%05d", currentIndex);
     }
 
     public NhanVienDTO getNhanVien(String idNhanVien) {
@@ -108,6 +110,14 @@ public class NhanVienBUS {
         return setNV.stream()
                 .filter(nhanVienDTO -> nhanVienDTO.getUsername() == null)
                 .collect(Collectors.toCollection(LinkedHashSet::new));
+    }
+
+    public HashMap<String, String> toMap() {
+        HashMap<String, String> mapNV = new HashMap<>();
+        for (NhanVienDTO nv : setNV) {
+            mapNV.put(nv.getName(), nv.getId());
+        }
+        return mapNV;
     }
 
     public boolean containsPhone(String phone) {

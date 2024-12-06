@@ -17,6 +17,8 @@ public class SelectForm extends JPanel {
         this.setLayout(new GridLayout(2, 1));
         this.setBackground(Color.white);
         this.setBorder(new EmptyBorder(0, 10, 5, 10));
+        this.setPreferredSize(new Dimension(160, 40));
+        this.setMinimumSize(new Dimension(160, 40));
 
         lblTitle = new JLabel(title);
         cbb = new JComboBox(obj);

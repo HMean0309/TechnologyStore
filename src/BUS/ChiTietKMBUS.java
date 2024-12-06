@@ -1,102 +1,66 @@
 package BUS;
 
-import DTO.ChiTietKhuyenMaiDTO;
 import DAO.ChiTietKMDAO;
+import DTO.ChiTietKhuyenMaiDTO;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.LinkedHashSet;
-import java.util.List;
 
 public class ChiTietKMBUS {
-    private LinkedHashSet<ChiTietKhuyenMaiDTO> setCTKM;
-    private ChiTietKMDAO daoCTKM;
-    private List<String> listColorKM;
-    private List<Integer> listPriceKM;
-    
-    public ChiTietKMBUS(){
-        setCTKM = new LinkedHashSet<>();
-        daoCTKM = new ChiTietKMDAO();
-        
-        setCTKM = ChiTietKMBUS.toSet(daoCTKM.getAllCTKM());
-    }
-    
-    public static LinkedHashSet<ChiTietKhuyenMaiDTO> toSet(ResultSet rs)
-    {
-        LinkedHashSet<ChiTietKhuyenMaiDTO> setPL = new LinkedHashSet<>();
-        try{
-            while(rs.next())
-            {
-                ChiTietKhuyenMaiDTO that = new ChiTietKhuyenMaiDTO(
-                        rs.getString("id_km"),
-                        rs.getString("id_sp"));
-                setPL.add(that);
-            }
-        }catch(SQLException e)
-        {
-            e.printStackTrace();
-        }
-        return setPL;
-    }
-    
-    public ChiTietKMBUS(LinkedHashSet<ChiTietKhuyenMaiDTO> setCTKM, ChiTietKMDAO daoCTKM){
-        this.setCTKM = setCTKM;
-        this.daoCTKM = daoCTKM;
-   }
-    
-   public LinkedHashSet<ChiTietKhuyenMaiDTO> getSetCTKM(){
-       return setCTKM;
-   } 
-   
-    public LinkedHashSet<ChiTietKhuyenMaiDTO> getCTKMByIdKM(String id)
-    {
-        ResultSet rs = daoCTKM.getCTKMByIdKM(id);
-        try{
-            while(rs.next())
-            {
-                ChiTietKhuyenMaiDTO that = new ChiTietKhuyenMaiDTO(
-                        rs.getString("id_km"),
-                        rs.getString("id_sp"));
-                setCTKM.add(that);
-            }
-        }catch(SQLException e)
-        {
-            e.printStackTrace();
-        }
-        return setCTKM;
-    }
-      
-   public void setSetCTKM (LinkedHashSet<ChiTietKhuyenMaiDTO> setCTKM) {
-       this.setCTKM = setCTKM;
-   }
-   
-   public ChiTietKMDAO getDaoCTKM()
-   {
-       return daoCTKM;
-   }
-   
-   public void setDaoCTKM(ChiTietKMDAO daoCTKM){
-       this.daoCTKM = daoCTKM;
-   }
-   
-    public int getAllCountCTKM(){
-        ResultSet rs = daoCTKM.getCountAllCTKM();
-        int count = -1;
-        try {
-            rs.next();
-            count = rs.getInt(1);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return count;
-    }  
-    
-    public void addCTKMWithData(ChiTietKhuyenMaiDTO CTKM){
-        daoCTKM.addCTKMWithData(CTKM);
-    }
-    
-    public void updateCTKMByIdKM(ChiTietKhuyenMaiDTO CTKM){
-        daoCTKM.updateCTKMByIdKM(CTKM);
-    }
-}
 
+    private LinkedHashSet<ChiTietKhuyenMaiDTO> chiTietKMSet; // Lưu trữ dữ liệu khuyến mãi
+    private ChiTietKMDAO chiTietKMDAO;
+
+    public ChiTietKMBUS() {
+        chiTietKMDAO = new ChiTietKMDAO();
+        chiTietKMSet = chiTietKMDAO.getAllChiTietKhuyenMai(); // Lấy tất cả chi tiết khuyến mãi từ DAO
+    }
+
+    // Lấy danh sách tất cả chi tiết khuyến mãi
+    public LinkedHashSet<ChiTietKhuyenMaiDTO> getAllChiTietKhuyenMai() {
+        return chiTietKMSet;
+    }
+
+    // Lấy danh sách sản phẩm áp dụng khuyến mãi theo ID khuyến mãi
+    public LinkedHashSet<ChiTietKhuyenMaiDTO> getChiTietByKhuyenMai(String idKM) {
+        return chiTietKMDAO.getChiTietKhuyenMaiById(idKM);
+    }
+
+    // Thêm chi tiết khuyến mãi mới
+    public boolean addChiTietKhuyenMai(ChiTietKhuyenMaiDTO chiTiet) {
+        if (chiTietKMDAO.insertChiTietKhuyenMai(chiTiet)) {
+            chiTietKMSet.add(chiTiet);
+            return true;
+        }
+        return false;
+    }
+
+    // Xóa chi tiết khuyến mãi theo ID khuyến mãi và ID sản phẩm
+    public boolean deleteChiTietKhuyenMai(String idKM, String idSP) {
+        if (chiTietKMDAO.deleteChiTietKhuyenMai(idKM, idSP)) {
+            chiTietKMSet.removeIf(ctkm -> 
+                ctkm.getIdKM().equals(idKM) && ctkm.getIdSP().equals(idSP));
+            return true;
+        }
+        return false;
+    }
+
+    // Xóa tất cả chi tiết khuyến mãi theo ID khuyến mãi
+    public boolean deleteAllChiTietByKhuyenMai(String idKM) {
+        if (chiTietKMDAO.deleteChiTietKhuyenMai(idKM)) {
+            chiTietKMSet.removeIf(ctkm -> ctkm.getIdKM().equals(idKM));
+            return true;
+        }
+        return false;
+    }
+
+    // Cập nhật danh sách sản phẩm áp dụng khuyến mãi
+    public boolean updateSanPhamApDungKhuyenMai(String idKM, LinkedHashSet<ChiTietKhuyenMaiDTO> newChiTietSet) {
+        if (chiTietKMDAO.updateSanPhamApDungKhuyenMai(idKM, newChiTietSet)) {
+            chiTietKMSet.removeIf(ctkm -> ctkm.getIdKM().equals(idKM));
+            chiTietKMSet.addAll(newChiTietSet);
+            return true;
+        }
+        return false;
+    }
+    
+}

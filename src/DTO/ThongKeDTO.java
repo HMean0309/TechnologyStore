@@ -2,13 +2,13 @@ package DTO;
 
 public class ThongKeDTO {
     private String key;
-    private Integer value;
-    private Integer count;
+    private Integer DoanhThu;
+    private Integer ChiPhi;
 
-    public ThongKeDTO(String key, Integer value, Integer count) {
+    public ThongKeDTO(String key, Integer ChiPhi, Integer DoanhThu) {
         this.key = key;
-        this.value = value;
-        this.count = count;
+        this.DoanhThu = DoanhThu;
+        this.ChiPhi = ChiPhi;
     }
 
     public String getKey() {
@@ -19,27 +19,27 @@ public class ThongKeDTO {
         this.key = key;
     }
 
-    public Integer getValue() {
-        return value;
+    public Integer getDoanhThu() {
+        return DoanhThu;
     }
 
-    public void setValue(Integer value) {
-        this.value = value;
+    public void setDoanhThu(Integer DoanhThu) {
+        this.DoanhThu = DoanhThu;
     }
 
-    public Integer getCount() {
-        return count;
+    public Integer getChiPhi() {
+        return ChiPhi;
     }
 
-    public void setCount(Integer count) {
-        this.count = count;
+    public void setChiPhi(Integer ChiPhi) {
+        this.ChiPhi = ChiPhi;
     }
      @Override
     public String toString() {
         return "ThongKeDTO{" +
                 "key='" + key + '\'' +
-                ", value=" + value +
-                ", count=" + count +
+                ", DoanhThu=" + DoanhThu +
+                ", ChiPhi=" + ChiPhi +
                 '}';
     }
 }

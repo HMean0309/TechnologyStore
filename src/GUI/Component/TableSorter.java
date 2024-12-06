@@ -51,20 +51,6 @@ public class TableSorter {
 
         return Long.compare(n1, n2);
     };
-    
-    public static final Comparator<Object> NUMERIC_COMPARATOR = (o1, o2) -> {
-        if (o1 == null && o2 == null) return 0;
-        if (o1 == null) return -1;
-        if (o2 == null) return 1;
-        try {
-            Double num1 = Double.parseDouble(o1.toString());
-            Double num2 = Double.parseDouble(o2.toString());
-            return Double.compare(num1, num2);
-        } catch (NumberFormatException e) {
-            return 0; 
-        }
-    };
-
 
     public static void configureTableColumnSorter(JTable table, int columnIndex, Comparator<Object> comparator) {
         DefaultTableModel tblModel = (DefaultTableModel) table.getModel();

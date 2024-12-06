@@ -10,7 +10,7 @@ import javax.swing.JTabbedPane;
 public final class ThongKe extends JPanel {
 
     JTabbedPane tabbedPane;
-    JPanel doanhthu;
+    JPanel doanhthu, tongquan;
     Color BackgroundColor = new Color(240, 247, 250);
     ThongKeBUS thongkeBUS = new ThongKeBUS();
 
@@ -23,10 +23,11 @@ public final class ThongKe extends JPanel {
         this.setBackground(BackgroundColor);
 
         doanhthu = new ThongKeDoanhThu(thongkeBUS);
+        tongquan = new ThongKeTongQuan(thongkeBUS);
 
         tabbedPane = new JTabbedPane();
         tabbedPane.setOpaque(false);
-
+        tabbedPane.addTab("Tổng quan", tongquan);
         tabbedPane.addTab("Doanh thu", doanhthu);
 
         this.add(tabbedPane);

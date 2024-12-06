@@ -40,15 +40,19 @@ public class InputImage extends JPanel implements ActionListener {
     }
 
     public String getUrl_img() {
+        if (url_img == null) {
+            return "";
+        }
         return url_img;
     }
 
     public void setUrl_img(String url_img) {
+        if (url_img == null) url_img = "";
+        this.url_img = url_img;
         ImageIcon imgicon = new ImageIcon("./src/img_product/" + url_img);
         imgicon = new ImageIcon(scale(imgicon));
         btnChooseImg.setIcon(imgicon);
         btnChooseImg.setText("");
-        this.url_img = url_img;
     }
 
     public void setUnable() {

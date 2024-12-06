@@ -1,17 +1,18 @@
 package GUI.Panel;
 
 import BUS.PhanLoaiBUS;
+import BUS.SanPhamBUS;
 import DTO.PhanLoaiDTO;
-import GUI.Component.IntegratedSearch;
-import GUI.Component.MainFunction;
-import GUI.Component.PanelBorderRadius;
-import GUI.Component.TableSorter;
+import DTO.SanPhamDTO;
+import GUI.Component.*;
 import GUI.Dialog.LoaiDialog;
 import GUI.Main;
 import com.formdev.flatlaf.fonts.roboto.FlatRobotoFont;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
@@ -29,12 +30,17 @@ public class Loai extends JPanel implements ActionListener {
     IntegratedSearch search;
     DefaultTableModel tblModel;
     public PhanLoaiBUS loaiBUS = new PhanLoaiBUS();
+    private SanPhamBUS sanPhamBUS = new SanPhamBUS();
     public ArrayList<PhanLoaiDTO> dataTable = new ArrayList<>(loaiBUS.getSetPL());
     public ArrayList<PhanLoaiDTO> resultTable = dataTable;
+    public ArrayList<SanPhamDTO> dataSP;
+    public ProductItem[] listSP;
     //QuyenDTO kh = new QuyenDTO();
     Main m;
     Color BackgroundColor = new Color(240, 247, 250);
     private JScrollPane scrollPaneDSSP;
+    private JLabel titleDSSP;
+    private JPanel contentDSSP;
 
     private void initComponent() {
         this.setBackground(BackgroundColor);
@@ -54,6 +60,19 @@ public class Loai extends JPanel implements ActionListener {
         centerRenderer.setHorizontalAlignment(JLabel.CENTER);
         tablePhanLoai.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
         tablePhanLoai.getColumnModel().getColumn(1).setCellRenderer(centerRenderer);
+        tablePhanLoai.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                int index = tablePhanLoai.getSelectedRow();
+                if (index != -1) {
+                    loadListSanPham(resultTable.get(index).getName());
+                } else {
+                    contentDSSP.removeAll();
+                    contentDSSP.revalidate();
+                    contentDSSP.repaint();
+                }
+            }
+        });
 
         tablePhanLoai.setAutoCreateRowSorter(true);
         TableSorter.configureTableColumnSorter(tablePhanLoai, 0, TableSorter.STRING_COMPARATOR);
@@ -113,15 +132,26 @@ public class Loai extends JPanel implements ActionListener {
         //Hiện danh sách sản phẩm
         contentRight = new JPanel();
         contentRight.setBackground(BackgroundColor);
-        contentRight.setLayout(new FlowLayout(0, 4, 10));
-        contentRight.setPreferredSize(new Dimension(400, 800));
-        JLabel tit = new JLabel("Danh sách sản phẩm");
-        tit.setFont(new java.awt.Font(FlatRobotoFont.FAMILY, 1, 16));
-        contentRight.add(tit);
-        scrollPaneDSSP = new JScrollPane(contentRight, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-        scrollPaneDSSP.setBorder(new EmptyBorder(0, 10, 20, 10));
+        contentRight.setLayout(new BorderLayout(0, 15));
+        contentRight.setBorder(new EmptyBorder(15, 10, 0, 10));
+        contentRight.setPreferredSize(new Dimension(400, 600));
+
+        contentDSSP = new JPanel();
+        contentDSSP.setBackground(BackgroundColor);
+        contentDSSP.setLayout(new BoxLayout(contentDSSP, BoxLayout.Y_AXIS));
+        //contentDSSP.setPreferredSize(new Dimension(400, 500));
+
+        titleDSSP = new JLabel("Danh sách sản phẩm");
+        titleDSSP.setFont(new java.awt.Font(FlatRobotoFont.FAMILY, 1, 16));
+
+        contentRight.add(titleDSSP, BorderLayout.PAGE_START);
+        //contentRight.add(contentDSSP, BorderLayout.CENTER);
+        scrollPaneDSSP = new JScrollPane(contentDSSP, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         scrollPaneDSSP.setBackground(BackgroundColor);
-        contentCenter.add(scrollPaneDSSP, BorderLayout.EAST);
+        scrollPaneDSSP.setBorder(new EmptyBorder(0, 0, 0, 0));
+        contentRight.add(scrollPaneDSSP, BorderLayout.CENTER);
+
+        contentCenter.add(contentRight, BorderLayout.EAST);
     }
 
     public Loai(Main m) {
@@ -135,6 +165,11 @@ public class Loai extends JPanel implements ActionListener {
         search.txtSearchForm.setText("");
         search.cbxChoose.setSelectedIndex(0);
 
+        contentDSSP.removeAll();
+        contentDSSP.revalidate();
+        contentDSSP.repaint();
+
+        this.dataSP = new ArrayList<>();
         this.dataTable = new ArrayList<>(loaiBUS.getSetPL());
         this.resultTable = dataTable;
         tblModel.setRowCount(0);
@@ -154,6 +189,21 @@ public class Loai extends JPanel implements ActionListener {
         }
     }
 
+    public void loadListSanPham(String nameCate) {
+        contentDSSP.removeAll();
+        contentDSSP.revalidate();
+        contentDSSP.repaint();
+        dataSP = new ArrayList<>(sanPhamBUS.filterNameCate(nameCate));
+        listSP = new ProductItem[dataSP.size()];
+        for (int i = 0; i < dataSP.size(); i++) {
+            listSP[i] = new ProductItem(dataSP.get(i), ProductItem.ProductType.CHECKBOX);
+            contentDSSP.add(listSP[i]);
+            listSP[i].setPreferredSize(new Dimension(380, 80));
+            contentDSSP.add(Box.createRigidArea(new Dimension(0, 10)));
+        }
+        contentDSSP.revalidate();
+        contentDSSP.repaint();
+    }
 
     public int getRowSelected() {
         int index = tablePhanLoai.getSelectedRow();

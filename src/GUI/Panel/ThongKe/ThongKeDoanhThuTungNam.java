@@ -75,12 +75,12 @@ public final class ThongKeDoanhThuTungNam extends JPanel implements ActionListen
     private void loadDataTable(ArrayList<ThongKeDTO> list) {
         tblModel.setRowCount(0);
         for (ThongKeDTO item : list) {
-            int doanhThu = item.getValue();
-            int chiPhi = item.getCount();
+            int doanhThu = item.getDoanhThu();
+            int chiPhi = item.getChiPhi();
             int loiNhuan = doanhThu - chiPhi;
 
             tblModel.addRow(new Object[]{
-                item.getKey(), Formater.formatVND(doanhThu), Formater.formatVND(chiPhi), Formater.formatVND(loiNhuan)
+                item.getKey(), Formater.formatVND(chiPhi), Formater.formatVND(doanhThu), Formater.formatVND(loiNhuan)
             });
         }
     }
@@ -93,8 +93,8 @@ public final class ThongKeDoanhThuTungNam extends JPanel implements ActionListen
         chart.addLegend("Lợi nhuận", new Color(189, 135, 245));
 
         for (ThongKeDTO item : list) {
-            int chiPhi = item.getCount();
-            int doanhThu = item.getValue();
+            int chiPhi = item.getChiPhi();
+            int doanhThu = item.getDoanhThu();
             int loiNhuan = doanhThu - chiPhi;
 
             chart.addData(new ModelChart("Năm " + item.getKey(), new double[]{chiPhi, doanhThu, loiNhuan}));
@@ -231,10 +231,10 @@ public final class ThongKeDoanhThuTungNam extends JPanel implements ActionListen
         } else if (source == btnExport) {
             try {
                 JTableExporter.exportJTableToExcel(tableThongKe);
-                JOptionPane.showMessageDialog(this, "Xuất Excel thành công!");
+                
             } catch (IOException ex) {
                 Logger.getLogger(ThongKeDoanhThuTungNam.class.getName()).log(Level.SEVERE, null, ex);
-                JOptionPane.showMessageDialog(this, "Có lỗi khi xuất file Excel!");
+                
             }
         }
     }

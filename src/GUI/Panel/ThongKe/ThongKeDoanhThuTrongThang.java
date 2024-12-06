@@ -111,7 +111,7 @@ public final class ThongKeDoanhThuTrongThang extends JPanel{
         tableThongKe = new JTable();
         scrollTableThongKe = new JScrollPane();
         tblModel = new DefaultTableModel();
-        String[] header = new String[]{"Ngày", "Doanh thu", "Chi phí", "Lợi nhuận"};
+        String[] header = new String[]{"Ngày", "Vốn", "Doanh Thu", "Lợi nhuận"};
         tblModel.setColumnIdentifiers(header);
         tableThongKe.setModel(tblModel);
         tableThongKe.setAutoCreateRowSorter(true);
@@ -167,9 +167,9 @@ public final class ThongKeDoanhThuTrongThang extends JPanel{
         // Duyệt danh sách và cập nhật biểu đồ
         for (int i = 0; i < list.size(); i++) {
             ThongKeDTO tk = list.get(i);
-            sum_chiPhi += tk.getCount(); // Chi phí
-            sum_doanhThu += tk.getValue(); // Doanh thu
-            sum_loiNhuan += (tk.getValue() - tk.getCount());
+            sum_chiPhi += tk.getChiPhi(); // Chi phí
+            sum_doanhThu += tk.getDoanhThu(); // Doanh thu
+            sum_loiNhuan += (tk.getDoanhThu() - tk.getChiPhi());
 
             
             if ((i + 1) % 3 == 0 || i == list.size() - 1) {
@@ -194,9 +194,9 @@ public final class ThongKeDoanhThuTrongThang extends JPanel{
         for (ThongKeDTO tk : list) {
             tblModel.addRow(new Object[]{
                 tk.getKey(),
-                Formater.formatVND(tk.getValue()), 
-                Formater.formatVND(tk.getCount()), 
-                Formater.formatVND(tk.getValue() - tk.getCount())
+                Formater.formatVND(tk.getChiPhi()), 
+                Formater.formatVND(tk.getDoanhThu()), 
+                Formater.formatVND(tk.getDoanhThu() - tk.getChiPhi())
             });
         }
     }

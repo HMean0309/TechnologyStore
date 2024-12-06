@@ -1,33 +1,45 @@
 package GUI.Component;
 
+import DTO.ChiTietSanPhamDTO;
+import DTO.SanPhamDTO;
 import com.formdev.flatlaf.FlatClientProperties;
+import helper.Formater;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 
 public class ProductItem extends JPanel implements MouseListener {
+
     public static enum ProductType {
-        CHECKBOX, RADIO;
+        CHECKBOX, RADIO, NONE;
     }
+
+    public boolean isProduct;
+    // Để quản lý các PropertyChangeListener
+    PropertyChangeSupport support = new PropertyChangeSupport(this);
+
     ProductType type;
     Color FontColor = new Color(96, 125, 139);
     Color ColorBlack = new Color(26, 26, 26);
     Color DefaultColor = new Color(255, 255, 255);
-    Color HoverColor = new Color(246, 246, 246, 255);
+    Color HoverColor = new Color(223, 241, 255, 255);
     JLabel img, lblTenSP, lblMaSP;
     JLabel[] lblSub;
-    JPanel panelCenter, panelContent, panelSubContent ;
+    JPanel panelCenter, panelContent, panelSubContent;
     JRadioButton radio;
-    public boolean isSelected = false;
+    private boolean isSelected = false;
 
+    private SanPhamDTO sanPham;
+    private ChiTietSanPhamDTO ctsanPham;
     JCheckBox checkbox;
+
 
     public JRadioButton getRadio() {
         return radio;
@@ -45,24 +57,57 @@ public class ProductItem extends JPanel implements MouseListener {
         this.checkbox = checkbox;
     }
 
+    public boolean isSelected() {
+        return isSelected;
+    }
 
-    public ProductItem(String linkImg, String tenSP, String maSP, String[] subTitle ,String[] sub, ProductType type){
+    public ChiTietSanPhamDTO getCtsanPham() {
+        return ctsanPham;
+    }
+
+    public void setSelected(boolean isSelected) {
+        boolean oldValue = this.isSelected;
+        this.isSelected = isSelected;
+        // Bắn sự kiện PropertyChangeEvent
+        support.firePropertyChange("isSelected", oldValue, isSelected);
+    }
+
+    // Thêm PropertyChangeListener
+    public void addPropertyChangeListener(PropertyChangeListener listener) {
+        if (support == null) {
+            support = new PropertyChangeSupport(this);
+        }
+        support.addPropertyChangeListener(listener);
+    }
+
+    // Xóa PropertyChangeListener
+    public void removePropertyChangeListener(PropertyChangeListener listener) {
+        if (support == null) {
+            support = new PropertyChangeSupport(this);
+        }
+        support.removePropertyChangeListener(listener);
+    }
+
+    public void initComponents(String linkImg, String tenSP, String maSP, String[] subTitle, String[] sub, ProductType type) {
         this.setLayout(new BorderLayout(10, 0));
-        this.setPreferredSize(new Dimension(380, 80));
-        this.setBorder(new EmptyBorder(10, 20, 10, 20));
-        this.setBackground(Color.white);
-        this.putClientProperty( FlatClientProperties.STYLE, "arc: 15" );
+        this.setBackground(DefaultColor);
+        this.setOpaque(true);
+        this.setPreferredSize(new Dimension(180, 80));
+        this.setMaximumSize(new Dimension(500, 80));
+        this.setMinimumSize(new Dimension(80, 80));
+        this.setBorder(new EmptyBorder(10, 10, 10, 10));
+        this.putClientProperty(FlatClientProperties.STYLE, "arc: 15");
 
         this.type = type;
-        switch (type){
+        switch (type) {
             case RADIO: {
                 radio = new JRadioButton();
                 radio.setOpaque(false);
                 radio.addChangeListener(new ChangeListener() {
                     @Override
                     public void stateChanged(ChangeEvent e) {
-                        isSelected = radio.isSelected();
-                        if (isSelected){
+                        setSelected(radio.isSelected());
+                        if (isSelected) {
                             setBackground(HoverColor);
                         } else {
                             setBackground(DefaultColor);
@@ -72,14 +117,14 @@ public class ProductItem extends JPanel implements MouseListener {
                 this.add(radio, BorderLayout.WEST);
                 break;
             }
-            case CHECKBOX:{
+            case CHECKBOX: {
                 checkbox = new JCheckBox();
                 checkbox.setOpaque(false);
                 checkbox.addChangeListener(new ChangeListener() {
                     @Override
                     public void stateChanged(ChangeEvent e) {
-                        isSelected = checkbox.isSelected();
-                        if (isSelected){
+                        setSelected(checkbox.isSelected());
+                        if (isSelected) {
                             setBackground(HoverColor);
                         } else {
                             setBackground(DefaultColor);
@@ -92,21 +137,24 @@ public class ProductItem extends JPanel implements MouseListener {
         }
 
         panelCenter = new JPanel();
-        panelCenter.setLayout(new BorderLayout(10,0));
+        panelCenter.setLayout(new BorderLayout(10, 0));
         panelCenter.setBorder(new EmptyBorder(0, 0, 0, 0));
         panelCenter.setOpaque(false);
         this.add(panelCenter, BorderLayout.CENTER);
 
+        if (isProduct && linkImg.isEmpty()) {
+            linkImg = "product.png";
+        }
         img = new JLabel("");
         img.setIcon(InputImage.resizeImage(new ImageIcon("./src/img_product/" + linkImg), 38));
         img.setOpaque(false);
         panelCenter.add(img, BorderLayout.WEST);
 
         panelContent = new JPanel();
-        panelContent.setLayout(new GridLayout(3,1));
+        panelContent.setLayout(new GridLayout(3, 1));
         panelContent.setBorder(new EmptyBorder(0, 0, 0, 0));
         panelContent.setOpaque(false);
-        panelCenter.add(panelContent,BorderLayout.CENTER);
+        panelCenter.add(panelContent, BorderLayout.CENTER);
 
         lblTenSP = new JLabel(tenSP);
         lblTenSP.putClientProperty("FlatLaf.style", "font: 120% $semibold.font");
@@ -114,12 +162,17 @@ public class ProductItem extends JPanel implements MouseListener {
         panelContent.add(lblTenSP);
 
         lblMaSP = new JLabel(maSP);
-        lblMaSP.putClientProperty("FlatLaf.style", "font: 80% $semibold.font");
-        lblMaSP.setForeground(Color.black);
+        if (isProduct) {
+            lblMaSP.putClientProperty("FlatLaf.style", "font: 80% $semibold.font");
+            lblMaSP.setForeground(Color.black);
+        } else {
+            lblMaSP.putClientProperty("FlatLaf.style", "font: 90% $semibold.font");
+            lblMaSP.setForeground(Color.BLUE);
+        }
         panelContent.add(lblMaSP);
 
         panelSubContent = new JPanel();
-        panelSubContent.setLayout(new GridLayout(1 + (sub.length % 2),2));
+        panelSubContent.setLayout(new GridLayout(1 + (sub.length % 2), 2, 10, 0));
         panelSubContent.setBorder(new EmptyBorder(0, 0, 0, 0));
         panelSubContent.setOpaque(false);
         panelContent.add(panelSubContent);
@@ -127,7 +180,7 @@ public class ProductItem extends JPanel implements MouseListener {
         lblSub = new JLabel[sub.length];
         for (int i = 0; i < lblSub.length; i++) {
             lblSub[i] = new JLabel(subTitle[i] + ": " + sub[i]);
-            lblSub[i].putClientProperty("FlatLaf.style", "font: 100% $medium.font");
+            lblSub[i].putClientProperty("FlatLaf.style", "font: 80% $medium.font");
             lblSub[i].setForeground(Color.gray);
             panelSubContent.add(lblSub[i]);
         }
@@ -135,16 +188,33 @@ public class ProductItem extends JPanel implements MouseListener {
         addMouseListener(this);
     }
 
+    public ProductItem(SanPhamDTO sanPham, ProductType type) {
+        this.sanPham = sanPham;
+        this.isProduct = true;
+        initComponents(sanPham.getImg(), sanPham.getName(), sanPham.getId(),
+                new String[]{ "Phân loại", "Số lượng tồn" }, new String[]{ sanPham.getNameCate(), sanPham.getTonKhoString() },
+                type);
+        this.support = new PropertyChangeSupport(this);
+    }
+
+    public ProductItem(ChiTietSanPhamDTO ctsp, ProductType type) {
+        this.ctsanPham = ctsp;
+        this.isProduct = false;
+        initComponents("", ctsp.getSeri(), Formater.formatVND(ctsp.getPrice()),
+                new String[]{ "Sản phẩm", "Màu" }, new String[]{ ctsanPham.getIdSP(), ctsanPham.getColor() },
+                type);
+        this.support = new PropertyChangeSupport(this);
+    }
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        switch (type){
+        switch (type) {
             case RADIO: {
                 radio.setSelected(true);
                 break;
             }
-            case CHECKBOX:{
-                if (!isSelected){
+            case CHECKBOX: {
+                if (!isSelected) {
                     checkbox.setSelected(true);
                 } else {
                     checkbox.setSelected(false);
@@ -180,17 +250,11 @@ public class ProductItem extends JPanel implements MouseListener {
         }
     }
 
-    public static void main(String[] args) {
-        JFrame frame = new JFrame("Test sp");
-        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        frame.setSize(500, 500);
+    public SanPhamDTO getSanPham() {
+        return sanPham;
+    }
 
-        ProductItem item1 = new ProductItem("oppo_f9.png", "OPPO F9", "PRODUCT00002",
-                new String[]{"Số lượng", "Phân loại"}, new String[]{"15","Điện thoại"}, ProductType.CHECKBOX );
-        frame.getContentPane().setLayout(new FlowLayout());
-        frame.add(item1);
-
-        frame.pack();
-        frame.setVisible(true);
+    public void setSanPham(SanPhamDTO sanPham) {
+        this.sanPham = sanPham;
     }
 }

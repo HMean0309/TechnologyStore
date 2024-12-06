@@ -1,8 +1,8 @@
 package DAO;
 
-import java.sql.ResultSet;
-
 import DTO.HoaDonDTO;
+
+import java.sql.ResultSet;
 
 public class HoaDonDAO extends ObjectDAO {
     public HoaDonDAO() {
@@ -11,41 +11,33 @@ public class HoaDonDAO extends ObjectDAO {
 
     public ResultSet getAllHoaDon() {
         super.connectDB();
-        String query = "SELECT * FROM HOA_DON";
+        String query = "SELECT * FROM hoadon_nv_kh where isDelete = 0;";
         return super.executeQuery(query);
     }
 
-    public ResultSet getAllHoaDonWithStatus(String status) {
+    public ResultSet getCountAllHoaDon() {
         super.connectDB();
-        String query = "SELECT * FROM HOA_DON WHERE status = ? ";
-        Object[] params = { status };
-        ResultSet rs = super.executeQuery(query, params);
+        String query = "SELECT COUNT(*) FROM HOA_DON";
+        ResultSet rs = super.executeQuery(query);
         return rs;
     }
 
-    public ResultSet getCountHoaDonWithStatus(String status) {
-        super.connectDB();
-        String query = "SELECT COUNT(*) FROM HOA_DON WHERE status = ?";
-        Object[] params = { status };
-        ResultSet rs = super.executeQuery(query, params);
-        return rs;
-    }
 
-    public void updateStatusHoaDon(String id, String status) {
+    public void removeHoaDon(String id) {
         super.connectDB();
-        String query = "UPDATE HOA_DON SET status = ? WHERE id = ?";
-        Object[] params = { status, id };
+        String query = "UPDATE HOA_DON SET isDelete = 1 WHERE id = ?";
+        Object[] params = { id };
         super.executeNonQuery(query, params);
 
     }
 
     public void addHoaDon(HoaDonDTO hoadon) {
         super.connectDB();
-        String query = "INSERT INTO HOA_DON (id,ngaylap,order_amount,discount_amount,status,km,pttt,id_khachhang,id_nhanvien,ghichu) "
-                + "VALUES(?,?,?,?,?,?,?,?,?,?)";
+        String query = "INSERT INTO HOA_DON (id,ngaylap,order_amount,discount_amount,km,pttt,id_khachhang,id_nhanvien) "
+                + "VALUES(?,?,?,?,?,?,?,?)";
         Object[] params = { hoadon.getId(), hoadon.getNgayLap(), hoadon.getOrderAmount(), hoadon.getDiscountAmount(),
-                hoadon.getStatus(), hoadon.getKhuyenMai(), hoadon.getPhuongThucTT(), hoadon.getKhachHang(),
-                hoadon.getNhanVien(), hoadon.getGhichu() };
+                hoadon.getKm(), hoadon.getPttt(), hoadon.getIdKhachHang(), hoadon.getIdNhanVien()
+        };
         super.executeNonQuery(query, params);
 
     }

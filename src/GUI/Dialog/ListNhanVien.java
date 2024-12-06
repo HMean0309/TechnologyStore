@@ -23,9 +23,6 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
-/**
- * @author robot
- */
 public class ListNhanVien extends JDialog {
 
     private TaiKhoan guiTaiKhoan;

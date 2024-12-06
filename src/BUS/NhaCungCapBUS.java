@@ -5,6 +5,7 @@ import DTO.NhaCungCapDTO;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -48,6 +49,14 @@ public class NhaCungCapBUS {
             e.printStackTrace();
         }
         return setNCC;
+    }
+
+    public HashMap<String, String> toMap() {
+        HashMap<String, String> mapNCC = new HashMap<>();
+        for (NhaCungCapDTO ncc : setNCC) {
+            mapNCC.put(ncc.getName(), ncc.getId());
+        }
+        return mapNCC;
     }
 
     public NhaCungCapBUS(LinkedHashSet<NhaCungCapDTO> setNCC, NhaCungCapDAO daoNCC) {
@@ -189,6 +198,12 @@ public class NhaCungCapBUS {
             return searchPhone(content);
         }
         return getSetNCC();
+    }
+
+    public LinkedHashSet<String> getAllNameNCC() {
+        return getSetNCC().stream()
+                .map(NhaCungCapDTO::getName)
+                .collect(Collectors.toCollection(LinkedHashSet::new));
     }
 
 }

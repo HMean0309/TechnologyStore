@@ -5,6 +5,7 @@ import DTO.KhachHangDTO;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -41,6 +42,9 @@ public class KhachHangBUS {
         daoKH.closeDB();
     }
 
+    public static KhachHangBUS getInstance() {
+        return new KhachHangBUS();
+    }
 
     public static LinkedHashSet<KhachHangDTO> toSet(ResultSet rs) {
         LinkedHashSet<KhachHangDTO> setKH = new LinkedHashSet<>();
@@ -67,6 +71,14 @@ public class KhachHangBUS {
         setSetKH(toSet(daoKH.getAllKhachHang()));
         daoKH.closeDB();
         return getSetKH();
+    }
+
+    public HashMap<String, String> toMap() {
+        HashMap<String, String> mapKH = new HashMap<>();
+        for (KhachHangDTO kh : setKH) {
+            mapKH.put(kh.getName(), kh.getId());
+        }
+        return mapKH;
     }
 
     public int getCountKhachHang() {

@@ -1,27 +1,29 @@
 package BUS;
 
+import DAO.ChiTietPhieuNhapDAO;
+import DTO.ChiTietPhieuNhapDTO;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.LinkedHashSet;
 
-import DAO.ChiTietPhieuNhapDAO;
-import DTO.ChiTietNhapKhoDTO;
-
 public class ChiTietPhieuNhapBUS {
-    private LinkedHashSet<ChiTietNhapKhoDTO> setCTPN;
+    private LinkedHashSet<ChiTietPhieuNhapDTO> setCTPN;
     private ChiTietPhieuNhapDAO daoCTPN;
 
     public ChiTietPhieuNhapBUS() {
         daoCTPN = new ChiTietPhieuNhapDAO();
         setCTPN = new LinkedHashSet<>();
         setCTPN = ChiTietPhieuNhapBUS.toSet(daoCTPN.getAllChiTietPhieuNhap());
+        daoCTPN.closeDB();
     }
 
-    public static LinkedHashSet<ChiTietNhapKhoDTO> toSet(ResultSet rs) {
-        LinkedHashSet<ChiTietNhapKhoDTO> setCTPN = new LinkedHashSet<>();
+    public static LinkedHashSet<ChiTietPhieuNhapDTO> toSet(ResultSet rs) {
+        LinkedHashSet<ChiTietPhieuNhapDTO> setCTPN = new LinkedHashSet<>();
         try {
             while (rs.next()) {
-                ChiTietNhapKhoDTO ctpn = new ChiTietNhapKhoDTO(
+                ChiTietPhieuNhapDTO ctpn = new ChiTietPhieuNhapDTO(
                         rs.getString("id_pn"),
                         rs.getString("seri"),
                         rs.getInt("cost"));
@@ -32,22 +34,27 @@ public class ChiTietPhieuNhapBUS {
         }
         return setCTPN;
     }
-    
-    public void addChiTietPhieuNhap(ChiTietNhapKhoDTO ctpn){
-        daoCTPN.addChiTietPhieuNhap(ctpn);
-        setCTPN.add(ctpn);
+
+    public void addAllChiTietPhieuNhap(ArrayList<ChiTietPhieuNhapDTO> listCTPN) {
+        LinkedHashSet<ChiTietPhieuNhapDTO> setAllCTPN = new LinkedHashSet<>(listCTPN);
+        if (setCTPN.addAll(setAllCTPN)) {
+            for (ChiTietPhieuNhapDTO ctpn : setAllCTPN) {
+                daoCTPN.addChiTietPhieuNhap(ctpn);
+            }
+            daoCTPN.closeDB();
+        }
     }
-    
-    public ChiTietPhieuNhapBUS(LinkedHashSet<ChiTietNhapKhoDTO> setCTPN, ChiTietPhieuNhapDAO daoCTPN) {
+
+    public ChiTietPhieuNhapBUS(LinkedHashSet<ChiTietPhieuNhapDTO> setCTPN, ChiTietPhieuNhapDAO daoCTPN) {
         this.setCTPN = setCTPN;
         this.daoCTPN = daoCTPN;
     }
 
-    public LinkedHashSet<ChiTietNhapKhoDTO> getSetCTPN() {
+    public LinkedHashSet<ChiTietPhieuNhapDTO> getSetCTPN() {
         return setCTPN;
     }
 
-    public void setSetCTPN(LinkedHashSet<ChiTietNhapKhoDTO> setCTPN) {
+    public void setSetCTPN(LinkedHashSet<ChiTietPhieuNhapDTO> setCTPN) {
         this.setCTPN = setCTPN;
     }
 

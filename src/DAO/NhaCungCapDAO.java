@@ -68,4 +68,30 @@ public class NhaCungCapDAO extends ObjectDAO {
         super.executeNonQuery(query, params);
 
     }
+    public NhaCungCapDTO selectById(String id) {
+        super.connectDB();
+        String query = "SELECT * FROM NCC WHERE id = ? ";
+        Object[] params = { id };
+        ResultSet rs = super.executeQuery(query, params);
+        NhaCungCapDTO nhaCungCap = null;
+
+        try {
+            if (rs.next()) {
+                nhaCungCap = new NhaCungCapDTO();
+                nhaCungCap.setId(rs.getString("id"));
+                nhaCungCap.setName(rs.getString("name"));
+                nhaCungCap.setPhone(rs.getString("phone"));
+                nhaCungCap.setAddress(rs.getString("address"));
+                nhaCungCap.setWard(rs.getString("ward"));
+                nhaCungCap.setDistrict(rs.getString("district"));
+                nhaCungCap.setCity(rs.getString("city"));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            super.closeDB();
+        }
+
+        return nhaCungCap;
+    }
 }

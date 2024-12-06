@@ -96,6 +96,13 @@ public class Validation {
         return fromDate.isBefore(toDate) || fromDate.isEqual(toDate);
     }
 
+    public static boolean isFromToInt(Integer from, Integer to) {
+        if (from == null || to == null) {
+            return true;
+        }
+        return from <= to;
+    }
+
     public static boolean isComponentInPanel(JPanel panel, Component component) {
         for (Component comp : panel.getComponents()) {
             if (comp.equals(component)) {

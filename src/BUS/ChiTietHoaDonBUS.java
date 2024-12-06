@@ -1,20 +1,16 @@
 package BUS;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.LinkedHashSet;
-
 import DAO.ChiTietHoaDonDAO;
 import DTO.ChiTietHoaDonDTO;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.LinkedHashSet;
 
 public class ChiTietHoaDonBUS {
     private LinkedHashSet<ChiTietHoaDonDTO> setCTHD;
     private ChiTietHoaDonDAO daoCTHD;
-    private String idHoaDon;
-
-    public String getIdHoaDon() {
-        return idHoaDon;
-    }
 
     public LinkedHashSet<ChiTietHoaDonDTO> getSetCTHD() {
         return setCTHD;
@@ -32,10 +28,9 @@ public class ChiTietHoaDonBUS {
         this.daoCTHD = daoCTHD;
     }
 
-    public ChiTietHoaDonBUS(String idHoaDon) {
-        this.idHoaDon = idHoaDon;
+    public ChiTietHoaDonBUS() {
         setCTHD = new LinkedHashSet<>();
-        daoCTHD = new ChiTietHoaDonDAO(idHoaDon);
+        daoCTHD = new ChiTietHoaDonDAO();
 
         setCTHD = toSet(daoCTHD.getAllCTHoaDon());
         daoCTHD.closeDB();
@@ -50,7 +45,7 @@ public class ChiTietHoaDonBUS {
                         rs.getString("seri"),
                         rs.getInt("don_gia"));
                 setCTHD.add(that);
-                
+
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -58,19 +53,8 @@ public class ChiTietHoaDonBUS {
         return setCTHD;
     }
 
-    public LinkedHashSet<ChiTietHoaDonDTO> getAllCTHoaDon(){
-        setSetCTHD(toSet(daoCTHD.getAllCTHoaDon()));
-        daoCTHD.closeDB();
-        return getSetCTHD();
-    }
 
-    public LinkedHashSet<ChiTietHoaDonDTO> getAllCTHoaDonOfSanPham(String idSanPham){
-        setSetCTHD(toSet(daoCTHD.getAllCTHoaDonOfSanPham(idSanPham)));
-        daoCTHD.closeDB();
-        return getSetCTHD();
-    }
-
-    public int getCountCTHoaDon(){
+    public int getCountCTHoaDon() {
         ResultSet rs = daoCTHD.getCountCTHoaDon();
         int count = -1;
         try {
@@ -83,25 +67,15 @@ public class ChiTietHoaDonBUS {
         return count;
     }
 
-    public int getCountCTHoaDonOfSanPham(String idSanPham){
-        ResultSet rs = daoCTHD.getCountCTHoaDonOfSanPham(idSanPham);
-        int count = -1;
-        try {
-            rs.next();
-            count = rs.getInt(1);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        daoCTHD.closeDB();
-        return count;
-    }
-
-    public void addCTHoaDon(ChiTietHoaDonDTO ctHoaDon) {
-        if (setCTHD.add(ctHoaDon)) {
-            daoCTHD.addCTHoaDon(ctHoaDon);
+    public void addAllChiTietHoaDon(ArrayList<ChiTietHoaDonDTO> listCTHD) {
+        LinkedHashSet<ChiTietHoaDonDTO> setAllCTHD = new LinkedHashSet<>(listCTHD);
+        if (setCTHD.addAll(setAllCTHD)) {
+            for (ChiTietHoaDonDTO cthd : setAllCTHD) {
+                daoCTHD.addCTHoaDon(cthd);
+            }
             daoCTHD.closeDB();
         }
     }
 
-    
+
 }
