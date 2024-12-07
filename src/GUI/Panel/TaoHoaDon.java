@@ -322,54 +322,13 @@ public class TaoHoaDon extends JPanel implements ActionListener, ItemListener {
         khPanel.add(khachKhangJLabel);
         khPanel.add(khachJPanel);
 
-        //Chọn khuyến mãi
-        JPanel khuyenmaiJPanel = new JPanel(new BorderLayout());
-        khuyenmaiJPanel.setPreferredSize(new Dimension(0, 40));
-        khuyenmaiJPanel.setBorder(new EmptyBorder(0, 10, 0, 10));
-        khuyenmaiJPanel.setOpaque(false);
-        JPanel kmJPanelLeft = new JPanel(new GridLayout(1, 1));
-        kmJPanelLeft.setOpaque(false);
-        kmJPanelLeft.setPreferredSize(new Dimension(40, 0));
-        ButtonCustom btnKm = new ButtonCustom("Chọn khuyến mãi", "success", 14);
-        kmJPanelLeft.add(btnKm);
-        btnKm.addActionListener((ActionEvent e) -> {
-
-        });
-
-        txtKM = new JTextField("");
-        txtKM.setEditable(false);
-        khuyenmaiJPanel.add(kmJPanelLeft, BorderLayout.EAST);
-        khuyenmaiJPanel.add(txtKM, BorderLayout.CENTER);
-        JPanel kmPanel = new JPanel(new GridLayout(2, 1, 5, 0));
-        kmPanel.setBackground(Color.WHITE);
-        kmPanel.setPreferredSize(new Dimension(0, 80));
-        JLabel khuyenMaiJLabel = new JLabel("Khuyến mãi");
-        khuyenMaiJLabel.setBorder(new EmptyBorder(0, 10, 0, 10));
-        kmPanel.add(khuyenMaiJLabel);
-        kmPanel.add(khuyenmaiJPanel);
-
-        right_center.add(kmPanel);
         right_center.add(khPanel);
         right_center.setOpaque(false);
 
-        right_bottom = new JPanel(new GridLayout(4, 1));
-        right_bottom.setPreferredSize(new Dimension(300, 200));
+        right_bottom = new JPanel(new GridLayout(3, 1));
+        right_bottom.setPreferredSize(new Dimension(300, 160));
         right_bottom.setBorder(new EmptyBorder(10, 10, 10, 10));
         right_bottom.setOpaque(false);
-
-        pn_discount = new JPanel(new BorderLayout(5, 0));
-        pn_discount.setBorder(new EmptyBorder(0, 5, 0, 5));
-        pn_discount.setOpaque(false);
-        JLabel title_discount = new JLabel("Chiết khấu:");
-        title_discount.setFont(new Font(FlatRobotoFont.FAMILY, 1, 18));
-        title_discount.setForeground(new Color(0, 0, 0));
-        discount = 0;
-        value_discount = new JLabel(Formater.formatVND(tongTien));
-        value_discount.setFont(new Font(FlatRobotoFont.FAMILY, 1, 18));
-        value_discount.setHorizontalAlignment(SwingConstants.RIGHT);
-        pn_discount.add(title_discount, BorderLayout.WEST);
-        pn_discount.add(value_discount, BorderLayout.CENTER);
-        right_bottom.add(pn_discount);
 
         pn_tongtien = new JPanel(new BorderLayout(5, 0));
         pn_tongtien.setBorder(new EmptyBorder(0, 5, 0, 5));
