@@ -322,7 +322,7 @@ INSERT INTO `chuc_nang` (`id`, `name`)
 VALUES ('SER001', 'Quản lý khách hàng'),
        ('SER002', 'Quản lý phân loại'),
        ('SER003', 'Quản lý nhà cung cấp'),
-       ('SER004', 'Quản lý nhập hàng'),
+       ('SER004', 'Quản lý phiếu nhập'),
        ('SER005', 'Quản lý phân quyền'),
        ('SER006', 'Quản lý sản phẩm'),
        ('SER007', 'Quản lý tài khoản'),
@@ -333,8 +333,7 @@ VALUES ('SER001', 'Quản lý khách hàng'),
 
 INSERT INTO `quyen` (`id`, `name`, `isDelete`)
 VALUES ('POS001', 'Admin', 0),
-       ('POS002', 'Quản Lý', 0),
-       ('POS003', 'Nhân viên', 0);
+       ('POS002', 'Quản Lý', 0);
 
 INSERT INTO `ct_quyen` (`id_quyen`, `id_chucnang`, `permission`)
 VALUES ('POS001', 'SER001', 'create'),
