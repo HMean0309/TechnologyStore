@@ -60,7 +60,7 @@ public class PhieuNhap extends JPanel implements ActionListener {
         tablePhieuNhap = new JTable();
         scrollTablePhieuNhap = new JScrollPane();
         tblModel = new DefaultTableModel();
-        String[] header = new String[]{ "Mã phiếu nhập", "Nhà cung cấp", "Người lập phiếu", "Tổng tiền", "Ngày nhập" };
+        String[] header = new String[]{ "Mã phiếu nhập", "Mã NCC", "Mã nhân viên", "Tổng tiền", "Ngày nhập" };
         tblModel.setColumnIdentifiers(header);
         tablePhieuNhap.setModel(tblModel);
         tablePhieuNhap.setFocusable(false);
@@ -367,7 +367,7 @@ public class PhieuNhap extends JPanel implements ActionListener {
         tblModel.setRowCount(0);
         for (PhieuNhapDTO phieunhap : resultTable) {
             tblModel.addRow(new Object[]{
-                    phieunhap.getId(), phieunhap.getNameNCC(), phieunhap.getNameNhanVien(),
+                    phieunhap.getId(), phieunhap.getIdNCC(), phieunhap.getIdNhanVien(),
                     Formater.formatVND(phieunhap.getTotal()),
                     Formater.formatTime(phieunhap.getNgayNhap())
             });
@@ -378,7 +378,7 @@ public class PhieuNhap extends JPanel implements ActionListener {
         tblModel.setRowCount(0);
         for (PhieuNhapDTO phieunhap : data) {
             tblModel.addRow(new Object[]{
-                    phieunhap.getId(), phieunhap.getNameNCC(), phieunhap.getNameNhanVien(),
+                    phieunhap.getId(), phieunhap.getIdNCC(), phieunhap.getIdNhanVien(),
                     Formater.formatVND(phieunhap.getTotal()),
                     Formater.formatTime(phieunhap.getNgayNhap())
             });

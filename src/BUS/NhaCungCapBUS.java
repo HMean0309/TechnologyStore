@@ -54,7 +54,7 @@ public class NhaCungCapBUS {
     public HashMap<String, String> toMap() {
         HashMap<String, String> mapNCC = new HashMap<>();
         for (NhaCungCapDTO ncc : setNCC) {
-            mapNCC.put(ncc.getName(), ncc.getId());
+            mapNCC.put(ncc.getId(), ncc.getName());
         }
         return mapNCC;
     }

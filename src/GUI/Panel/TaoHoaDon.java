@@ -283,7 +283,7 @@ public class TaoHoaDon extends JPanel implements ActionListener, ItemListener {
         txtMaphieu.setText(hoadonBUS.createID());
         txtMaphieu.setEditable(false);
         txtNhanVien = new InputForm("Nhân viên lập");
-        txtNhanVien.setText(nv.getName());
+        txtNhanVien.setText(nv.getId());
         txtNhanVien.setEditable(false);
 
         right_top.add(txtMaphieu);
@@ -306,7 +306,7 @@ public class TaoHoaDon extends JPanel implements ActionListener, ItemListener {
             ListKhachHang listkh = new ListKhachHang(this, owner, "Chọn khách hàng", true);
             KhachHangDTO khachHangDTO = listkh.getKh();
             if (khachHangDTO != null) {
-                txtKh.setText(khachHangDTO.getName());
+                txtKh.setText(khachHangDTO.getId());
             }
         });
 
@@ -545,10 +545,10 @@ public class TaoHoaDon extends JPanel implements ActionListener, ItemListener {
         } else if (source == btnDatHang && validateHoaDon()) {
             String idHD = txtMaphieu.getText();
             String idNV = nv.getId();
-            String idKH = mapKH.get(txtKh.getText());
+            String idKH = txtKh.getText();
 
             hoadonBUS.addHoaDon(new HoaDonDTO(idHD, LocalDateTime.now(), tongTien, 0,
-                    idKH, idNV, txtKh.getText(), nv.getName(), false));
+                    idKH, idNV, mapKH.get(idKH), nv.getName(), false));
             for (String idSP : gioHang.keySet()) {
                 HashMap<String, ArrayList<ChiTietSanPhamDTO>> option_seri = gioHang.get(idSP);
                 for (String color : option_seri.keySet()) {

@@ -119,21 +119,21 @@ public class HoaDonBUS {
         return getSetHD();
     }
 
-    public LinkedHashSet<HoaDonDTO> filterNameNhanVien(String nameNV) {
-        if (nameNV.equals("Tất cả")) {
+    public LinkedHashSet<HoaDonDTO> filterIdNhanVien(String idNV) {
+        if (idNV.equals("Tất cả")) {
             return setHD;
         }
         return setHD.stream()
-                .filter(hoadonDTO -> hoadonDTO.getNameNhanVien().equals(nameNV))
+                .filter(hoadonDTO -> hoadonDTO.getIdNhanVien().equals(idNV))
                 .collect(Collectors.toCollection(LinkedHashSet::new));
     }
 
-    public LinkedHashSet<HoaDonDTO> filterNameKhachHang(String nameKH) {
-        if (nameKH.equals("Tất cả")) {
+    public LinkedHashSet<HoaDonDTO> filterIdKhachHang(String idKH) {
+        if (idKH.equals("Tất cả")) {
             return setHD;
         }
         return setHD.stream()
-                .filter(hoadonDTO -> hoadonDTO.getNameKhachHang().equals(nameKH))
+                .filter(hoadonDTO -> hoadonDTO.getIdKhachHang().equals(idKH))
                 .collect(Collectors.toCollection(LinkedHashSet::new));
     }
 
@@ -179,8 +179,8 @@ public class HoaDonBUS {
     public LinkedHashSet<HoaDonDTO> searchAndfilter(String searchContent, String searchType, Object[] filterContent) {
         LinkedHashSet<HoaDonDTO> searchResult = search(searchContent, searchType);
 
-        LinkedHashSet<HoaDonDTO> setNameNv = filterNameNhanVien((String) filterContent[0]);
-        LinkedHashSet<HoaDonDTO> setNameKhachHang = filterNameKhachHang((String) filterContent[1]);
+        LinkedHashSet<HoaDonDTO> setNameNv = filterIdNhanVien((String) filterContent[0]);
+        LinkedHashSet<HoaDonDTO> setNameKhachHang = filterIdKhachHang((String) filterContent[1]);
         LinkedHashSet<HoaDonDTO> setFromNgayLap = filterFromNgayLap((LocalDate) filterContent[2]);
         LinkedHashSet<HoaDonDTO> setToNgayLap = filterToNgayLap((LocalDate) filterContent[3]);
         LinkedHashSet<HoaDonDTO> setFromTotal = filterFromTotal((Integer) filterContent[4]);

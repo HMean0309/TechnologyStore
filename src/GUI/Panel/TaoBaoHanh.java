@@ -268,10 +268,10 @@ public class TaoBaoHanh extends JPanel implements ActionListener, ItemListener {
         txtMaHoaDon.setText(hd.getId());
         txtMaHoaDon.setEditable(false);
         txtKhachHang = new InputForm("Khách hàng");
-        txtKhachHang.setText(hd.getNameKhachHang());
+        txtKhachHang.setText(hd.getIdKhachHang());
         txtKhachHang.setEditable(false);
         txtNhanVien = new InputForm("Nhân viên lập");
-        txtNhanVien.setText(nv.getName());
+        txtNhanVien.setText(nv.getId());
         txtNhanVien.setEditable(false);
         inputNgayTraHang = new InputDate("Ngày Trả Hàng");
 

@@ -113,21 +113,21 @@ public class PhieuNhapBUS {
         return getSetPN();
     }
 
-    public LinkedHashSet<PhieuNhapDTO> filterNameNhanVien(String nameNV) {
-        if (nameNV.equals("Tất cả")) {
+    public LinkedHashSet<PhieuNhapDTO> filterIdNhanVien(String idNV) {
+        if (idNV.equals("Tất cả")) {
             return setPN;
         }
         return setPN.stream()
-                .filter(phieuNhapDTO -> phieuNhapDTO.getNameNhanVien().equals(nameNV))
+                .filter(phieuNhapDTO -> phieuNhapDTO.getIdNhanVien().equals(idNV))
                 .collect(Collectors.toCollection(LinkedHashSet::new));
     }
 
-    public LinkedHashSet<PhieuNhapDTO> filterNameNCC(String nameNCC) {
-        if (nameNCC.equals("Tất cả")) {
+    public LinkedHashSet<PhieuNhapDTO> filterIdNCC(String idNCC) {
+        if (idNCC.equals("Tất cả")) {
             return setPN;
         }
         return setPN.stream()
-                .filter(phieuNhapDTO -> phieuNhapDTO.getNameNCC().equals(nameNCC))
+                .filter(phieuNhapDTO -> phieuNhapDTO.getIdNCC().equals(idNCC))
                 .collect(Collectors.toCollection(LinkedHashSet::new));
     }
 
@@ -173,8 +173,8 @@ public class PhieuNhapBUS {
     public LinkedHashSet<PhieuNhapDTO> searchAndfilter(String searchContent, String searchType, Object[] filterContent) {
         LinkedHashSet<PhieuNhapDTO> searchResult = search(searchContent, searchType);
 
-        LinkedHashSet<PhieuNhapDTO> setNameNv = filterNameNhanVien((String) filterContent[0]);
-        LinkedHashSet<PhieuNhapDTO> setNameNCC = filterNameNCC((String) filterContent[1]);
+        LinkedHashSet<PhieuNhapDTO> setNameNv = filterIdNhanVien((String) filterContent[0]);
+        LinkedHashSet<PhieuNhapDTO> setNameNCC = filterIdNCC((String) filterContent[1]);
         LinkedHashSet<PhieuNhapDTO> setFromNgayNhap = filterFromNgayNhap((LocalDate) filterContent[2]);
         LinkedHashSet<PhieuNhapDTO> setToNgayNhap = filterToNgayNhap((LocalDate) filterContent[3]);
         LinkedHashSet<PhieuNhapDTO> setFromTotal = filterFromTotal((Integer) filterContent[4]);

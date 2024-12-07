@@ -60,7 +60,7 @@ public class HoaDon extends JPanel implements ActionListener {
         tableHoaDon = new JTable();
         scrollTableHoaDon = new JScrollPane();
         tblModel = new DefaultTableModel();
-        String[] header = new String[]{ "Mã hóa đơn", "Khách hàng", "Người lập phiếu", "Tổng tiền", "Ngày lập" };
+        String[] header = new String[]{ "Mã hóa đơn", "Mã Khách Hàng", "Mã Nhân Viên", "Tổng tiền", "Ngày lập" };
         tblModel.setColumnIdentifiers(header);
         tableHoaDon.setModel(tblModel);
         tableHoaDon.setFocusable(false);
@@ -367,7 +367,7 @@ public class HoaDon extends JPanel implements ActionListener {
         tblModel.setRowCount(0);
         for (HoaDonDTO hoadon : resultTable) {
             tblModel.addRow(new Object[]{
-                    hoadon.getId(), hoadon.getNameKhachHang(), hoadon.getNameNhanVien(),
+                    hoadon.getId(), hoadon.getIdKhachHang(), hoadon.getIdNhanVien(),
                     Formater.formatVND(hoadon.getTotal()),
                     Formater.formatTime(hoadon.getNgayLap())
             });
@@ -378,7 +378,7 @@ public class HoaDon extends JPanel implements ActionListener {
         tblModel.setRowCount(0);
         for (HoaDonDTO hoadon : data) {
             tblModel.addRow(new Object[]{
-                    hoadon.getId(), hoadon.getNameKhachHang(), hoadon.getNameNhanVien(),
+                    hoadon.getId(), hoadon.getIdKhachHang(), hoadon.getIdNhanVien(),
                     Formater.formatVND(hoadon.getTotal()),
                     Formater.formatTime(hoadon.getNgayLap())
             });

@@ -114,7 +114,7 @@ public class NhanVienBUS {
     public HashMap<String, String> toMap() {
         HashMap<String, String> mapNV = new HashMap<>();
         for (NhanVienDTO nv : setNV) {
-            mapNV.put(nv.getName(), nv.getId());
+            mapNV.put(nv.getId(), nv.getName());
         }
         return mapNV;
     }

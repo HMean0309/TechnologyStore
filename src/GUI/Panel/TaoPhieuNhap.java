@@ -355,7 +355,7 @@ public class TaoPhieuNhap extends JPanel implements ActionListener, ItemListener
         txtMaphieu.setText(phieunhapBUS.createID());
         txtMaphieu.setEditable(false);
         txtNhanVien = new InputForm("Nhân viên nhập");
-        txtNhanVien.setText(nv.getName());
+        txtNhanVien.setText(nv.getId());
         txtNhanVien.setEditable(false);
         ArrayList<String> dataNCC = new ArrayList<>(mapNCC.keySet());
         dataNCC.add(0, "Vui lòng chọn nhà cung cấp");
@@ -586,10 +586,10 @@ public class TaoPhieuNhap extends JPanel implements ActionListener, ItemListener
         } else if (source == btnNhapHang && validatePhieuNhap()) {
             String idPN = txtMaphieu.getText();
             String idNV = nv.getId();
-            String idNCC = mapNCC.get((String) cbxNhaCungCap.getSelectedItem());
+            String idNCC = (String) cbxNhaCungCap.getSelectedItem();
 
             phieunhapBUS.addPhieuNhap(new PhieuNhapDTO(idPN, LocalDateTime.now(), tongTien,
-                    idNV, idNCC, nv.getName(), cbxNhaCungCap.getValue(), false));
+                    idNV, idNCC, nv.getName(), mapNCC.get(idNCC), false));
             for (String idSP : gioHang.keySet()) {
                 HashMap<String, ArrayList<ChiTietSanPhamDTO>> option_seri = gioHang.get(idSP);
                 for (String color : option_seri.keySet()) {

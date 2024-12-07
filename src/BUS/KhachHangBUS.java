@@ -76,7 +76,7 @@ public class KhachHangBUS {
     public HashMap<String, String> toMap() {
         HashMap<String, String> mapKH = new HashMap<>();
         for (KhachHangDTO kh : setKH) {
-            mapKH.put(kh.getName(), kh.getId());
+            mapKH.put(kh.getId(), kh.getName());
         }
         return mapKH;
     }

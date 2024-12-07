@@ -120,21 +120,21 @@ public class BaoHanhBUS {
         return getSetBH();
     }
 
-    public LinkedHashSet<BaoHanhDTO> filterNameNhanVien(String nameNV) {
-        if (nameNV.equals("Tất cả")) {
+    public LinkedHashSet<BaoHanhDTO> filterIdNhanVien(String idNV) {
+        if (idNV.equals("Tất cả")) {
             return setBH;
         }
         return setBH.stream()
-                .filter(baohanhDTO -> baohanhDTO.getNameNhanVien().equals(nameNV))
+                .filter(baohanhDTO -> baohanhDTO.getIdNhanVien().equals(idNV))
                 .collect(Collectors.toCollection(LinkedHashSet::new));
     }
 
-    public LinkedHashSet<BaoHanhDTO> filterNameKhachHang(String nameKH) {
-        if (nameKH.equals("Tất cả")) {
+    public LinkedHashSet<BaoHanhDTO> filterIdKhachHang(String idKH) {
+        if (idKH.equals("Tất cả")) {
             return setBH;
         }
         return setBH.stream()
-                .filter(baohanhDTO -> baohanhDTO.getNameKhachHang().equals(nameKH))
+                .filter(baohanhDTO -> baohanhDTO.getIdKhachHang().equals(idKH))
                 .collect(Collectors.toCollection(LinkedHashSet::new));
     }
 
@@ -179,8 +179,8 @@ public class BaoHanhBUS {
     public LinkedHashSet<BaoHanhDTO> searchAndfilter(String searchContent, String searchType, Object[] filterContent) {
         LinkedHashSet<BaoHanhDTO> searchResult = search(searchContent, searchType);
 
-        LinkedHashSet<BaoHanhDTO> setNameNv = filterNameNhanVien((String) filterContent[0]);
-        LinkedHashSet<BaoHanhDTO> setNameKhachHang = filterNameKhachHang((String) filterContent[1]);
+        LinkedHashSet<BaoHanhDTO> setNameNv = filterIdNhanVien((String) filterContent[0]);
+        LinkedHashSet<BaoHanhDTO> setNameKhachHang = filterIdKhachHang((String) filterContent[1]);
         LinkedHashSet<BaoHanhDTO> setFromNgayBaoHanh = filterFromNgayBaoHanh((LocalDate) filterContent[2]);
         LinkedHashSet<BaoHanhDTO> setToNgayBaoHanh = filterToNgayBaoHanh((LocalDate) filterContent[3]);
         LinkedHashSet<BaoHanhDTO> setFromNgayTraHang = filterFromNgayTraHang((LocalDate) filterContent[4]);

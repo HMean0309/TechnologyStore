@@ -55,7 +55,7 @@ public class BaoHanh extends JPanel implements ActionListener {
         tableBaoHanh = new JTable();
         scrollTableBaoHanh = new JScrollPane();
         tblModel = new DefaultTableModel();
-        String[] header = new String[]{ "Mã bảo hành", "Mã phiếu bảo hành", "Khách hàng", "Người lập phiếu", "Ngày lập", "Ngày trả hàng" };
+        String[] header = new String[]{ "Mã bảo hành", "Mã hóa đơn", "Mã khách hàng", "Mã nhân viên", "Ngày lập", "Ngày trả hàng" };
         tblModel.setColumnIdentifiers(header);
         tableBaoHanh.setModel(tblModel);
         tableBaoHanh.setFocusable(false);
@@ -324,8 +324,7 @@ public class BaoHanh extends JPanel implements ActionListener {
         tblModel.setRowCount(0);
         for (BaoHanhDTO baohanh : resultTable) {
             tblModel.addRow(new Object[]{
-                    baohanh.getId(), baohanh.getIdHoaDon(),
-                    baohanh.getNameKhachHang(), baohanh.getNameNhanVien(),
+                    baohanh.getId(), baohanh.getIdHoaDon(), baohanh.getIdKhachHang(), baohanh.getIdNhanVien(),
                     Formater.formatTime(baohanh.getNgayBaoHanh()),
                     Formater.formatDate(baohanh.getNgayTraHang())
             });
@@ -336,8 +335,7 @@ public class BaoHanh extends JPanel implements ActionListener {
         tblModel.setRowCount(0);
         for (BaoHanhDTO baohanh : data) {
             tblModel.addRow(new Object[]{
-                    baohanh.getId(), baohanh.getIdHoaDon(),
-                    baohanh.getNameKhachHang(), baohanh.getNameNhanVien(),
+                    baohanh.getId(), baohanh.getIdHoaDon(), baohanh.getIdKhachHang(), baohanh.getIdNhanVien(),
                     Formater.formatTime(baohanh.getNgayBaoHanh()),
                     Formater.formatDate(baohanh.getNgayTraHang())
             });
