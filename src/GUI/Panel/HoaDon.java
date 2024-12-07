@@ -1,5 +1,6 @@
 package GUI.Panel;
 
+import BUS.ChiTietHoaDonBUS;
 import BUS.HoaDonBUS;
 import BUS.KhachHangBUS;
 import BUS.NhanVienBUS;
@@ -467,7 +468,8 @@ public class HoaDon extends JPanel implements ActionListener {
                         "Bạn có chắc chắn muốn xóa hóa đơn ?", "Xóa hóa đơn",
                         JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE);
                 if (input == 0) {
-                    //hoadonBUS.removeHoaDon(resultTable.get(index));
+                    hoadonBUS.removeHoaDon(resultTable.get(index));
+                    ChiTietHoaDonBUS.getInstance().removeAllChiTietHoaDon(resultTable.get(index).getId());
                     loadDataTable();
                 }
             }

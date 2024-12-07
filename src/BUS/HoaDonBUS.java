@@ -196,4 +196,11 @@ public class HoaDonBUS {
 
         return result;
     }
+
+    public void removeHoaDon(HoaDonDTO hoadon) {
+        if (setHD.remove(hoadon)) {
+            daoHD.removeHoaDon(hoadon.getId());
+            daoHD.closeDB();
+        }
+    }
 }

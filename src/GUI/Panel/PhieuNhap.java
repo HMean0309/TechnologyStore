@@ -1,8 +1,6 @@
 package GUI.Panel;
 
-import BUS.NhaCungCapBUS;
-import BUS.NhanVienBUS;
-import BUS.PhieuNhapBUS;
+import BUS.*;
 import DTO.NhanVienDTO;
 import DTO.PhieuNhapDTO;
 import GUI.Component.*;
@@ -461,13 +459,20 @@ public class PhieuNhap extends JPanel implements ActionListener {
             TaoPhieuNhap created = new TaoPhieuNhap(m, nv);
             m.setPanel(created);
         } else if (e.getSource() == mainFunction.btn.get("delete")) {
+            ChiTietSPBUS ctspBUS = new ChiTietSPBUS();
             int index = getRowSelected();
+            if (!ctspBUS.isRemovePN(resultTable.get(index).getId())) {
+                JOptionPane.showMessageDialog(this, "Phiếu nhập đã có sản phẩm bán ra. Không thể xóa phiếu nhập này!", "Thông báo", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
             if (index != -1) {
                 int input = JOptionPane.showConfirmDialog(null,
                         "Bạn có chắc chắn muốn xóa phiếu nhập ?", "Xóa phiếu nhập",
                         JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE);
                 if (input == 0) {
-                    //phieunhapBUS.removePhieuNhap(resultTable.get(index));
+                    phieunhapBUS.removePhieuNhap(resultTable.get(index));
+                    ChiTietPhieuNhapBUS.getInstance().removeAllChiTietPhieuNhap(resultTable.get(index).getId());
+                    ctspBUS.removeAllOSPInPN(resultTable.get(index).getId());
                     loadDataTable();
                 }
             }

@@ -25,4 +25,11 @@ public class ChiTietBaoHanhDAO extends ObjectDAO {
         super.executeNonQuery(query, params);
 
     }
+
+    public void removeCTBaoHanh(String idBH) {
+        super.connectDB();
+        String query = "DELETE FROM CT_BAO_HANH WHERE id_bh = ?;";
+        Object[] params = { idBH };
+        super.executeNonQuery(query, params);
+    }
 }

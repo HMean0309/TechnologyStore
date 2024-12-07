@@ -65,4 +65,11 @@ public class PhieuNhapDAO extends ObjectDAO {
 
         return phieuNhap;
     }
+
+    public void removePhieuNhap(String idPN) {
+        super.connectDB();
+        String query = "UPDATE phieu_nhap_kho SET isDelete = 1 WHERE id = ?";
+        Object[] params = { idPN };
+        super.executeNonQuery(query, params);
+    }
 }

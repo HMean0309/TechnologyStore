@@ -38,6 +38,10 @@ public class ChiTietBaoHanhBUS {
         daoCTBH.closeDB();
     }
 
+    public static ChiTietBaoHanhBUS getInstance() {
+        return new ChiTietBaoHanhBUS();
+    }
+
     public static LinkedHashSet<ChiTietBaoHanhDTO> toSet(ResultSet rs) {
         LinkedHashSet<ChiTietBaoHanhDTO> setCTBH = new LinkedHashSet<>();
         try {
@@ -86,5 +90,12 @@ public class ChiTietBaoHanhBUS {
                         && chiTietBaoHanhDTO.getIdSP().equals(idSP)
                         && chiTietBaoHanhDTO.getColor().equals(option))
                 .collect(Collectors.toCollection(LinkedHashSet::new));
+    }
+
+    public void removeAllChiTietBaoHanh(String idBaoHanh) {
+        if (setCTBH.removeIf(chiTietBaoHanhDTO -> chiTietBaoHanhDTO.getIdBH().equals(idBaoHanh))) {
+            daoCTBH.removeCTBaoHanh(idBaoHanh);
+            daoCTBH.closeDB();
+        }
     }
 }

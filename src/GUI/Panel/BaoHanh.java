@@ -1,6 +1,7 @@
 package GUI.Panel;
 
 import BUS.BaoHanhBUS;
+import BUS.ChiTietBaoHanhBUS;
 import BUS.KhachHangBUS;
 import BUS.NhanVienBUS;
 import DTO.BaoHanhDTO;
@@ -376,7 +377,8 @@ public class BaoHanh extends JPanel implements ActionListener {
                         "Bạn có chắc chắn muốn xóa phiếu bảo hành ?", "Xóa phiếu bảo hành",
                         JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE);
                 if (input == 0) {
-                    //baohanhBUS.removeBaoHanh(resultTable.get(index));
+                    baohanhBUS.removeBaoHanh(resultTable.get(index));
+                    ChiTietBaoHanhBUS.getInstance().removeAllChiTietBaoHanh(resultTable.get(index).getId());
                     loadDataTable();
                 }
             }

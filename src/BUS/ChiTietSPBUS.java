@@ -158,7 +158,29 @@ public class ChiTietSPBUS {
                 .collect(Collectors.toCollection(LinkedHashSet::new));
     }
 
-    public static void main(String[] args) {
+    public boolean isRemovePN(String idPN) {
+        LinkedHashSet<ChiTietSanPhamDTO> seriInPN = setCTSP.stream()
+                .filter(chiTietSanPhamDTO -> chiTietSanPhamDTO.getIdPhieuNhap().equals(idPN))
+                .collect(Collectors.toCollection(LinkedHashSet::new));
+        boolean isRemove = true;
+        for (ChiTietSanPhamDTO ctsp : seriInPN) {
+            if (ctsp.getIdHoaDon() != null) {
+                isRemove = false;
+                return isRemove;
+            }
+        }
+        return isRemove;
+    }
 
+    public void removeAllOSPInPN(String idPN) {
+        LinkedHashSet<ChiTietSanPhamDTO> setNeedRemove = setCTSP.stream()
+                .filter(chiTietSanPhamDTO -> chiTietSanPhamDTO.getIdPhieuNhap().equals(idPN))
+                .collect(Collectors.toCollection(LinkedHashSet::new));
+        if (setCTSP.removeAll(setNeedRemove)) {
+            for (ChiTietSanPhamDTO ctsp : setNeedRemove) {
+                daoCTSP.removeCTSPBySeri(ctsp.getSeri());
+            }
+            daoCTSP.closeDB();
+        }
     }
 }

@@ -19,6 +19,10 @@ public class ChiTietPhieuNhapBUS {
         daoCTPN.closeDB();
     }
 
+    public static ChiTietPhieuNhapBUS getInstance() {
+        return new ChiTietPhieuNhapBUS();
+    }
+
     public static LinkedHashSet<ChiTietPhieuNhapDTO> toSet(ResultSet rs) {
         LinkedHashSet<ChiTietPhieuNhapDTO> setCTPN = new LinkedHashSet<>();
         try {
@@ -64,5 +68,12 @@ public class ChiTietPhieuNhapBUS {
 
     public void setDaoCTPN(ChiTietPhieuNhapDAO daoCTPN) {
         this.daoCTPN = daoCTPN;
+    }
+
+    public void removeAllChiTietPhieuNhap(String idPN) {
+        if (setCTPN.removeIf(chiTietPhieuNhapDTO -> chiTietPhieuNhapDTO.getIdPN().equals(idPN))) {
+            daoCTPN.removeChiTietPhieuNhap(idPN);
+            daoCTPN.closeDB();
+        }
     }
 }

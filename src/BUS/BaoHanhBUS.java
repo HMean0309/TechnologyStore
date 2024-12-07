@@ -197,4 +197,11 @@ public class BaoHanhBUS {
 
         return result;
     }
+
+    public void removeBaoHanh(BaoHanhDTO baoHanhDTO) {
+        if (setBH.remove(baoHanhDTO)) {
+            daoBH.removeBaoHanh(baoHanhDTO.getId());
+            daoBH.closeDB();
+        }
+    }
 }

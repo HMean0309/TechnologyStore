@@ -190,4 +190,11 @@ public class PhieuNhapBUS {
 
         return result;
     }
+
+    public void removePhieuNhap(PhieuNhapDTO phieuNhapDTO) {
+        if (setPN.remove(phieuNhapDTO)) {
+            daoPN.removePhieuNhap(phieuNhapDTO.getId());
+            daoPN.closeDB();
+        }
+    }
 }

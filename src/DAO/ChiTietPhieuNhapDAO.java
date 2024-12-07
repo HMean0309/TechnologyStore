@@ -33,4 +33,10 @@ public class ChiTietPhieuNhapDAO extends ObjectDAO {
 
     }
 
+    public void removeChiTietPhieuNhap(String idPN) {
+        super.connectDB();
+        String query = "DELETE FROM CT_NHAP_KHO WHERE id_pn = ?";
+        Object[] params = { idPN };
+        super.executeNonQuery(query, params);
+    }
 }

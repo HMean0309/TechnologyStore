@@ -32,4 +32,10 @@ public class ChiTietHoaDonDAO extends ObjectDAO {
     }
 
 
+    public void removeCTHoaDon(String idHD) {
+        super.connectDB();
+        String query = "DELETE FROM CT_HOA_DON WHERE id_hoadon = ?";
+        Object[] params = { idHD };
+        super.executeNonQuery(query, params);
+    }
 }

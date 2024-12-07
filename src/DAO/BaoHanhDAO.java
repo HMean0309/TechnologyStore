@@ -34,4 +34,11 @@ public class BaoHanhDAO extends ObjectDAO {
         super.executeNonQuery(query, params);
 
     }
+
+    public void removeBaoHanh(String idBH) {
+        super.connectDB();
+        String query = "UPDATE phieu_bao_hanh SET isDelete = 1 WHERE id = ?";
+        Object[] params = { idBH };
+        super.executeNonQuery(query, params);
+    }
 }

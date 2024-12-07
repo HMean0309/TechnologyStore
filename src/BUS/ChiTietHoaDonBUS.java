@@ -36,6 +36,10 @@ public class ChiTietHoaDonBUS {
         daoCTHD.closeDB();
     }
 
+    public static ChiTietHoaDonBUS getInstance() {
+        return new ChiTietHoaDonBUS();
+    }
+
     public static LinkedHashSet<ChiTietHoaDonDTO> toSet(ResultSet rs) {
         LinkedHashSet<ChiTietHoaDonDTO> setCTHD = new LinkedHashSet<>();
         try {
@@ -78,4 +82,10 @@ public class ChiTietHoaDonBUS {
     }
 
 
+    public void removeAllChiTietHoaDon(String idHoaDon) {
+        if (setCTHD.removeIf(chiTietHoaDonDTO -> chiTietHoaDonDTO.getIdHoaDon().equals(idHoaDon))) {
+            daoCTHD.removeCTHoaDon(idHoaDon);
+            daoCTHD.closeDB();
+        }
+    }
 }
