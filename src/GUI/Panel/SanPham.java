@@ -79,7 +79,7 @@ public class SanPham extends JPanel implements ActionListener {
         functionBar.setLayout(new GridLayout(2, 1, 0, 20));
         functionBar.setBorder(new EmptyBorder(10, 10, 10, 10));
 
-        String[] action = { "create", "update", "delete", "detail", "view", "import", "export" };
+        String[] action = { "create", "update", "delete", "detail", "view", "export" };
         mainFunction = new MainFunction(m.user.getIdQuyen(), "SER006", action);
         for (String ac : action) {
             mainFunction.btn.get(ac).addActionListener(this);
