@@ -89,7 +89,7 @@ public class PhanLoaiBUS {
     public HashMap<String, String> toMap() {
         HashMap<String, String> mapLoai = new HashMap<>();
         for (PhanLoaiDTO loai : setPL) {
-            mapLoai.put(loai.getId(), loai.getName());
+            mapLoai.put(loai.getName(), loai.getId());
         }
         return mapLoai;
     }
