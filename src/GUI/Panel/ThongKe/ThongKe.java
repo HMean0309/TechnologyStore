@@ -13,6 +13,7 @@ public final class ThongKe extends JPanel {
     JPanel doanhthu, tongquan;
     Color BackgroundColor = new Color(240, 247, 250);
     ThongKeBUS thongkeBUS = new ThongKeBUS();
+    private ThongKeSanPhamBanChay banchay;
 
     public ThongKe() {
         initComponent();
@@ -24,11 +25,13 @@ public final class ThongKe extends JPanel {
 
         doanhthu = new ThongKeDoanhThu(thongkeBUS);
         tongquan = new ThongKeTongQuan(thongkeBUS);
+        banchay = new ThongKeSanPhamBanChay(thongkeBUS);
 
         tabbedPane = new JTabbedPane();
         tabbedPane.setOpaque(false);
         tabbedPane.addTab("Tổng quan", tongquan);
         tabbedPane.addTab("Doanh thu", doanhthu);
+        tabbedPane.addTab("Danh sách bán chạy", banchay);
 
         this.add(tabbedPane);
     }

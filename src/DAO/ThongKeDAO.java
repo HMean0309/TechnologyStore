@@ -160,4 +160,39 @@ public class ThongKeDAO extends ObjectDAO {
 
         return results;
     }
+
+    public LinkedHashSet<ThongKeDTO> thongKeSanPhamBanChay(int thang, int nam) {
+        super.connectDB();
+        String query = "SELECT sp.name AS TenSanPham, " +
+                "COUNT(cthd.seri) AS SoLuongBan " +
+                "FROM san_pham sp " +
+                "JOIN ct_san_pham ctsp ON sp.id = ctsp.id_sp " +
+                "JOIN ct_hoa_don cthd ON ctsp.seri = cthd.seri " +
+                "JOIN hoa_don hd ON cthd.id_hoadon = hd.id " +
+                "WHERE MONTH(hd.ngaylap) = ? " +
+                "AND YEAR(hd.ngaylap) = ? " +
+                "AND sp.isDelete = 0 " +
+                "AND hd.isDelete = 0 " +
+                "GROUP BY sp.id, sp.name " +
+                "ORDER BY SoLuongBan DESC";
+
+        LinkedHashSet<ThongKeDTO> results = new LinkedHashSet<>();
+
+        try (ResultSet rs = executeQuery(query, new Object[]{thang, nam})) {
+            while (rs.next()) {
+                String tenSanPham = rs.getString("TenSanPham");
+                int soLuongBan = rs.getInt("SoLuongBan");
+
+                results.add(new ThongKeDTO(
+                        tenSanPham,
+                        0,
+                        soLuongBan
+                ));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return results;
+    }
 }

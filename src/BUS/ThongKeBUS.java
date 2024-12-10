@@ -35,4 +35,10 @@ public class ThongKeBUS {
                 .stream()
                 .collect(Collectors.toCollection(LinkedHashSet::new));
     }
+
+    public LinkedHashSet<ThongKeDTO> getSanPhamBanChay(int thang, int nam) {
+        return thongKeDAO.thongKeSanPhamBanChay(thang, nam)
+                .stream()
+                .collect(Collectors.toCollection(LinkedHashSet::new));
+    }
 }
