@@ -344,11 +344,15 @@ public final class ChiTietPhieuDialog extends JDialog implements ActionListener 
         if (source == btnPdf) {
             writePDF w = new writePDF();
             if (this.hoadon != null) {
-                //w.writePX(hoadon.getMaphieu());
+                w.writeHD(hoadon, tblModel);
             }
             if (this.phieunhap != null) {
-                w.writePN(phieunhap.getId(), tblModel);
+                w.writePN(phieunhap, tblModel);
             }
+            if (this.baohanh != null) {
+                w.writeBH(baohanh, tblModel);
+            }
+
         }
     }
 }

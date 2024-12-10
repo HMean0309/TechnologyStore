@@ -9,6 +9,10 @@ public class HoaDonDAO extends ObjectDAO {
         super();
     }
 
+    public static HoaDonDAO getInstance() {
+        return new HoaDonDAO();
+    }
+
     public ResultSet getAllHoaDon() {
         super.connectDB();
         String query = "SELECT * FROM hoadon_nv_kh where isDelete = 0;";
